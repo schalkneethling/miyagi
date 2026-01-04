@@ -8,13 +8,19 @@ eleventyNavigation:
 **Installed as a dev dependency:**
 
 ```bash
-npm run miyagi start
+pnpm miyagi start
 ```
 
 or
 
 ```bash
 yarn miyagi start
+```
+
+or
+
+```bash
+npm run miyagi start
 ```
 
 **Installed globally:**
