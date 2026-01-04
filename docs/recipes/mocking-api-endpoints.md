@@ -5,7 +5,7 @@ Since _miyagi_ is focused on developing components independently of a backend fr
 We can do that easily using [Mock Service Worker (MSW)](https://mswjs.io). Start by [installing _MSW_](https://mswjs.io/docs/getting-started):
 
 ```bash
-npm install msw@latest --save-dev
+pnpm add -D msw@latest
 ```
 
 Please follow the [instructions on the _MSW_ website](https://mswjs.io/docs/integrations/browser) to setup MSW using _Browser Integration_ (not the Node integration). When generating the worker script, use whichever directory you prefer for the `PUBLIC_DIR`. We will use the current directory, so `.` for this example.

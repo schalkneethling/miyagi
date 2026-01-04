@@ -1,0 +1,8 @@
+packages:
+  - .
+  - 11ty
+
+onlyBuiltDependencies:
+  - esbuild
+  - pre-commit
+  - spawn-sync
