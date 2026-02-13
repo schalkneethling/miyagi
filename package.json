@@ -43,7 +43,7 @@
 		"directory-tree": "^3.5.2",
 		"express": "^5.1.0",
 		"js-yaml": "^4.1.0",
-		"marked": "^16.4.1",
+		"marked": "^17.0.2",
 		"node-watch": "^0.7.4",
 		"twing": "7.2.2",
 		"ws": "^8.18.3",
