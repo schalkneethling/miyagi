@@ -54,6 +54,13 @@ If you need _miyagi_ to serve static assets (like images, SVGs, etc.), you can d
 ["images", "svgs", "templates"]
 ```
 
+### `isolateComponents`
+
+default: `false`<br>
+type: `boolean`
+
+When set to `true`, components that do not declare [`$assets` in their mock data](/how-to/writing-mock-data/#declaring-component-assets) will only load the `shared` assets (see below) plus their own `<component>.miyagi.css` / `<component>.miyagi.js` files. When `false` (default), components without `$assets` load all global `css` and `js` files (legacy behavior).
+
 ### `js`
 
 default: `null`<br>
@@ -81,6 +88,34 @@ default: `null`<br>
 type: `string`
 
 If you create CSS and JS files with hashes and have therefore a manifest file, you can set this here and then use the same keys of the manifest file for your CSS and JS files in `assets.css` and `assets.js`. _miyagi_ will then resolve these.
+
+### `shared`
+
+default:
+
+```json
+{
+	"css": [],
+	"js": []
+}
+```
+
+type: `object`
+
+Assets that should always be loaded when a component uses [isolated asset loading via `$assets`](/how-to/writing-mock-data/#declaring-component-assets). Typically used for base styles like design tokens, resets, or utility CSS that all components depend on.
+
+```json
+{
+	"assets": {
+		"shared": {
+			"css": ["dist/tokens.css", "dist/reset.css"],
+			"js": []
+		}
+	}
+}
+```
+
+The `js` entries support the same format as `assets.js` (string or object with `src`, `defer`, `async`, `type`, `position`).
 
 ## `build`
 
@@ -161,15 +196,15 @@ The render function for your templates. The function will be called with an obje
 
 ```js
 {
-	engine: {
-		async render({ name, context, cb }) {
-			try {
-				return cb(null, await twing.render(name, context));
-			} catch (err) {
-				return cb(err.toString());
-			}
-		}
-	}
+ engine: {
+  async render({ name, context, cb }) {
+   try {
+    return cb(null, await twing.render(name, context));
+   } catch (err) {
+    return cb(err.toString());
+   }
+  }
+ }
 }
 ```
 

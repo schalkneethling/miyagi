@@ -1,0 +1,40 @@
+{
+  "label": "Submit",
+  "type": "button",
+  "tone": "primary",
+  "url": null,
+  "$variants": [
+    {
+      "$name": "Primary link",
+      "type": "link",
+      "url": "#",
+      "label": "Learn more"
+    },
+    {
+      "$name": "Secondary link",
+      "type": "link",
+      "tone": "secondary",
+      "url": "#",
+      "label": "Cancel"
+    },
+    {
+      "$name": "Primary button small",
+      "type": "button",
+      "size": "small",
+      "label": "Save"
+    },
+    {
+      "$name": "Primary button icon start",
+      "type": "button",
+      "icon_position": "start",
+      "icon": "download",
+      "label": "Download"
+    },
+    {
+      "$name": "Disabled",
+      "type": "button",
+      "disabled": true,
+      "label": "Unavailable"
+    }
+  ]
+}

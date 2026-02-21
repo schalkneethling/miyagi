@@ -1,0 +1,82 @@
+$hidden: true
+dismissible: false
+end_date: "2070-12-31T00:00:00Z"
+id: warning-alert
+message: This is a warning info message.
+start_date: "2025-01-01T00:00:00Z"
+tone: warning
+
+$variants:
+  - $name: Critical
+    id: critical-alert
+    message: This is a critical info message.
+    tone: critical
+
+  - $name: Info
+    id: info-alert
+    message: This is an info message.
+    tone: info
+
+  - $name: Success
+    id: success-alert
+    message: This is a success info message.
+    tone: success
+
+  - $name: Warning not dismissible
+    dismissible: false
+    id: warning-not-dismissible
+    message: This is a warning info message that cannot be dismissed.
+
+  - $name: Info dismissible
+    dismissible: true
+    id: info-dismissible-alert
+    message: This is a dismissable info message.
+    tone: info
+
+  - $name: Info with primary action
+    id: info-primary-action
+    message: This is an info message with a primary action.
+    tone: info
+    action:
+      $tpl: elements/button
+      $ref: elements/button#Primary-link
+      label: Label
+
+  - $name: Info with secondary action
+    id: info-secondary-action
+    message: This is an info message with a secondary action.
+    tone: info
+    action:
+      $tpl: elements/button
+      $ref: elements/button#Secondary-link
+      label: Label
+
+  - $name: Warning with action and icon
+    id: warning-action-icon
+    message: This is a warning message with an action that has an icon.
+    tone: warning
+    action:
+      $tpl: elements/button
+      $ref: elements/button#Primary-button-icon-start
+      label: Download
+      url: "#"
+
+  - $name: Critical with action dismissible
+    dismissible: true
+    id: critical-action-dismissible
+    message: This is a critical message with both action and dismiss button.
+    tone: critical
+    action:
+      $tpl: elements/button
+      $ref: elements/button#Secondary-link
+      label: Learn more
+
+  - $name: Success with action small
+    id: success-action-small
+    message: This is a success message with a small action button.
+    tone: success
+    action:
+      $tpl: elements/button
+      $ref: elements/button#Primary-button-small
+      label: View details
+      url: "#"

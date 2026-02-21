@@ -1,0 +1,27 @@
+{
+  "$hidden": true,
+  "tone": "info",
+  "message": "This is an informational message.",
+  "dismissible": false,
+  "$variants": [
+    {
+      "$name": "Warning",
+      "tone": "warning",
+      "message": "This action cannot be undone."
+    },
+    {
+      "$name": "Dismissible",
+      "dismissible": true,
+      "message": "You have 3 unread notifications."
+    },
+    {
+      "$name": "With action",
+      "message": "Your subscription is about to expire.",
+      "action": {
+        "$tpl": "elements/button",
+        "$ref": "elements/button#Primary link",
+        "label": "Renew now"
+      }
+    }
+  ]
+}

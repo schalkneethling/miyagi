@@ -9,6 +9,11 @@ export default {
 	assets: {
 		root: "",
 		css: [],
+		shared: {
+			css: [],
+			js: [],
+		},
+		isolateComponents: false,
 		customProperties: {
 			files: [],
 			prefixes: {

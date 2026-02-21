@@ -5,6 +5,15 @@ const loader = createFilesystemLoader(fs);
 const twing = createEnvironment(loader);
 
 export default {
+	assets: {
+		root: "tests/_setup/assets",
+		shared: {
+			css: ["shared.css"],
+			js: [{ src: "shared.js" }],
+		},
+		css: ["shared.css", "global-only.css"],
+		js: [{ src: "shared.js" }, { src: "global-only.js" }],
+	},
 	components: {
 		folder: "tests/_setup/components",
 	},
