@@ -20,7 +20,7 @@
 		"frontend"
 	],
 	"engines": {
-		"node": ">=20.11.0"
+		"node": ">=24"
 	},
 	"files": [
 		"api",
@@ -46,6 +46,7 @@
 		"marked": "^17.0.2",
 		"node-watch": "^0.7.4",
 		"twing": "7.3.1",
+		"valibot": "^1.2.0",
 		"ws": "^8.18.3",
 		"yargs": "^18.0.0"
 	},
@@ -53,7 +54,9 @@
 		"@eslint/js": "^9.39.2",
 		"@rollup/plugin-node-resolve": "^16.0.3",
 		"@rollup/plugin-terser": "^0.4.4",
+		"@types/js-yaml": "^4.0.9",
 		"@types/node": "^24.10.0",
+		"@types/yargs": "^17.0.35",
 		"@vitest/coverage-v8": "^4.0.6",
 		"cssnano": "^7.1.2",
 		"eslint": "^9.39.0",
@@ -75,8 +78,7 @@
 		"build": "gulp build",
 		"test": "vitest run --coverage --coverage.include=api --coverage.include=lib",
 		"lint": "stylelint frontend/assets/css/ && eslint lib/ && eslint frontend/assets/js/",
-		"fix": "eslint lib/ --fix && eslint frontend/assets/js/ --fix",
-		"release": "standard-version"
+		"fix": "eslint lib/ --fix && eslint frontend/assets/js/ --fix"
 	},
 	"browserslist": [
 		"last 2 versions",

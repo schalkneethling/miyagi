@@ -1,0 +1,35 @@
+element-info-message:
+  header: true
+  css:
+    component:
+      build/assets/css/info-message.css: {}
+  js:
+    build/assets/js/info-message.js:
+      attributes:
+        type: module
+  dependencies:
+    - mytheme/element-alert-box
+
+element-alert-box:
+  header: true
+  css:
+    component:
+      build/assets/css/alert-box.css: {}
+
+element-button:
+  css:
+    component:
+      build/assets/css/button.css: {}
+  js:
+    build/assets/js/button.js: {}
+  dependencies:
+    - core/drupal
+
+element-card:
+  css:
+    component:
+      build/assets/css/card.css: {}
+  js:
+    build/assets/js/card.js:
+      attributes:
+        type: module

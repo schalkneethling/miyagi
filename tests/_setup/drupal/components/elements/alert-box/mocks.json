@@ -1,0 +1,23 @@
+{
+  "type": "warning",
+  "text": "Please review the information below before continuing.",
+  "dismissible": false,
+  "$variants": [
+    {
+      "$name": "Error",
+      "type": "error",
+      "text": "Something went wrong. Please try again later."
+    },
+    {
+      "$name": "Info",
+      "type": "info",
+      "text": "Your session will expire in 5 minutes."
+    },
+    {
+      "$name": "Success dismissible",
+      "type": "success",
+      "text": "Your changes have been saved.",
+      "dismissible": true
+    }
+  ]
+}

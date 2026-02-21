@@ -289,6 +289,43 @@ If you want to define default mock data, so your variants inherit it, but not re
 }
 ```
 
+## Declaring component assets
+
+By default, _miyagi_ loads all CSS and JS files defined in [`assets.css`](/configuration/options/#css) and [`assets.js`](/configuration/options/#js) for every component. This means unrelated JavaScript executes in every component view, which can cause console errors, unwanted side effects, and style leakage.
+
+You can opt a component into **isolated asset loading** by adding `$assets` to its mock data:
+
+```json
+{
+	"$assets": {
+		"css": ["dist/button.css"],
+		"js": [{ "src": "dist/button.js", "type": "module" }]
+	},
+	"label": "Save",
+	"type": "submit"
+}
+```
+
+When `$assets` is present, _miyagi_ loads only:
+
+1. The [`assets.shared`](/configuration/options/#shared) files (base styles, tokens, resets)
+2. The CSS and JS declared in `$assets`
+3. The component's own `<component>.miyagi.css` and `<component>.miyagi.js` (if they exist)
+
+The `js` entries in `$assets` support the same format as [`assets.js`](/configuration/options/#js) — either a string path or an object with `src`, `defer`, `async`, `type`, and `position`.
+
+Both `css` and `js` inside `$assets` are optional. If you only need to declare CSS dependencies:
+
+```json
+{
+	"$assets": {
+		"css": ["dist/button.css"]
+	}
+}
+```
+
+To force **all** components into isolated mode (even those without `$assets`), set [`assets.isolateComponents`](/configuration/options/#isolatecomponents) to `true` in your config. Components without `$assets` will then only receive `assets.shared` files.
+
 ## Global mock data
 
 You can define global mock data by creating a `mocks.json` (or whatever you defined the mock files to be named like in `files.mocks`) in your [`components.folder`](/configuration/options#components). This mock data will be merged into your components mock data. The components mock data has higher priority, hence overwrites keys with the same name.
