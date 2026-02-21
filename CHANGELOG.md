@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.1](https://github.com/schalkneethling/miyagi/compare/v4.1.0...v4.1.1) (2026-02-21)
+
+
+### Bug Fixes
+
+* incorrect URL for provenance ([5053b67](https://github.com/schalkneethling/miyagi/commit/5053b67ad9fa985a415a64c231a4d882aea98bc8))
+* incorrect URL for provenance ([794483e](https://github.com/schalkneethling/miyagi/commit/794483ef1187613908c6c3a67fd7674aa4900281))
+
 ## [4.1.0](https://github.com/schalkneethling/miyagi/compare/v4.0.1...v4.1.0) (2026-02-21)
 
 
