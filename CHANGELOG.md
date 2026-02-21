@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/schalkneethling/miyagi/compare/v4.0.1...v4.1.0) (2026-02-21)
+
+
+### Features
+
+* component asset isolation, Drupal assets utility, and release automation ([9d89278](https://github.com/schalkneethling/miyagi/commit/9d89278ed1e81c83d04e9d4020cb1e27081daf97))
+* component asset isolation, Drupal assets utility, and release automation ([0c40067](https://github.com/schalkneethling/miyagi/commit/0c400675a770c3116a7a21e00f2107369d33ad33))
+
+
+### Bug Fixes
+
+* file watcher infinite loop ([1c73ad9](https://github.com/schalkneethling/miyagi/commit/1c73ad9b34ffe94f1cd543c9706aef4101016480))
+
 ### [4.0.1](https://github.com/miyagi-dev/miyagi/compare/v4.0.0...v4.0.1) (2025-10-30)
 
 
