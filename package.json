@@ -9,7 +9,7 @@
 	"bugs": "https://github.com/miyagi-dev/miyagi/issues",
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:miyagi-dev/miyagi.git"
+		"url": "https://github.com/schalkneethling/miyagi.git"
 	},
 	"type": "module",
 	"keywords": [
