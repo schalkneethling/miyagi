@@ -16,6 +16,8 @@ const date = new Date(2024, 0, 1, 12, 30);
 beforeEach(() => {
 	vi.useFakeTimers();
 	vi.setSystemTime(date);
+	process.env.MIYAGI_LOG_CONTEXT = "";
+	process.env.MIYAGI_LOG_LEVEL = "";
 
 	vi.spyOn(console, "error").mockImplementation(() => {});
 	vi.spyOn(console, "warn").mockImplementation(() => {});
@@ -26,6 +28,8 @@ beforeEach(() => {
 afterEach(() => {
 	vi.useRealTimers();
 	vi.restoreAllMocks();
+	delete process.env.MIYAGI_LOG_CONTEXT;
+	delete process.env.MIYAGI_LOG_LEVEL;
 });
 
 describe("non-verbose mode", () => {
@@ -217,5 +221,37 @@ describe("verbose mode", () => {
 				);
 			});
 		});
+	});
+});
+
+describe("lint log level filtering", () => {
+	test("error level suppresses warn/info/success", () => {
+		process.env.MIYAGI_LOG_CONTEXT = "lint";
+		process.env.MIYAGI_LOG_LEVEL = "error";
+
+		log("warn", "warning message");
+		log("info", "info message");
+		log("success", "success message");
+		log("error", "error message");
+
+		expect(console.warn).toHaveBeenCalledTimes(0);
+		expect(console.info).toHaveBeenCalledTimes(0);
+		expect(console.log).toHaveBeenCalledTimes(0);
+		expect(console.error).toHaveBeenCalledTimes(1);
+	});
+
+	test("warn level shows warn and error", () => {
+		process.env.MIYAGI_LOG_CONTEXT = "lint";
+		process.env.MIYAGI_LOG_LEVEL = "warn";
+
+		log("warn", "warning message");
+		log("info", "info message");
+		log("success", "success message");
+		log("error", "error message");
+
+		expect(console.warn).toHaveBeenCalledTimes(1);
+		expect(console.info).toHaveBeenCalledTimes(0);
+		expect(console.log).toHaveBeenCalledTimes(0);
+		expect(console.error).toHaveBeenCalledTimes(1);
 	});
 });

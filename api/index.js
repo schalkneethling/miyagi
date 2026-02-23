@@ -7,6 +7,11 @@ import build from "../lib/build/index.js";
 import generateMockData from "../lib/generator/mocks.js";
 import generateComponent from "../lib/generator/component.js";
 import validateMockData from "../lib/validator/mocks.js";
+import {
+	getSchemaValidationMode,
+	toSchemaValidationResult,
+	validateSchemas,
+} from "../lib/validator/schemas.js";
 
 /**
  * @param {object} obj
@@ -172,14 +177,44 @@ export const createComponent = async ({ component, only = [], skip = [] }) => {
 
 export const lintComponents = async () => {
 	global.app = await init("api");
-	const promises = [];
+	const mode = getSchemaValidationMode();
+	const components = global.state.routes.filter((route) => route.paths.tpl);
+	const schemaValidation = validateSchemas({
+		components,
+	});
+	const schemaErrorsByComponent = new Map();
 
-	global.state.routes.forEach((route) => {
-		if (route.paths.tpl) {
-			promises.push(
+	schemaValidation.errors.forEach((entry) => {
+		if (!schemaErrorsByComponent.has(entry.component)) {
+			schemaErrorsByComponent.set(entry.component, []);
+		}
+		schemaErrorsByComponent
+			.get(entry.component)
+			.push(toSchemaValidationResult(entry));
+	});
+
+	if (mode === "fail-fast" && schemaValidation.errors.length > 0) {
+		return {
+			success: false,
+			data: getLintComponentErrorsInRouteOrder({
+				components,
+				errorMap: schemaErrorsByComponent,
+			}),
+		};
+	}
+
+	const promises = components
+		.filter((route) => !schemaErrorsByComponent.has(route.paths.dir.short))
+		.map(
+			(route) =>
 				new Promise((resolve) => {
 					getComponentData(route).then((data) => {
-						const validation = validateMockData(route, data || [], true);
+						const validation = validateMockData(
+							route,
+							data || [],
+							true,
+							schemaValidation.validSchemas,
+						);
 
 						resolve({
 							component: route.alias,
@@ -187,13 +222,25 @@ export const lintComponents = async () => {
 						});
 					});
 				}),
-			);
-		}
-	});
+		);
 
 	return await Promise.all(promises)
 		.then((res) => {
-			const errors = res.filter((result) => result?.errors?.length > 0);
+			res.forEach((result) => {
+				if (!result?.errors?.length) {
+					return;
+				}
+				const componentErrors = schemaErrorsByComponent.get(result.component) || [];
+				schemaErrorsByComponent.set(result.component, [
+					...componentErrors,
+					...result.errors,
+				]);
+			});
+
+			const errors = getLintComponentErrorsInRouteOrder({
+				components,
+				errorMap: schemaErrorsByComponent,
+			});
 
 			return {
 				success: errors.length === 0,
@@ -216,8 +263,26 @@ export const lintComponent = async ({ component }) => {
 			message: `The component ${component} does not seem to exist.`,
 		};
 
+	const allSchemaValidation = validateSchemas({
+		components: [componentObject],
+	});
+
+	if (allSchemaValidation.errors.length > 0) {
+		return {
+			success: false,
+			data: allSchemaValidation.errors.map((entry) =>
+				toSchemaValidationResult(entry),
+			),
+		};
+	}
+
 	const data = await getComponentData(componentObject);
-	const errors = validateMockData(componentObject, data, true);
+	const errors = validateMockData(
+		componentObject,
+		data || [],
+		true,
+		allSchemaValidation.validSchemas,
+	);
 
 	return {
 		success: errors === null || errors?.length === 0,
@@ -233,4 +298,27 @@ function getComponentsObject(component) {
 	return global.state.routes.find(
 		(route) => route.paths.dir.short === component,
 	);
+}
+
+/**
+ * @param {object} params
+ * @param {Array<object>} params.components
+ * @param {Map<string, Array<object>>} params.errorMap
+ * @returns {Array<object>}
+ */
+function getLintComponentErrorsInRouteOrder({ components, errorMap }) {
+	return components
+		.map((route) => {
+			const componentErrors = errorMap.get(route.alias) || [];
+
+			if (componentErrors.length === 0) {
+				return null;
+			}
+
+			return {
+				component: route.alias,
+				errors: componentErrors,
+			};
+		})
+		.filter(Boolean);
 }

@@ -28,12 +28,12 @@ default:
 
 ```json
 {
-	"files": [],
-	"prefixes": {
-		"color": "color",
-		"typo": "typo",
-		"spacing": "spacing"
-	}
+  "files": [],
+  "prefixes": {
+    "color": "color",
+    "typo": "typo",
+    "spacing": "spacing"
+  }
 }
 ```
 
@@ -68,13 +68,13 @@ type: `array`
 
 ```json
 [
-	{
-		"src": "src/index.js",
-		"defer": false,
-		"async": false,
-		"type": null,
-		"position": "head"
-	}
+  {
+    "src": "src/index.js",
+    "defer": false,
+    "async": false,
+    "type": null,
+    "position": "head"
+  }
 ]
 ```
 
@@ -95,8 +95,8 @@ default:
 
 ```json
 {
-	"css": [],
-	"js": []
+  "css": [],
+  "js": []
 }
 ```
 
@@ -106,12 +106,12 @@ Assets that should always be loaded when a component uses [isolated asset loadin
 
 ```json
 {
-	"assets": {
-		"shared": {
-			"css": ["dist/tokens.css", "dist/reset.css"],
-			"js": []
-		}
-	}
+  "assets": {
+    "shared": {
+      "css": ["dist/tokens.css", "dist/reset.css"],
+      "js": []
+    }
+  }
 }
 ```
 
@@ -228,8 +228,8 @@ default:
 
 ```json
 {
-	"extension": "css",
-	"name": "index"
+  "extension": "css",
+  "name": "index"
 }
 ```
 
@@ -241,8 +241,8 @@ default:
 
 ```json
 {
-	"extension": "js",
-	"name": "index"
+  "extension": "js",
+  "name": "index"
 }
 ```
 
@@ -254,8 +254,8 @@ default:
 
 ```json
 {
-	"extension": ["json", "js"],
-	"name": "mocks"
+  "extension": ["json", "js"],
+  "name": "mocks"
 }
 ```
 
@@ -271,8 +271,8 @@ default:
 
 ```json
 {
-	"extension": "json",
-	"name": "schema"
+  "extension": "json",
+  "name": "schema"
 }
 ```
 
@@ -282,8 +282,8 @@ default:
 
 ```json
 {
-	"name": "index",
-	"extension": null
+  "name": "index",
+  "extension": null
 }
 ```
 
@@ -300,7 +300,7 @@ Example:
 
 ```json
 {
-	"@templates": "/path/to/your/templates"
+  "@templates": "/path/to/your/templates"
 }
 ```
 
@@ -310,6 +310,30 @@ You can then use `$tpl: "@templates/some-template"` or `$ref: "@templates/some-m
 
 default: `"miyagi"`<br>
 type: `string`
+
+## `lint`
+
+### `logLevel`
+
+default: `"error"`<br>
+type: `string`<br>
+values: `error|warn|info`
+
+Controls CLI lint output verbosity:
+
+- `error`: only errors
+- `warn`: errors + warnings
+- `info`: errors + warnings + info/success messages
+
+Example:
+
+```json
+{
+  "lint": {
+    "logLevel": "warn"
+  }
+}
+```
 
 ## `ui`
 
@@ -356,44 +380,44 @@ default:
 
 ```json
 {
-	"favicon": null, // path to a favicon
-	"logo": null, // path to a logo — can be used if the same logo should be used for light and dark mode
-	"light": {
-		// theming for light mode
-		"logo": null, // path to a logo
-		"navigation": {
-			"colorText": "hsl(0, 0%, 12%)",
-			"colorBackground": "hsl(0, 0%, 86%)",
-			"colorLinks": "hsl(0, 0%, 12%)",
-			"colorLinksActive": "hsl(0, 0%, 96%)",
-			"colorSearchBorder": "rgba(0, 0, 0, 0.25)"
-		},
-		"content": {
-			"colorBackground": "hsl(0, 0%, 100%)",
-			"colorText": "hsl(0, 0%, 12%)",
-			"colorHeadline1": "hsl(0, 0%, 12%)",
-			"colorHeadline2": "hsl(0, 0%, 12%)"
-		}
-	},
-	"dark": {
-		// theming for light mode
-		"logo": null, // path to a logo
-		"navigation": {
-			"colorText": "hsl(0, 0%, 100%)",
-			"colorBackground": "hsl(0, 0%, 16%)",
-			"colorLinks": "hsl(0, 0%, 100%)",
-			"colorLinksActive": "hsl(0, 0%, 16%)",
-			"colorSearchBorder": "rgba(255, 255, 255, 0.25)"
-		},
-		"content": {
-			"colorBackground": "hsl(0, 0%, 16%)",
-			"colorText": "hsl(0, 0%, 100%)",
-			"colorHeadline1": "hsl(0, 0%, 100%)",
-			"colorHeadline2": "hsl(0, 0%, 100%)"
-		}
-	},
-	"css": null, // string of CSS which gets added to miyagi and components. can be used to changed the styling of miyagi or e.g. add custom fonts,
-	"js": null // string of JS which gets added to components
+  "favicon": null, // path to a favicon
+  "logo": null, // path to a logo — can be used if the same logo should be used for light and dark mode
+  "light": {
+    // theming for light mode
+    "logo": null, // path to a logo
+    "navigation": {
+      "colorText": "hsl(0, 0%, 12%)",
+      "colorBackground": "hsl(0, 0%, 86%)",
+      "colorLinks": "hsl(0, 0%, 12%)",
+      "colorLinksActive": "hsl(0, 0%, 96%)",
+      "colorSearchBorder": "rgba(0, 0, 0, 0.25)"
+    },
+    "content": {
+      "colorBackground": "hsl(0, 0%, 100%)",
+      "colorText": "hsl(0, 0%, 12%)",
+      "colorHeadline1": "hsl(0, 0%, 12%)",
+      "colorHeadline2": "hsl(0, 0%, 12%)"
+    }
+  },
+  "dark": {
+    // theming for light mode
+    "logo": null, // path to a logo
+    "navigation": {
+      "colorText": "hsl(0, 0%, 100%)",
+      "colorBackground": "hsl(0, 0%, 16%)",
+      "colorLinks": "hsl(0, 0%, 100%)",
+      "colorLinksActive": "hsl(0, 0%, 16%)",
+      "colorSearchBorder": "rgba(255, 255, 255, 0.25)"
+    },
+    "content": {
+      "colorBackground": "hsl(0, 0%, 16%)",
+      "colorText": "hsl(0, 0%, 100%)",
+      "colorHeadline1": "hsl(0, 0%, 100%)",
+      "colorHeadline2": "hsl(0, 0%, 100%)"
+    }
+  },
+  "css": null, // string of CSS which gets added to miyagi and components. can be used to changed the styling of miyagi or e.g. add custom fonts,
+  "js": null // string of JS which gets added to components
 }
 ```
 

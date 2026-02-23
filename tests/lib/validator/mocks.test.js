@@ -1,11 +1,25 @@
-import { describe, test, expect, beforeAll, afterAll } from "vitest";
-import path from "node:path";
+import {
+	describe,
+	test,
+	expect,
+	beforeAll,
+	afterAll,
+	beforeEach,
+	afterEach,
+	vi,
+} from "vitest";
 import { getComponentData } from "../../../lib/mocks/index.js";
 import validateMockData from "../../../lib/validator/mocks.js";
 import init from "../../../lib/index.js";
 
 beforeAll(() => (process.env.MIYAGI_JS_API = true));
 afterAll(() => (process.env.MIYAGI_JS_API = false));
+beforeEach(() => {
+	vi.spyOn(console, "warn").mockImplementation(() => { });
+});
+afterEach(() => {
+	vi.restoreAllMocks();
+});
 
 describe("validateMockData", () => {
 	describe("with missing schema", () => {
@@ -15,6 +29,30 @@ describe("validateMockData", () => {
 			expect(
 				await validateMockData(component, await getComponentData(component)),
 			).toStrictEqual(null);
+		});
+
+		test("logs explicit missing schema warning", async () => {
+			process.env.MIYAGI_JS_API = "";
+			const component = await getComponentsObject("anchor");
+			await validateMockData(component, await getComponentData(component), false);
+
+			expect(console.warn).toHaveBeenCalledWith(
+				expect.stringContaining("has no schema file"),
+			);
+			process.env.MIYAGI_JS_API = "true";
+		});
+	});
+
+	describe("with unparseable schema", () => {
+		test("logs explicit parse-failed schema warning", async () => {
+			process.env.MIYAGI_JS_API = "";
+			const component = await getComponentsObject("video");
+			await validateMockData(component, await getComponentData(component), false);
+
+			expect(console.warn).toHaveBeenCalledWith(
+				expect.stringContaining("could not be parsed as JSON or YAML"),
+			);
+			process.env.MIYAGI_JS_API = "true";
 		});
 	});
 
