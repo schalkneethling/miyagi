@@ -1,0 +1,11 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://fixture.local/ref-consumer",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"value": {
+			"$ref": "https://fixture.local/ref-source#/properties/value"
+		}
+	}
+}

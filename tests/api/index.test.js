@@ -70,10 +70,23 @@ const RESPONSES = {
 			type: "schema",
 		},
 	],
+	refMissing: [
+		{
+			type: "schema-ref",
+			data: [
+				{
+					message: expect.stringContaining("can't resolve reference"),
+				},
+			],
+		},
+	],
 };
 
 beforeAll(() => (process.env.MIYAGI_JS_API = true));
 afterAll(() => (process.env.MIYAGI_JS_API = false));
+afterEach(
+	() => (defaultConfig.defaultUserConfig.schemaValidationMode = "collect-all"),
+);
 
 describe("getMockData", () => {
 	describe("without passing a component name", () => {
@@ -196,7 +209,7 @@ describe("createBuild", () => {
 
 		expect(await createBuild()).toStrictEqual({
 			success: true,
-			message: "Build done! Wrote 94 directories and files.",
+			message: "Build done! Wrote 112 directories and files.",
 		});
 
 		[
@@ -481,27 +494,73 @@ describe("createComponent", () => {
 });
 
 describe("lintComponents", () => {
-	test("validates the mock data of all components against their schema files and returns an array with all errors", async () => {
-		expect(await lintComponents()).toStrictEqual({
-			success: false,
-			data: [
-				// Mocks that do not match the schema
-				{
-					component: "card",
-					errors: RESPONSES.card,
-				},
-				// Invalid schema file, mock file exists
-				{
-					component: "icon",
-					errors: RESPONSES.icon,
-				},
-				// Invalid schema file, no mock file exists
-				{
-					component: "image",
-					errors: RESPONSES.image,
-				},
-			],
+	test("in collect-all mode, returns schema and mock errors after full pipeline", async () => {
+		defaultConfig.defaultUserConfig.schemaValidationMode = "collect-all";
+
+		const result = await lintComponents();
+		expect(result.success).toBe(false);
+		expect(result.data.map((entry) => entry.component)).toStrictEqual([
+			"card",
+			"icon",
+			"image",
+			"ref-missing",
+		]);
+
+		expect(result.data.find((entry) => entry.component === "card")).toStrictEqual({
+			component: "card",
+			errors: RESPONSES.card,
 		});
+
+		const iconError = result.data.find(
+			(entry) => entry.component === "icon",
+		)?.errors?.[0];
+		expect(iconError?.type).toBe("schema");
+		expect(iconError?.data?.[0]).toEqual(
+			expect.objectContaining({
+				message: RESPONSES.icon[0].data[0].message,
+				component: "icon",
+				schemaFile: expect.any(String),
+			}),
+		);
+
+		const imageError = result.data.find(
+			(entry) => entry.component === "image",
+		)?.errors?.[0];
+		expect(imageError?.type).toBe("schema");
+		expect(imageError?.data?.[0]).toEqual(
+			expect.objectContaining({
+				message: RESPONSES.image[0].data[0].message,
+				component: "image",
+				schemaFile: expect.any(String),
+			}),
+		);
+
+		const refMissingError = result.data.find(
+			(entry) => entry.component === "ref-missing",
+		)?.errors?.[0];
+		expect(refMissingError?.type).toBe("schema-ref");
+		expect(refMissingError?.data?.[0]).toEqual(
+			expect.objectContaining({
+				message: RESPONSES.refMissing[0].data[0].message,
+				component: "ref-missing",
+				schemaFile: expect.any(String),
+			}),
+		);
+	});
+
+	test("in fail-fast mode, returns schema errors and skips mock validation phase", async () => {
+		defaultConfig.defaultUserConfig.schemaValidationMode = "fail-fast";
+
+		const result = await lintComponents();
+		expect(result.success).toBe(false);
+		expect(result.data.map((entry) => entry.component)).toStrictEqual([
+			"icon",
+			"image",
+			"ref-missing",
+		]);
+		expect(
+			result.data.some((entry) => entry.component === "card"),
+		).toStrictEqual(false);
 	});
 });
 
@@ -544,19 +603,58 @@ describe("lintComponent", () => {
 
 	describe("with invalid schema file while mock file exists", () => {
 		test("returns success:false and an array with all errors", async () => {
-			expect(await lintComponent({ component: "icon" })).toStrictEqual({
-				success: false,
-				data: RESPONSES.icon,
-			});
+			const result = await lintComponent({ component: "icon" });
+			expect(result.success).toBe(false);
+			expect(result.data?.[0]).toEqual(
+				expect.objectContaining({
+					type: "schema",
+				}),
+			);
+			expect(result.data?.[0]?.data?.[0]).toEqual(
+				expect.objectContaining({
+					message: RESPONSES.icon[0].data[0].message,
+					component: "icon",
+					schemaFile: expect.any(String),
+				}),
+			);
 		});
 	});
 
 	describe("with invalid schema file while no mock file exists", () => {
 		test("returns success:false and an array with all errors", async () => {
-			expect(await lintComponent({ component: "image" })).toStrictEqual({
-				success: false,
-				data: RESPONSES.image,
-			});
+			const result = await lintComponent({ component: "image" });
+			expect(result.success).toBe(false);
+			expect(result.data?.[0]).toEqual(
+				expect.objectContaining({
+					type: "schema",
+				}),
+			);
+			expect(result.data?.[0]?.data?.[0]).toEqual(
+				expect.objectContaining({
+					message: RESPONSES.image[0].data[0].message,
+					component: "image",
+					schemaFile: expect.any(String),
+				}),
+			);
+		});
+	});
+
+	describe("with unresolved schema reference", () => {
+		test("returns success:false and schema-ref error", async () => {
+			const result = await lintComponent({ component: "ref-missing" });
+			expect(result.success).toBe(false);
+			expect(result.data?.[0]).toEqual(
+				expect.objectContaining({
+					type: "schema-ref",
+				}),
+			);
+			expect(result.data?.[0]?.data?.[0]).toEqual(
+				expect.objectContaining({
+					message: expect.stringContaining("can't resolve reference"),
+					component: "ref-missing",
+					schemaFile: expect.any(String),
+				}),
+			);
 		});
 	});
 });
