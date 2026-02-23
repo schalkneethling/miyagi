@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.2.0](https://github.com/schalkneethling/miyagi/compare/v4.1.1...v4.2.0) (2026-02-23)
+
+
+### Features
+
+* improve schema validation handling and lint log levels ([ca4db23](https://github.com/schalkneethling/miyagi/commit/ca4db2365b507d19f56ce3c434ce36bc4c3712a1))
+* improve schema validation handling and lint log levels ([953bc32](https://github.com/schalkneethling/miyagi/commit/953bc32e06367027a49e066e4ae131cdf7a6427b))
+
 ## [4.1.1](https://github.com/schalkneethling/miyagi/compare/v4.1.0...v4.1.1) (2026-02-21)
 
 
