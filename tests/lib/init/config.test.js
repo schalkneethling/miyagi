@@ -11,6 +11,11 @@ describe("config processing", () => {
 			expect(config.watch.backend).toBe("chokidar");
 		});
 
+		test("defaults watch report format to summary", () => {
+			const config = getConfig({});
+			expect(config.watch.report.format).toBe("summary");
+		});
+
 		test("derives sources from components folder by default", () => {
 			const config = getConfig({
 				components: { folder: "src" },
