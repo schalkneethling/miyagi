@@ -31,6 +31,10 @@ vi.mock("../../../lib/state/file-contents.js", () => ({
 	readFile: vi.fn(async () => ({})),
 }));
 
+vi.mock("../../../lib/logger.js", () => ({
+	default: vi.fn(),
+}));
+
 vi.mock("ws", () => ({
 	WebSocketServer: vi.fn(function MockWebSocketServer() {
 		this.on = vi.fn((eventName, callback) => {
@@ -55,6 +59,7 @@ vi.mock("ws", () => ({
 }));
 
 const { default: Watcher } = await import("../../../lib/init/watcher.js");
+const { default: mockLogger } = await import("../../../lib/logger.js");
 
 describe("Watcher", () => {
 	let mockServer;
@@ -157,12 +162,41 @@ describe("Watcher", () => {
 		await vi.advanceTimersByTimeAsync(150);
 
 		expect(mockSetState).toHaveBeenCalledTimes(1);
+		const updatingStartedCalls = mockLogger.mock.calls.filter(
+			([type, message]) =>
+				type === "info" &&
+				typeof message === "string" &&
+				message.includes("miyagi is updating the state"),
+		);
+		expect(updatingStartedCalls).toHaveLength(1);
 		expect(mockSetState).toHaveBeenCalledWith({
 			sourceTree: true,
 			fileContents: true,
 			menu: true,
 			partials: true,
 		});
+	});
+
+	test("prints resolved source list only when debug.logResolvedSources is enabled", () => {
+		global.config.watch.report.format = "pretty";
+		global.config.watch.debug.logResolvedSources = false;
+		Watcher(mockServer);
+
+		expect(
+			consoleInfoSpy.mock.calls.some(([line]) =>
+				String(line).includes("Resolved sources:"),
+			),
+		).toBe(false);
+
+		consoleInfoSpy.mockClear();
+		global.config.watch.debug.logResolvedSources = true;
+		Watcher(mockServer);
+
+		expect(
+			consoleInfoSpy.mock.calls.some(([line]) =>
+				String(line).includes("Resolved sources:"),
+			),
+		).toBe(true);
 	});
 
 	test("sends structured reload payload to websocket clients", async () => {

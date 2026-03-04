@@ -590,7 +590,7 @@ default:
 {
   "enabled": true,
   "onStart": true,
-  "format": "pretty",
+  "format": "summary",
   "destination": "stdout",
   "useColors": true
 }
@@ -602,6 +602,8 @@ Startup watch report options.
 - `destination`: currently only `stdout`
 
 Use `json` when the watch report needs to be parsed by scripts or tooling (for example CI checks or custom integrations).
+`summary` is the default to keep startup output concise on larger projects.
+`pretty` keeps richer sections, and full resolved source listing is shown only when `watch.debug.logResolvedSources=true`.
 
 CLI overrides are available:
 
@@ -624,6 +626,8 @@ default:
 ```
 
 Enable verbose watcher diagnostics while debugging reload decisions.
+
+Note: `watch.debug.logResolvedSources=true` enables full resolved watch source listing in startup report output.
 
 ## `schema`
 
