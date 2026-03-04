@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.3.1](https://github.com/schalkneethling/miyagi/compare/v4.3.0...v4.3.1) (2026-03-04)
+
+
+### Bug Fixes
+
+* reduce watch startup noise and batch update logs ([4f9bd99](https://github.com/schalkneethling/miyagi/commit/4f9bd9916e52fed6888e8e970ef6e7beac3d937a))
+* reduce watch startup noise and log spam ([aa9dcf5](https://github.com/schalkneethling/miyagi/commit/aa9dcf5d3b7f4728644203c5b8da16fb81ecf476))
+
 ## [4.3.0](https://github.com/schalkneethling/miyagi/compare/v4.2.0...v4.3.0) (2026-03-04)
 
 
