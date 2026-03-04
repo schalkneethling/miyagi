@@ -5,6 +5,53 @@ beforeAll(() => (process.env.MIYAGI_JS_API = true));
 afterAll(() => (process.env.MIYAGI_JS_API = false));
 
 describe("config processing", () => {
+	describe("watch", () => {
+		test("defaults to chokidar backend", () => {
+			const config = getConfig({});
+			expect(config.watch.backend).toBe("chokidar");
+		});
+
+		test("derives sources from components folder by default", () => {
+			const config = getConfig({
+				components: { folder: "src" },
+			});
+			expect(config.watch.sources).toEqual(
+				expect.arrayContaining([
+					expect.objectContaining({
+						id: "components",
+						type: "dir",
+						path: "src",
+					}),
+				]),
+			);
+		});
+
+		test("maps legacy ui.reloadAfterChanges.componentAssets to watch reload rules", () => {
+			const config = getConfig({
+				ui: {
+					reloadAfterChanges: {
+						componentAssets: true,
+					},
+				},
+			});
+			expect(config.watch.reload.rules.componentAsset).toBe("iframe");
+			expect(config.watch.reload.rules.globalCss).toBe("iframe");
+			expect(config.watch.reload.rules.globalJs).toBe("iframe");
+		});
+
+		test("fails when deprecated node-watch backend is configured", () => {
+			expect(() =>
+				getConfig({
+					watch: {
+						backend: "node-watch",
+					},
+				}),
+			).toThrow(
+				'`watch.backend="node-watch"` is no longer supported. Please use `watch.backend="chokidar"`. See https://docs.miyagi.dev/configuration/options/ for migration details.',
+			);
+		});
+	});
+
 	describe("assets.shared", () => {
 		test("defaults to empty css and js arrays when not specified", () => {
 			const config = getConfig({});

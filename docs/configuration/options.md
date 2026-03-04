@@ -421,6 +421,210 @@ default:
 }
 ```
 
+## `watch`
+
+_Settings for file watching, live reload transport, and startup watch reporting._
+
+### `backend`
+
+default: `"chokidar"`<br>
+type: `string`<br>
+values: `chokidar`
+
+`node-watch` is no longer supported.
+
+### `enabled`
+
+default: `true`<br>
+type: `boolean`
+
+Enable or disable file watching globally.
+
+### `sources`
+
+default: `[]`
+type: `array`
+
+By default, miyagi derives watched sources from known config locations:
+
+- `components.folder`
+- `docs.folder`
+- local `assets` entries (`assets.folder`, `assets.css`, `assets.js`, and `assets.shared`)
+- config file watch settings
+
+`watch.sources` behavior is explicit:
+
+- if `watch.sources` is omitted, defaults above are used
+- if `watch.sources` is `[]`, defaults above are used
+- as soon as `watch.sources` contains at least one entry, those entries replace auto-derived defaults
+
+Sources can target directories or files. Each source accepts:
+
+- `id`: stable source id (`string`)
+- `type`: `dir` or `file`
+- `path`: path to watch (`string`)
+- `recursive`: whether to recurse (`boolean`, default `true`)
+- `optional`: marks a source as expected to be environment-dependent (reported in watch output)
+
+Missing or invalid paths are skipped at runtime. They are shown as `missing` in the startup watch report. If no valid watch targets remain after resolution, miyagi logs a watch startup failure.
+
+### `ignore`
+
+#### `defaults`
+
+default: `true`<br>
+type: `boolean`
+
+Includes baseline ignore patterns (`node_modules/**`, `.git/**`).
+
+#### `patterns`
+
+default: `[]`<br>
+type: `string[]`
+
+Additional ignore globs. Legacy `components.ignores` values are merged here.
+
+### `behavior`
+
+#### `debounceMs`
+
+default: `60`<br>
+type: `number`
+
+Event debounce window before processing starts.
+
+#### `coalesceWindowMs`
+
+default: `120`<br>
+type: `number`
+
+Additional coalescing window for burst writes.
+
+#### `awaitWriteFinish`
+
+default:
+
+```json
+{
+  "enabled": true,
+  "stabilityThresholdMs": 200,
+  "pollIntervalMs": 50
+}
+```
+
+Controls write-finish stabilization for atomic save patterns.
+
+### `reload`
+
+#### `enabled`
+
+default: `true`<br>
+type: `boolean`
+
+Global reload toggle.
+
+#### `rules`
+
+default:
+
+```json
+{
+  "template": "iframe",
+  "data": "parent",
+  "docs": "parent",
+  "schema": "iframe",
+  "componentAsset": "none",
+  "globalCss": "none",
+  "globalJs": "none",
+  "unknown": "parent"
+}
+```
+
+Rule values: `none`, `iframe`, `parent`.
+
+These rules determine which part of the miyagi UI is reloaded based on what changed.
+
+- `none`: do not reload browser
+- `iframe`: reload only the component iframe
+- `parent`: reload the parent UI window (full shell + iframe)
+
+Use `iframe` when a change only affects rendered component output. Use `parent` when navigation/menu/source tree context may have changed.
+
+Rules:
+
+- `template`: component template file changes
+- `data`: mock data changes (often affects menu/variation state, so default `parent`)
+- `docs`: markdown docs changes (default `parent`)
+- `schema`: schema file changes (default `iframe`)
+- `componentAsset`: component-local CSS/JS changes (default `none`, useful if assets are bundled elsewhere)
+- `globalCss`: global CSS asset changes
+- `globalJs`: global JS asset changes
+- `unknown`: fallback for unclassified changes
+
+You can set any rule to `none`, `iframe`, or `parent` depending on your project workflow. Typical examples:
+
+- Bundled asset pipeline: keep `componentAsset`, `globalCss`, `globalJs` as `none`
+- Direct file serving during development: set one or more of those to `iframe`
+- If state/menu consistency is more important than speed: prefer `parent`
+
+### `socket`
+
+#### `heartbeat`
+
+default:
+
+```json
+{
+  "enabled": true,
+  "intervalMs": 30000
+}
+```
+
+Server-side websocket heartbeat settings.
+
+### `report`
+
+default:
+
+```json
+{
+  "enabled": true,
+  "onStart": true,
+  "format": "pretty",
+  "destination": "stdout",
+  "useColors": true
+}
+```
+
+Startup watch report options.
+
+- `format`: `pretty`, `summary`, `json`
+- `destination`: currently only `stdout`
+
+Use `json` when the watch report needs to be parsed by scripts or tooling (for example CI checks or custom integrations).
+
+CLI overrides are available:
+
+- `--watch-report` / `--no-watch-report`
+- `--watch-report-format pretty|summary|json`
+- `--watch-report-no-color`
+
+Precedence is: `CLI > miyagi config > defaults`.
+
+### `debug`
+
+default:
+
+```json
+{
+  "logEvents": false,
+  "logDecisions": false,
+  "logResolvedSources": false
+}
+```
+
+Enable verbose watcher diagnostics while debugging reload decisions.
+
 ## `schema`
 
 ### `ajv`

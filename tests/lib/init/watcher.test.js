@@ -1,104 +1,208 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
-import fs from "fs";
 import defaultConfig from "../../../lib/default-config.js";
-import Watcher from "../../../lib/init/watcher.js";
 
-// Mock dependencies
-vi.mock("node-watch", () => ({
-	default: vi.fn(() => ({
-		on: vi.fn(),
-	})),
+const chokidarOnHandlers = {};
+const wsServerHandlers = {};
+const watcherInstance = {
+	on: vi.fn((eventName, callback) => {
+		chokidarOnHandlers[eventName] = callback;
+		return watcherInstance;
+	}),
+	close: vi.fn(),
+};
+const watchMock = vi.fn(() => watcherInstance);
+const mockSetState = vi.fn(async () => {});
+
+vi.mock("chokidar", () => ({
+	default: {
+		watch: watchMock,
+	},
+}));
+
+vi.mock("../../../lib/state/index.js", () => ({
+	default: mockSetState,
+}));
+
+vi.mock("../../../lib/config.js", () => ({
+	default: vi.fn(async () => ({})),
+}));
+
+vi.mock("../../../lib/state/file-contents.js", () => ({
+	readFile: vi.fn(async () => ({})),
 }));
 
 vi.mock("ws", () => ({
-	WebSocketServer: vi.fn(function () {
-		this.on = vi.fn();
+	WebSocketServer: vi.fn(function MockWebSocketServer() {
+		this.on = vi.fn((eventName, callback) => {
+			wsServerHandlers[eventName] = callback;
+			return this;
+		});
+		this.handleUpgrade = vi.fn((_request, _socket, _head, callback) => {
+			callback({
+				on: vi.fn(),
+				readyState: 1,
+				send: vi.fn(),
+				ping: vi.fn(),
+			});
+		});
+		this.emit = vi.fn((eventName, ws) => {
+			if (eventName === "connection" && wsServerHandlers.connection) {
+				wsServerHandlers.connection(ws);
+			}
+		});
 		return this;
 	}),
 }));
 
+const { default: Watcher } = await import("../../../lib/init/watcher.js");
+
 describe("Watcher", () => {
 	let mockServer;
-	let fsWatchSpy;
+	let consoleInfoSpy;
 
 	beforeEach(() => {
-		// Create a mock server object
+		vi.useFakeTimers();
+		vi.clearAllMocks();
+		for (const key of Object.keys(chokidarOnHandlers)) delete chokidarOnHandlers[key];
+		for (const key of Object.keys(wsServerHandlers)) delete wsServerHandlers[key];
+
+		consoleInfoSpy = vi.spyOn(console, "info").mockImplementation(() => {});
 		mockServer = {
 			on: vi.fn(),
 		};
 
-		// Spy on fs.watch
-		fsWatchSpy = vi.spyOn(fs, "watch").mockImplementation(() => {});
-
-		// Setup global.config with default configuration
 		global.config = {
 			...defaultConfig.defaultUserConfig,
 			components: {
-				folder: "src",
+				folder: "lib",
 				ignores: [],
-			},
-			docs: {
-				folder: "docs",
 			},
 			assets: {
 				root: "",
 				folder: [],
 				css: [],
 				js: [],
+				customProperties: {
+					files: [],
+				},
+				shared: {
+					css: [],
+					js: [],
+				},
+			},
+			docs: {
+				folder: null,
+			},
+			files: {
+				...defaultConfig.defaultUserConfig.files,
+				templates: {
+					...defaultConfig.defaultUserConfig.files.templates,
+					extension: "twig",
+				},
 			},
 			extensions: [],
+			watch: {
+				...defaultConfig.defaultUserConfig.watch,
+				sources: [
+					{
+						id: "components",
+						type: "dir",
+						path: "lib",
+						recursive: true,
+					},
+				],
+				report: {
+					...defaultConfig.defaultUserConfig.watch.report,
+					enabled: true,
+					onStart: true,
+					format: "summary",
+					useColors: false,
+				},
+			},
+		};
+
+		global.state = {
+			fileContents: {},
+			partials: {},
 		};
 	});
 
 	afterEach(() => {
-		vi.restoreAllMocks();
+		vi.runOnlyPendingTimers();
+		vi.useRealTimers();
 		delete global.config;
+		delete global.state;
+		vi.restoreAllMocks();
 	});
 
-	describe("watchConfigFile option", () => {
-		test("The `watchConfigFile` option is true by default", () => {
-			expect(defaultConfig.defaultUserConfig.ui.watchConfigFile).toBe(true);
+	test("starts chokidar with configured sources", () => {
+		Watcher(mockServer);
+
+		expect(watchMock).toHaveBeenCalledTimes(1);
+		expect(watchMock).toHaveBeenCalledWith(
+			expect.arrayContaining([expect.stringMatching(/lib$/)]),
+			expect.objectContaining({
+				ignoreInitial: true,
+				persistent: true,
+			}),
+		);
+		expect(consoleInfoSpy).toHaveBeenCalled();
+	});
+
+	test("coalesces repeated events for same path", async () => {
+		Watcher(mockServer);
+
+		chokidarOnHandlers.all("change", "lib/example.txt");
+		chokidarOnHandlers.all("change", "lib/example.txt");
+		await vi.advanceTimersByTimeAsync(150);
+
+		expect(mockSetState).toHaveBeenCalledTimes(1);
+		expect(mockSetState).toHaveBeenCalledWith({
+			sourceTree: true,
+			fileContents: true,
+			menu: true,
+			partials: true,
 		});
+	});
 
-		test("The file watcher is initialized when `userFileName` is set and `watchConfigFile` is true", () => {
-			global.config.userFileName = ".miyagi.js";
-			global.config.ui.watchConfigFile = true;
+	test("sends structured reload payload to websocket clients", async () => {
+		Watcher(mockServer);
 
-			Watcher(mockServer);
+		const upgradeHandler = mockServer.on.mock.calls.find(
+			([eventName]) => eventName === "upgrade",
+		)[1];
 
-			expect(fsWatchSpy).toHaveBeenCalledWith(
-				".miyagi.js",
-				expect.any(Function),
-			);
-			expect(fsWatchSpy).toHaveBeenCalledTimes(1);
-		});
+		const socket = {
+			destroy: vi.fn(),
+		};
 
-		test("The file watcher is not initialized when `userFileName` is set but `watchConfigFile` is false", () => {
-			global.config.userFileName = ".miyagi.js";
-			global.config.ui.watchConfigFile = false;
+		upgradeHandler(
+			{
+				url: "/__miyagi_ws",
+				headers: { host: "localhost:5000" },
+			},
+			socket,
+			Buffer.from(""),
+		);
 
-			Watcher(mockServer);
+		const wsClient = {
+			on: vi.fn(),
+			readyState: 1,
+			send: vi.fn(),
+			ping: vi.fn(),
+		};
+		wsServerHandlers.connection(wsClient);
 
-			expect(fsWatchSpy).not.toHaveBeenCalled();
-		});
+		chokidarOnHandlers.all("change", "lib/example.txt");
+		await vi.advanceTimersByTimeAsync(150);
 
-		test("The file watcher is not initialized when `userFileName` is not set", () => {
-			global.config.userFileName = null;
-			global.config.ui.watchConfigFile = true;
-
-			Watcher(mockServer);
-
-			expect(fsWatchSpy).not.toHaveBeenCalled();
-		});
-
-		test("The file watcher is not initialized when `userFileName` is undefined", () => {
-			global.config.userFileName = undefined;
-			global.config.ui.watchConfigFile = true;
-
-			Watcher(mockServer);
-
-			expect(fsWatchSpy).not.toHaveBeenCalled();
-		});
+		expect(wsClient.send).toHaveBeenCalledTimes(1);
+		expect(JSON.parse(wsClient.send.mock.calls[0][0])).toEqual(
+			expect.objectContaining({
+				type: "reload",
+				scope: "parent",
+			}),
+		);
 	});
 });
 
