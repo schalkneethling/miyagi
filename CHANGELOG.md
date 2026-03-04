@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.3.0](https://github.com/schalkneethling/miyagi/compare/v4.2.0...v4.3.0) (2026-03-04)
+
+
+### Features
+
+* stabilize watch/reload flow and add explicit watch config ([7ef725d](https://github.com/schalkneethling/miyagi/commit/7ef725de69217422ea97f25dd9864e62b3e0a138))
+* stabilize watch/reload flow with chokidar ([d4500fe](https://github.com/schalkneethling/miyagi/commit/d4500feef07250df27a87afab7c6af6a27596ca7))
+
 ## [4.2.0](https://github.com/schalkneethling/miyagi/compare/v4.1.1...v4.2.0) (2026-02-23)
 
 
