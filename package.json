@@ -1,6 +1,6 @@
 {
 	"name": "@schalkneethling/miyagi-core",
-	"version": "4.2.0",
+	"version": "4.3.0",
 	"description": "miyagi is a component development tool for JavaScript template engines.",
 	"main": "index.js",
 	"author": "Schalk Neethling <schalkneethling@duck.com>, Michael Großklaus <mail@mgrossklaus.de> (https://www.mgrossklaus.de)",
