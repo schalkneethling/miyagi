@@ -61,7 +61,7 @@
 		"cssnano": "^7.1.2",
 		"eslint": "^9.39.0",
 		"eslint-plugin-jsdoc": "^62.5.4",
-		"globals": "^15.15.0",
+		"globals": "^17.4.0",
 		"gulp": "^5.0.1",
 		"gulp-postcss": "^10.0.0",
 		"postcss": "^8.5.6",
