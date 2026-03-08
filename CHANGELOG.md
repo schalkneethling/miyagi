@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.4.0](https://github.com/schalkneethling/miyagi/compare/v4.3.1...v4.4.0) (2026-03-08)
+
+
+### Features
+
+* cli dx improvements and adds a doctor cli ([df10175](https://github.com/schalkneethling/miyagi/commit/df101755475791ab7fa62b322f85a2bcfbb1b87f))
+* cursor commands and docs updates ([2f3b62f](https://github.com/schalkneethling/miyagi/commit/2f3b62f9d111b497e03b746dba00c1486bb9aaa0))
+* improve cli dx and add doctor command ([b937e4e](https://github.com/schalkneethling/miyagi/commit/b937e4e03bf3c05e9d2bdabeee1582175f215430))
+
 ## [4.3.1](https://github.com/schalkneethling/miyagi/compare/v4.3.0...v4.3.1) (2026-03-04)
 
 
