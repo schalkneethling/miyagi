@@ -1,3 +1,3 @@
-import Miyagi from "./lib/index.js";
+import { runCli } from "./lib/cli/run.js";
 
-export default await Miyagi();
+export default runCli;

@@ -22,7 +22,52 @@ _miyagi_ is a component development tool for JavaScript templating engines.
 
 ## Requirements
 
-- NodeJS `20.11.0` or higher
+- NodeJS `24` or higher
+
+## Quick start
+
+Twig example:
+
+```bash
+pnpm add -D @schalkneethling/miyagi-core twing
+```
+
+Create `.miyagi.mjs`:
+
+```js
+import { createSynchronousEnvironment, createSynchronousFilesystemLoader } from "twing";
+import fs from "node:fs";
+
+const twing = createSynchronousEnvironment(createSynchronousFilesystemLoader(fs));
+
+export default {
+  components: {
+    folder: "src/components",
+  },
+  docs: {
+    folder: "docs",
+  },
+  engine: {
+    async render({ name, context, cb }) {
+      try {
+        return cb(null, await twing.render(name, context));
+      } catch (err) {
+        return cb(err.toString());
+      }
+    },
+  },
+};
+```
+
+Then start miyagi:
+
+```bash
+pnpm exec miyagi start
+```
+
+Open `http://localhost:5000`.
+
+If you use a different template engine, swap the `engine.render` implementation for that engine.
 
 ## Demos
 
@@ -37,6 +82,8 @@ _miyagi_ is a component development tool for JavaScript templating engines.
 ## Documentation
 
 [https://docs.miyagi.dev](https://docs.miyagi.dev)
+
+CLI quickstart: [https://docs.miyagi.dev/cli-commands/starting-miyagi/](https://docs.miyagi.dev/cli-commands/starting-miyagi/)
 
 ## Sponsor
 

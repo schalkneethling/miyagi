@@ -1,3 +1,8 @@
 # Using verbose mode
 
-You can run all cli commands in verbose mode using `-v` or `--verbose`. This gives you additional information which might helpful especially in case of errors.
+You can run all CLI commands in verbose mode with `-v` or `--verbose`. This prints additional information, mainly useful when debugging errors.
+
+```bash
+miyagi start --verbose
+miyagi build -v
+```

@@ -1,7 +1,7 @@
 # Creating a component
 
 ```bash
-miyagi new <folderName>/<componentName>`
+miyagi new <folderName>/<componentName>
 ```
 
 This will create a component folder including the following files:
@@ -13,7 +13,7 @@ This will create a component folder including the following files:
 - `mocks`: mocks.json
 - `schema`: schema.json
 
-_**NOTE:** The component will be located based on your current working directoy (so you are able to use autocompletion) and the file names depend on your [`files` settings](/configuration/options#files)._
+_**NOTE:** The component will be located based on your current working directory, so you can use shell autocompletion. The file names depend on your [`files` settings](/configuration/options#files)._
 
 ## Params
 
