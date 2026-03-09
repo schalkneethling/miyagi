@@ -358,12 +358,12 @@ Defines if your component automatically reloads after saving.
 
 #### `componentAssets`
 
-default: `false`<br>
+default: `true`<br>
 type: `boolean`
 
 Defines if your component automatically reloads after the css or js file of your component has been updated.
 
-_**NOTE:** This is disabled by default for the case that you have a build process that bundles your components assets. These bundled files could be added to your configuration in the [`assets key`](#assets)._
+_**NOTE:** This is a legacy option. Prefer using [`watch.reload.rules`](#rules) for fine-grained control over reload behavior._
 
 ### `textDirection`
 
@@ -486,6 +486,15 @@ Additional ignore globs. Legacy `components.ignores` values are merged here.
 
 ### `behavior`
 
+#### `startupGraceMs`
+
+default: `500`<br>
+type: `number`
+
+Grace period (in milliseconds) after the file watcher starts during which all events are silently dropped. This prevents spurious state updates caused by parallel build processes (e.g. esbuild, webpack) writing output files to watched directories during server startup.
+
+Set to `0` to disable.
+
 #### `debounceMs`
 
 default: `60`<br>
@@ -533,9 +542,9 @@ default:
   "data": "parent",
   "docs": "parent",
   "schema": "iframe",
-  "componentAsset": "none",
-  "globalCss": "none",
-  "globalJs": "none",
+  "componentAsset": "iframe",
+  "globalCss": "iframe",
+  "globalJs": "iframe",
   "unknown": "parent"
 }
 ```
@@ -556,15 +565,15 @@ Rules:
 - `data`: mock data changes (often affects menu/variation state, so default `parent`)
 - `docs`: markdown docs changes (default `parent`)
 - `schema`: schema file changes (default `iframe`)
-- `componentAsset`: component-local CSS/JS changes (default `none`, useful if assets are bundled elsewhere)
+- `componentAsset`: component-local CSS/JS changes (default `iframe`)
 - `globalCss`: global CSS asset changes
 - `globalJs`: global JS asset changes
 - `unknown`: fallback for unclassified changes
 
 You can set any rule to `none`, `iframe`, or `parent` depending on your project workflow. Typical examples:
 
-- Bundled asset pipeline: keep `componentAsset`, `globalCss`, `globalJs` as `none`
-- Direct file serving during development: set one or more of those to `iframe`
+- Bundled asset pipeline where miyagi should not reload on build output: set `componentAsset`, `globalCss`, `globalJs` to `none`
+- Direct file serving during development: keep defaults (`iframe`)
 - If state/menu consistency is more important than speed: prefer `parent`
 
 ### `socket`
