@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.4.1](https://github.com/schalkneethling/miyagi/compare/v4.4.0...v4.4.1) (2026-03-09)
+
+
+### Bug Fixes
+
+* watcher startup noise, CSS/JS reload defaults, and router crash ([0384e56](https://github.com/schalkneethling/miyagi/commit/0384e56f364359c77b93ae4dced10ef1b459b172))
+* watcher startup noise, CSS/JS reload defaults, and router crash ([6f515c9](https://github.com/schalkneethling/miyagi/commit/6f515c9ec9e97bb1b2524ffc08f8a9af7aafba8a))
+
 ## [4.4.0](https://github.com/schalkneethling/miyagi/compare/v4.3.1...v4.4.0) (2026-03-08)
 
 
