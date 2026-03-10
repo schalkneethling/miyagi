@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.4.2](https://github.com/schalkneethling/miyagi/compare/v4.4.1...v4.4.2) (2026-03-10)
+
+
+### Bug Fixes
+
+* **validator:** register global schema defs before component compile ([eae57a0](https://github.com/schalkneethling/miyagi/commit/eae57a0a38e531f48e8a8d953298441d90c89026))
+* **validator:** register global schema defs before component compile ([28c2468](https://github.com/schalkneethling/miyagi/commit/28c2468cc66bde517ef14b01e1eeeebd7a54552d))
+
 ## [4.4.1](https://github.com/schalkneethling/miyagi/compare/v4.4.0...v4.4.1) (2026-03-09)
 
 
