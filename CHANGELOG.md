@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.4.3](https://github.com/schalkneethling/miyagi/compare/v4.4.2...v4.4.3) (2026-03-10)
+
+
+### Bug Fixes
+
+* format with Prettier ([b1718f9](https://github.com/schalkneethling/miyagi/commit/b1718f9124b8d34729ed111808cdb63b66b5a39f))
+* **validator:** register global schemas in dev server render path ([1ec197d](https://github.com/schalkneethling/miyagi/commit/1ec197d8a8f1eb1fc36590857a0497ada461b609))
+* **validator:** register global schemas in dev server render path ([e0a5cf8](https://github.com/schalkneethling/miyagi/commit/e0a5cf836cb245b71e05f8d164d261449f12dc6a))
+
 ## [4.4.2](https://github.com/schalkneethling/miyagi/compare/v4.4.1...v4.4.2) (2026-03-10)
 
 ### Bug Fixes
