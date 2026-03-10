@@ -1,0 +1,2 @@
+# Intentionally malformed fixture used to test unparseable schema handling
+tests/_setup/components/video/schema.json

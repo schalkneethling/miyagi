@@ -1,5 +1,5 @@
 {
-    "require-dev": {
-        "factorial-io/twigcs-extension": "^1.1"
-    }
+  "require-dev": {
+    "factorial-io/twigcs-extension": "^1.1"
+  }
 }

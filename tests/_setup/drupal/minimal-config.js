@@ -1,6 +1,6 @@
 export default {
-	engine: "drupal",
-	drupal: {
-		libraries: "mytheme.libraries.yml",
-	},
+  engine: "drupal",
+  drupal: {
+    libraries: "mytheme.libraries.yml",
+  },
 };

@@ -3,107 +3,107 @@
 @import url("./spacings.css");
 
 .CustomPropsGroup {
-	list-style: none;
-	margin: 3em 0;
-	padding: 0;
+  list-style: none;
+  margin: 3em 0;
+  padding: 0;
 }
 
 .CustomProp {
-	position: relative;
-	border: 0.0625rem solid transparent;
+  position: relative;
+  border: 0.0625rem solid transparent;
 }
 
 .CustomProp[aria-selected="true"] {
-	position: relative;
+  position: relative;
 }
 
 .CustomProp-prop {
-	display: block;
-	margin: 10px 0 0;
-	word-break: break-all;
+  display: block;
+  margin: 10px 0 0;
+  word-break: break-all;
 }
 
 .CustomProp-button {
-	background: none;
-	border: none;
-	appearance: none;
-	font: inherit;
-	width: fit-content;
-	padding: 0;
-	text-align: start;
+  background: none;
+  border: none;
+  appearance: none;
+  font: inherit;
+  width: fit-content;
+  padding: 0;
+  text-align: start;
 }
 
 .CustomProp-button:focus {
-	outline: none;
+  outline: none;
 }
 
 .CustomProp-button:not([aria-expanded="true"]):hover .CustomProp-prop,
 .CustomProp-button:not([aria-expanded="true"]):focus .CustomProp-prop {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 .CustomProp-details {
-	position: absolute;
-	bottom: calc(100% + 15px);
-	inset-inline-start: 0;
-	padding: 15px;
-	margin: 0;
-	z-index: 1;
-	background: var(--color-Tooltip-background);
-	box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
-	outline: 0.0625rem solid var(--color-Tooltip-outline);
-	box-sizing: border-box;
-	font-size: 14px;
-	display: none;
-	grid-template-columns: fit-content(50%) 1fr;
-	gap: 0.5rem 1rem;
-	line-height: 1.5;
-	white-space: nowrap;
+  position: absolute;
+  bottom: calc(100% + 15px);
+  inset-inline-start: 0;
+  padding: 15px;
+  margin: 0;
+  z-index: 1;
+  background: var(--color-Tooltip-background);
+  box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
+  outline: 0.0625rem solid var(--color-Tooltip-outline);
+  box-sizing: border-box;
+  font-size: 14px;
+  display: none;
+  grid-template-columns: fit-content(50%) 1fr;
+  gap: 0.5rem 1rem;
+  line-height: 1.5;
+  white-space: nowrap;
 }
 
 @keyframes fadeIn {
-	from {
-		opacity: 0;
-		transform: translateY(10px);
-	}
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
 
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .CustomProp-details:not([hidden]),
 .CustomProp-button:hover + .CustomProp-details {
-	display: grid;
-	animation: fadeIn 0.15s ease;
+  display: grid;
+  animation: fadeIn 0.15s ease;
 }
 
 .CustomProp-details::before,
 .CustomProp-details::after {
-	content: "";
-	display: block;
-	position: absolute;
-	inset-inline-start: 15px;
-	width: 0;
-	height: 0;
-	border: 10px solid transparent;
+  content: "";
+  display: block;
+  position: absolute;
+  inset-inline-start: 15px;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
 }
 
 .CustomProp-details::before {
-	border-top-color: var(--color-Tooltip-outline);
-	top: 100%;
+  border-top-color: var(--color-Tooltip-outline);
+  top: 100%;
 }
 
 .CustomProp-details::after {
-	border-top-color: var(--color-Tooltip-background);
-	top: calc(100% - 2px);
+  border-top-color: var(--color-Tooltip-background);
+  top: calc(100% - 2px);
 }
 
 .CustomProp-detailsProperty {
-	font-weight: 600;
+  font-weight: 600;
 }
 
 .CustomProp-detailsValue {
-	margin: 0;
+  margin: 0;
 }

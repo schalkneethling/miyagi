@@ -1,13 +1,13 @@
 {
-	"$assets": {
-		"css": ["isolated.css"],
-		"js": [{ "src": "isolated.js", "type": "module" }]
-	},
-	"text": "Isolated component",
-	"$variants": [
-		{
-			"$name": "alt",
-			"text": "Alt variant"
-		}
-	]
+  "$assets": {
+    "css": ["isolated.css"],
+    "js": [{ "src": "isolated.js", "type": "module" }]
+  },
+  "text": "Isolated component",
+  "$variants": [
+    {
+      "$name": "alt",
+      "text": "Alt variant"
+    }
+  ]
 }

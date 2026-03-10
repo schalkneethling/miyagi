@@ -12,8 +12,8 @@ The most basic mock file would look something like this:
 
 ```json
 {
-	"label": "Save",
-	"type": "submit"
+  "label": "Save",
+  "type": "submit"
 }
 ```
 
@@ -21,9 +21,9 @@ In the UI this would be shown as a variant with the name "default". If you want 
 
 ```json
 {
-	"$name": "save",
-	"label": "Save",
-	"type": "submit"
+  "$name": "save",
+  "label": "Save",
+  "type": "submit"
 }
 ```
 
@@ -33,15 +33,15 @@ You can also add variants, which would be merged with the default data:
 
 ```json
 {
-	"label": "Save",
-	"type": "submit",
-	"$variants": [
-		{
-			"$name": "reset disabled",
-			"label": "Disabled",
-			"disabled": true
-		}
-	]
+  "label": "Save",
+  "type": "submit",
+  "$variants": [
+    {
+      "$name": "reset disabled",
+      "label": "Disabled",
+      "disabled": true
+    }
+  ]
 }
 ```
 
@@ -49,9 +49,9 @@ So, the data of the variation `"reset disabled"` would be:
 
 ```json
 {
-	"label": "Disabled",
-	"type": "submit",
-	"disabled": true
+  "label": "Disabled",
+  "type": "submit",
+  "disabled": true
 }
 ```
 
@@ -63,13 +63,13 @@ When you have an array in your default mock data as well as your variant mock da
 
 ```json
 {
-	"items": [1, 2, 3],
-	"$variant": [
-		{
-			"$name": "variant",
-			"items": [4, 5, 6]
-		}
-	]
+  "items": [1, 2, 3],
+  "$variant": [
+    {
+      "$name": "variant",
+      "items": [4, 5, 6]
+    }
+  ]
 }
 ```
 
@@ -77,7 +77,7 @@ becomes
 
 ```json
 {
-	"items": [1, 2, 3, 4, 5, 6]
+  "items": [1, 2, 3, 4, 5, 6]
 }
 ```
 
@@ -89,16 +89,16 @@ If you want to change this behavior, you can use `$opts` to define a different m
 
 ```json
 {
-	"item": [1, 2, 3],
-	"$variant": [
-		{
-			"$name": "variant",
-			"item": [4, 5, 6],
-			"$opts": {
-				"item": "overwrite"
-			}
-		}
-	]
+  "item": [1, 2, 3],
+  "$variant": [
+    {
+      "$name": "variant",
+      "item": [4, 5, 6],
+      "$opts": {
+        "item": "overwrite"
+      }
+    }
+  ]
 }
 ```
 
@@ -106,7 +106,7 @@ becomes
 
 ```json
 {
-	"item": [4, 5, 6]
+  "item": [4, 5, 6]
 }
 ```
 
@@ -116,16 +116,16 @@ becomes
 
 ```json
 {
-	"item": [1, { "a": 2 }, { "a": null }],
-	"$variants": [
-		{
-			"$name": "variant",
-			"item": [2, { "b": 2 }, { "a": 3 }],
-			"$opts": {
-				"item": "combine"
-			}
-		}
-	]
+  "item": [1, { "a": 2 }, { "a": null }],
+  "$variants": [
+    {
+      "$name": "variant",
+      "item": [2, { "b": 2 }, { "a": 3 }],
+      "$opts": {
+        "item": "combine"
+      }
+    }
+  ]
 }
 ```
 
@@ -133,7 +133,7 @@ becomes
 
 ```json
 {
-	"item": [2, { "a": 2, "b": 2 }, { "a": 3 }]
+  "item": [2, { "a": 2, "b": 2 }, { "a": 3 }]
 }
 ```
 
@@ -143,7 +143,7 @@ Instead of manually defining data, you can also reference other mock files like 
 
 ```json
 {
-	"$ref": "some/other/component"
+  "$ref": "some/other/component"
 }
 ```
 
@@ -171,8 +171,8 @@ would result in
 
 ```json
 {
-	"oneVar": "someOtherValue",
-	"anotherVar": "anotherValue"
+  "oneVar": "someOtherValue",
+  "anotherVar": "anotherValue"
 }
 ```
 
@@ -182,7 +182,7 @@ If you need to reference a variation from another mock file, you can do so by us
 
 ```json
 {
-	"$ref": "some/other/component#variation-name"
+  "$ref": "some/other/component#variation-name"
 }
 ```
 
@@ -194,12 +194,12 @@ You can create definitions in mock files, so mock data can be reused in multiple
 
 ```json
 {
-	"$defs": {
-		"customDefinitionName": {
-			"oneVar": "someOtherValue",
-			"anotherVar": "anotherValue"
-		}
-	}
+  "$defs": {
+    "customDefinitionName": {
+      "oneVar": "someOtherValue",
+      "anotherVar": "anotherValue"
+    }
+  }
 }
 ```
 
@@ -207,7 +207,7 @@ These definitions can then either be used in the same mock file like this:
 
 ```json
 {
-	"$ref": "#/$defs/customDefinitionName"
+  "$ref": "#/$defs/customDefinitionName"
 }
 ```
 
@@ -215,7 +215,7 @@ Or you can reference definitions from other mock files:
 
 ```json
 {
-	"$ref": "some/other/component/#/$defs/customDefinitionName"
+  "$ref": "some/other/component/#/$defs/customDefinitionName"
 }
 ```
 
@@ -225,10 +225,10 @@ By referencing a template file using `$tpl`, the object would be converted into 
 
 ```json
 {
-	"oneVar": {
-		"$tpl": "some/other/component",
-		"$ref": "some/other/component"
-	}
+  "oneVar": {
+    "$tpl": "some/other/component",
+    "$ref": "some/other/component"
+  }
 }
 ```
 
@@ -236,7 +236,7 @@ would result in
 
 ```json
 {
-	"oneVar": "<someHtml></someHtml>"
+  "oneVar": "<someHtml></someHtml>"
 }
 ```
 
@@ -248,16 +248,16 @@ If you want to use multiple components for one HTML string, you can do that by u
 
 ```json
 {
-	"html": {
-		"$render": [
-			{
-				"$tpl": "some/component"
-			},
-			{
-				"$tpl": "another/component"
-			}
-		]
-	}
+  "html": {
+    "$render": [
+      {
+        "$tpl": "some/component"
+      },
+      {
+        "$tpl": "another/component"
+      }
+    ]
+  }
 }
 ```
 
@@ -269,9 +269,9 @@ If you want to fetch mock data from an API or do any other asynchronous operatio
 
 ```js
 export default async function returnMockData() {
-	const data = await fetchData();
+  const data = await fetchData();
 
-	return data;
+  return data;
 }
 ```
 
@@ -297,12 +297,12 @@ You can opt a component into **isolated asset loading** by adding `$assets` to i
 
 ```json
 {
-	"$assets": {
-		"css": ["dist/button.css"],
-		"js": [{ "src": "dist/button.js", "type": "module" }]
-	},
-	"label": "Save",
-	"type": "submit"
+  "$assets": {
+    "css": ["dist/button.css"],
+    "js": [{ "src": "dist/button.js", "type": "module" }]
+  },
+  "label": "Save",
+  "type": "submit"
 }
 ```
 
@@ -318,9 +318,9 @@ Both `css` and `js` inside `$assets` are optional. If you only need to declare C
 
 ```json
 {
-	"$assets": {
-		"css": ["dist/button.css"]
-	}
+  "$assets": {
+    "css": ["dist/button.css"]
+  }
 }
 ```
 

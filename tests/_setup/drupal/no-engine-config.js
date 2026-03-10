@@ -1,5 +1,5 @@
 export default {
-	drupal: {
-		libraries: "mytheme.libraries.yml",
-	},
+  drupal: {
+    libraries: "mytheme.libraries.yml",
+  },
 };

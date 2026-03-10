@@ -1,40 +1,40 @@
 /** @define Title; */
 
 .Title {
-	display: flex;
-	justify-content: center;
-	margin-inline-start: calc(var(--menu-spacing) + var(--bar-size));
-	margin-inline-end: var(--menu-spacing);
+  display: flex;
+  justify-content: center;
+  margin-inline-start: calc(var(--menu-spacing) + var(--bar-size));
+  margin-inline-end: var(--menu-spacing);
 }
 
 .Title-link {
-	display: inline-block;
-	font-size: 0.875em;
-	font-weight: 500;
+  display: inline-block;
+  font-size: 0.875em;
+  font-weight: 500;
 }
 
 .Title-link:focus-visible {
-	outline-offset: var(--outline-offset);
+  outline-offset: var(--outline-offset);
 }
 
 .Title-logo img {
-	max-inline-size: 100%;
-	min-inline-size: 50%;
-	vertical-align: middle;
+  max-inline-size: 100%;
+  min-inline-size: 50%;
+  vertical-align: middle;
 }
 
 .Title-logo + .Title-name {
-	display: none;
+  display: none;
 }
 
 @media (width <= 40rem) {
-	.Title-logo img {
-		block-size: 2rem;
-	}
+  .Title-logo img {
+    block-size: 2rem;
+  }
 }
 
 @media (width > 40rem) {
-	.Title {
-		margin-block: 1.5rem;
-	}
+  .Title {
+    margin-block: 1.5rem;
+  }
 }

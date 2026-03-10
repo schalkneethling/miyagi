@@ -16,8 +16,8 @@ Using the custom properties, you could also make sure that you do not have separ
 
 ```css
 html {
-	--color-IframeText: var(--color-IframeText--light);
-	/* … */
+  --color-IframeText: var(--color-IframeText--light);
+  /* … */
 }
 ```
 
@@ -38,10 +38,10 @@ import fs from "node:fs";
 const css = fs.readFileSync("my/custom/styles.css", "utf8");
 
 export default {
-	ui: {
-		theme: {
-			css,
-		},
-	},
+  ui: {
+    theme: {
+      css,
+    },
+  },
 };
 ```
