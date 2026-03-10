@@ -2,9 +2,9 @@
 
 ## Configuring the JSON Schema specification
 
-If you do not configure anything, _miyagi_ uses the default of AJV, which is currently draft-07.
+If you do not configure anything, _miyagi_ uses the default AJV class, which validates against JSON Schema draft-07.
 
-If you want to change this to e.g. draft-2012, you can do that by importing the correct AJV dist and adding it to your config export:
+If you want to use a different draft — for example draft 2020-12 — import the matching AJV class and pass it in your config:
 
 ```js
 // .miyagi.js
@@ -14,10 +14,10 @@ import { Ajv2020 } from "ajv/dist/2020.js";
 /* … */
 
 export default {
-	/* … */
-	schema: {
-		ajv: Ajv2020,
-	},
+  /* … */
+  schema: {
+    ajv: Ajv2020,
+  },
 };
 ```
 

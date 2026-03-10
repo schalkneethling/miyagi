@@ -1,0 +1,11 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://fixture.local/ref-global-consumer",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"label": {
+			"$ref": "https://fixture.local/global-label-type"
+		}
+	}
+}
