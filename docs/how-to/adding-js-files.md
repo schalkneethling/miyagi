@@ -6,9 +6,9 @@ The **simplest way** is to add one file:
 
 ```json
 {
-	"assets": {
-		"js": "src/index.js"
-	}
+  "assets": {
+    "js": "src/index.js"
+  }
 }
 ```
 
@@ -18,12 +18,12 @@ If you want to serve **different files per `NODE_ENV`**, you can do that like th
 
 ```json
 {
-	"assets": {
-		"js": {
-			"development": "src/index.js",
-			"production": "dist/index.js"
-		}
-	}
+  "assets": {
+    "js": {
+      "development": "src/index.js",
+      "production": "dist/index.js"
+    }
+  }
 }
 ```
 
@@ -31,9 +31,9 @@ In both cases you could also use an array in case you want to **serve multiple f
 
 ```json
 {
-	"assets": {
-		"js": ["src/index.js", "src/another-file.js"]
-	}
+  "assets": {
+    "js": ["src/index.js", "src/another-file.js"]
+  }
 }
 ```
 
@@ -41,12 +41,12 @@ or
 
 ```json
 {
-	"assets": {
-		"js": {
-			"development": ["src/index.js", "src/another-file.js"],
-			"production": ["dist/index.js", "dist/another-file.js"]
-		}
-	}
+  "assets": {
+    "js": {
+      "development": ["src/index.js", "src/another-file.js"],
+      "production": ["dist/index.js", "dist/another-file.js"]
+    }
+  }
 }
 ```
 
@@ -62,11 +62,11 @@ In case you want to use `async`, `defer`, `type="module"` or include the script 
 
 ```json
 {
-	"src": "src/index.js",
-	"async": true,
-	"defer": true,
-	"type": "module",
-	"position": "body"
+  "src": "src/index.js",
+  "async": true,
+  "defer": true,
+  "type": "module",
+  "position": "body"
 }
 ```
 
@@ -74,15 +74,15 @@ This object can be used for any of the previously mentioned examples to replace 
 
 ```json
 {
-	"assets": {
-		"js": {
-			"src": "src/index.js",
-			"async": true,
-			"defer": true,
-			"type": "module",
-			"position": "body"
-		}
-	}
+  "assets": {
+    "js": {
+      "src": "src/index.js",
+      "async": true,
+      "defer": true,
+      "type": "module",
+      "position": "body"
+    }
+  }
 }
 ```
 
@@ -90,20 +90,20 @@ or
 
 ```json
 {
-	"assets": {
-		"js": {
-			"development": [
-				{
-					"src": "src/index.js",
-					"async": true,
-					"defer": true,
-					"type": "module",
-					"position": "body"
-				}
-			],
-			"production": []
-		}
-	}
+  "assets": {
+    "js": {
+      "development": [
+        {
+          "src": "src/index.js",
+          "async": true,
+          "defer": true,
+          "type": "module",
+          "position": "body"
+        }
+      ],
+      "production": []
+    }
+  }
 }
 ```
 
@@ -111,10 +111,10 @@ Please note that the object just mentioned does not make much sense, but merely 
 
 ```json
 {
-	"src": null,
-	"async": false,
-	"defer": false,
-	"type": null,
-	"position": "head"
+  "src": null,
+  "async": false,
+  "defer": false,
+  "type": null,
+  "position": "head"
 }
 ```

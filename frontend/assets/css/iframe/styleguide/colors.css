@@ -1,61 +1,61 @@
 .Colors {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
-	gap: 3em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
+  gap: 3em;
 }
 
 .Colors-button {
-	--size: 3em;
+  --size: 3em;
 
-	display: flex;
-	flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .Colors-button::before,
 .Colors-button::after {
-	display: block;
+  display: block;
 }
 
 .Colors--all .Colors-button::before {
-	margin-inline-end: 10px;
-	width: var(--size);
+  margin-inline-end: 10px;
+  width: var(--size);
 }
 
 .Colors--all .Colors-button::before,
 .Colors--decoration .Colors-button::before {
-	height: var(--size);
-	background: var(--color);
-	border: 1px solid var(--backdrop, transparent);
-	content: "";
-	order: -1;
+  height: var(--size);
+  background: var(--color);
+  border: 1px solid var(--backdrop, transparent);
+  content: "";
+  order: -1;
 }
 
 .Colors--decoration .Colors-button::before {
-	width: 100%;
+  width: 100%;
 }
 
 .Colors--all .Colors-button::after,
 .Colors--typo .Colors-button::after {
-	font-size: var(--size);
-	color: var(--color);
-	font-weight: bold;
-	order: -1;
-	/* stylelint-disable */
-	-webkit-text-stroke: 1px var(--backdrop, transparent);
-	text-stroke: 1px var(--backdrop, transparent);
-	/* stylelint-enable */
+  font-size: var(--size);
+  color: var(--color);
+  font-weight: bold;
+  order: -1;
+  /* stylelint-disable */
+  -webkit-text-stroke: 1px var(--backdrop, transparent);
+  text-stroke: 1px var(--backdrop, transparent);
+  /* stylelint-enable */
 }
 
 .Colors--all .Colors-button::after {
-	content: "Aa";
+  content: "Aa";
 }
 
 .Colors--typo .Colors-button::after {
-	content: "AaBbCc";
+  content: "AaBbCc";
 }
 
 .Colors-prop,
 .Colors-value {
-	flex: 1 0 100%;
-	margin: 10px 0 0;
+  flex: 1 0 100%;
+  margin: 10px 0 0;
 }

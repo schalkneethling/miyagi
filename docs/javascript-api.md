@@ -61,7 +61,7 @@ Creates a mock data file based on the components schema file, same as the CLI co
 
 ```js
 {
-	component: String; // Required — Path to the component directory, relative from config.components.folder.
+  component: String; // Required — Path to the component directory, relative from config.components.folder.
 }
 ```
 
@@ -124,7 +124,7 @@ Validates the schema and mock data for a single component.
 
 ```js
 {
-	component: String; // Required — Path to component directory.
+  component: String; // Required — Path to component directory.
 }
 ```
 

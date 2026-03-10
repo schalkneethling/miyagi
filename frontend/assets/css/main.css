@@ -4,68 +4,68 @@
 @import url("./main/menu.css");
 
 html {
-	height: 100%;
+  height: 100%;
 }
 
 body {
-	background: var(--color-Menu-background);
-	color: var(--color-Text);
-	display: grid;
-	font-family: var(--font-family);
-	font-size: var(--font-size);
-	line-height: var(--line-height);
-	min-height: 100%;
+  background: var(--color-Menu-background);
+  color: var(--color-Text);
+  display: grid;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  min-height: 100%;
 }
 
 .Content {
-	grid-area: iframe;
+  grid-area: iframe;
 }
 
 .FrameWrapper {
-	height: 100%;
-	width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
 .Frame {
-	display: block;
-	height: 100%;
-	width: 100%;
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
 @media (width <= 40rem) {
-	html {
-		--spacing-x: 1rem;
-		--spacing-y: 1rem;
-	}
+  html {
+    --spacing-x: 1rem;
+    --spacing-y: 1rem;
+  }
 
-	body {
-		grid-template:
-			"nav"
-			"iframe" 1fr;
-	}
+  body {
+    grid-template:
+      "nav"
+      "iframe" 1fr;
+  }
 }
 
 @media (width > 40rem) {
-	html {
-		--spacing-x: 2rem;
-		--spacing-y: 4rem;
-	}
+  html {
+    --spacing-x: 2rem;
+    --spacing-y: 4rem;
+  }
 
-	body {
-		grid-template-areas: "nav iframe";
-		grid-template-columns: 16rem 1fr;
-	}
+  body {
+    grid-template-areas: "nav iframe";
+    grid-template-columns: 16rem 1fr;
+  }
 }
 
 .u-hiddenVisually {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	margin: -1px;
-	border: 0;
-	padding: 0;
-	clip-path: inset(100%);
-	/* stylelint-disable-next-line */
-	clip: rect(0 0 0 0);
-	overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  clip-path: inset(100%);
+  /* stylelint-disable-next-line */
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }

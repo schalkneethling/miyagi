@@ -1,6 +1,6 @@
 export default {
-	engine: "wordpress",
-	wordpress: {
-		functions: "functions.php",
-	},
+  engine: "wordpress",
+  wordpress: {
+    functions: "functions.php",
+  },
 };

@@ -56,10 +56,10 @@ By default all global CSS/JS (`config.assets.css/js`) are loaded for every compo
 
 ```json
 {
-	"$assets": {
-		"css": ["button.css"],
-		"js": [{ "src": "button.js", "type": "module" }]
-	}
+  "$assets": {
+    "css": ["button.css"],
+    "js": [{ "src": "button.js", "type": "module" }]
+  }
 }
 ```
 

@@ -1,67 +1,67 @@
 @import url("./config-switcher.css");
 
 .ConfigSwitchers {
-	display: flex;
-	background: var(--bar-background);
+  display: flex;
+  background: var(--bar-background);
 }
 
 .ConfigSwitchers-toggle {
-	--size: var(--bar-size);
+  --size: var(--bar-size);
 
-	align-items: center;
-	color: var(--color-Icon);
-	display: flex;
-	flex-shrink: 0;
-	gap: 0.5em;
-	cursor: pointer;
-	border-block-start: var(--divider);
-	inline-size: 100%;
+  align-items: center;
+  color: var(--color-Icon);
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.5em;
+  cursor: pointer;
+  border-block-start: var(--divider);
+  inline-size: 100%;
 
-	svg {
-		display: block;
-		inline-size: var(--size);
-		block-size: var(--size);
-		padding: 0.45em;
-	}
+  svg {
+    display: block;
+    inline-size: var(--size);
+    block-size: var(--size);
+    padding: 0.45em;
+  }
 }
 
 .ConfigSwitchers-toggle:focus-visible {
-	outline-offset: calc(-1 * var(--outline-offset));
+  outline-offset: calc(-1 * var(--outline-offset));
 }
 
 .ConfigSwitchers-toggleClose {
-	fill: currentcolor;
-	block-size: 75%;
-	inline-size: 75%;
+  fill: currentcolor;
+  block-size: 75%;
+  inline-size: 75%;
 }
 
 .ConfigSwitchers-toggle[aria-expanded="false"] .ConfigSwitchers-toggleClose {
-	display: none;
+  display: none;
 }
 
 .ConfigSwitchers-toggle[aria-expanded="true"] .ConfigSwitchers-toggleOpen {
-	display: none;
+  display: none;
 }
 
 .ConfigSwitchers-container {
-	padding: var(--bar-size);
-	padding-inline-start: calc(2 * var(--bar-size));
-	flex: 1;
-	position: absolute;
-	z-index: 2;
-	inset-block: 0 calc(var(--bar-size) + 0.0625rem);
-	inset-inline: 0;
-	background: var(--bar-background);
+  padding: var(--bar-size);
+  padding-inline-start: calc(2 * var(--bar-size));
+  flex: 1;
+  position: absolute;
+  z-index: 2;
+  inset-block: 0 calc(var(--bar-size) + 0.0625rem);
+  inset-inline: 0;
+  background: var(--bar-background);
 }
 
 .ConfigSwitchers-container > * + * {
-	margin-block-start: var(--menu-spacing);
+  margin-block-start: var(--menu-spacing);
 }
 
 .ConfigSwitchers-toggle[aria-expanded="false"] ~ .ConfigSwitchers-container {
-	display: none;
+  display: none;
 }
 
 .ConfigSwitchers-toggle[aria-expanded="true"] ~ .ConfigSwitchers-container {
-	display: block;
+  display: block;
 }

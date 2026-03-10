@@ -1,113 +1,113 @@
 /** @define Nav; */
 
 .Nav-entry {
-	position: relative;
+  position: relative;
 }
 
 .Nav-entry:not(.Nav-entry--lvl0)::before {
-	content: "";
-	display: block;
-	inline-size: var(--bar-size);
-	position: absolute;
-	inset-block: 0;
-	inset-inline-start: 0;
-	background: var(--color-MenuBar-background);
+  content: "";
+  display: block;
+  inline-size: var(--bar-size);
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  background: var(--color-MenuBar-background);
 }
 
 .Nav-entry--directory {
-	border-block-start: var(--divider);
+  border-block-start: var(--divider);
 }
 
 .Nav-entry--lvl0:last-child {
-	border-block-end: var(--divider);
+  border-block-end: var(--divider);
 }
 
 .Nav-wrapper {
-	position: relative;
+  position: relative;
 }
 
 .Nav-toggle {
-	display: block;
-	position: absolute;
-	z-index: 1;
-	inset-block: 0;
-	inset-inline-end: 0;
-	inline-size: var(--bar-size);
+  display: block;
+  position: absolute;
+  z-index: 1;
+  inset-block: 0;
+  inset-inline-end: 0;
+  inline-size: var(--bar-size);
 }
 
 .Nav-toggle::after {
-	border: var(--toggle-border);
-	border-block-start-width: var(--toggle-borderWidth);
-	border-inline-end-width: var(--toggle-borderWidth);
-	content: "";
-	display: block;
-	font-size: var(--toggle-fontSize);
-	block-size: var(--toggle-height);
-	position: absolute;
-	inset-block-start: 50%;
-	inset-inline-start: 50%;
-	transition: var(--toggle-transition);
-	inline-size: var(--toggle-width);
+  border: var(--toggle-border);
+  border-block-start-width: var(--toggle-borderWidth);
+  border-inline-end-width: var(--toggle-borderWidth);
+  content: "";
+  display: block;
+  font-size: var(--toggle-fontSize);
+  block-size: var(--toggle-height);
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transition: var(--toggle-transition);
+  inline-size: var(--toggle-width);
 }
 
 .Nav-toggle[aria-expanded="false"]::after {
-	transform: var(--toggle-transition-closed);
+  transform: var(--toggle-transition-closed);
 }
 
 .Nav-toggle[aria-expanded="true"]::after {
-	transform: var(--toggle-transition-opened);
-	border-color: var(--color-Text);
+  transform: var(--toggle-transition-opened);
+  border-color: var(--color-Text);
 }
 
 .Nav-item,
 .Nav-variant {
-	display: block;
-	padding-block: var(--menu-spacing);
-	padding-inline-start: calc(var(--level, 1) * 1em + var(--menu-spacing));
-	margin-inline-start: var(--bar-size);
+  display: block;
+  padding-block: var(--menu-spacing);
+  padding-inline-start: calc(var(--level, 1) * 1em + var(--menu-spacing));
+  margin-inline-start: var(--bar-size);
 }
 
 :where(.Nav-item, .Nav-variant):not(:has(mark)),
 :where(.Nav-item, .Nav-variant) mark {
-	text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 :where(.Nav-item, .Nav-variant)[aria-current="page"] {
-	background: var(--color-Link-active-background);
-	color: var(--color-Link-active, var(--color-Link));
+  background: var(--color-Link-active-background);
+  color: var(--color-Link-active, var(--color-Link));
 }
 
 .is-no-match:not(:has(.is-match)) {
-	display: none;
+  display: none;
 }
 
 .Nav-entry--directory.has-match > .Nav-toggle,
 .Nav-entry--directory.is-match * {
-	opacity: 1 !important;
+  opacity: 1 !important;
 }
 
 .Nav-item--directory {
-	color: var(--color-Link);
-	cursor: default;
-	opacity: 0.75;
+  color: var(--color-Link);
+  cursor: default;
+  opacity: 0.75;
 }
 
 .Nav-item--link {
-	font-weight: 600;
+  font-weight: 600;
 }
 
 .Nav-item--link,
 .Nav-variant {
-	color: var(--color-Link);
-	text-decoration: none;
+  color: var(--color-Link);
+  text-decoration: none;
 }
 
 .Nav-item--link:where(:hover, :focus),
 .Nav-variant:where(:hover, :focus) {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 .Nav-toggle:focus-visible,
 .Nav-item:focus-visible {
-	outline-offset: calc(-1 * var(--outline-offset));
+  outline-offset: calc(-1 * var(--outline-offset));
 }

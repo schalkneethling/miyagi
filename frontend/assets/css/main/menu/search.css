@@ -1,64 +1,64 @@
 /** @define Search; */
 
 .Search {
-	border-block: var(--divider);
-	display: flex;
-	margin-block-end: var(--spacing-x);
-	position: relative;
+  border-block: var(--divider);
+  display: flex;
+  margin-block-end: var(--spacing-x);
+  position: relative;
 }
 
 .Search-label {
-	--size: var(--bar-size);
+  --size: var(--bar-size);
 
-	align-items: center;
-	display: flex;
-	flex-shrink: 0;
-	block-size: var(--size);
-	justify-content: center;
-	inline-size: var(--size);
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  block-size: var(--size);
+  justify-content: center;
+  inline-size: var(--size);
 }
 
 .Search-clear:not([hidden]) {
-	--size: var(--bar-size);
+  --size: var(--bar-size);
 
-	align-items: center;
-	display: flex;
-	justify-content: center;
-	inline-size: var(--size);
-	block-size: var(--size);
-	border-radius: 50%;
-	position: absolute;
-	inset-inline-end: 0;
-	inset-block-start: 0;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  inline-size: var(--size);
+  block-size: var(--size);
+  border-radius: 50%;
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-start: 0;
 }
 
 .Search-icon {
-	color: var(--color-Icon);
-	display: block;
-	inline-size: 50%;
-	block-size: 50%;
+  color: var(--color-Icon);
+  display: block;
+  inline-size: 50%;
+  block-size: 50%;
 }
 
 .Search-icon path {
-	fill: currentcolor;
+  fill: currentcolor;
 }
 
 .Search-icon circle {
-	fill: none;
-	stroke: currentcolor;
+  fill: none;
+  stroke: currentcolor;
 }
 
 .Search-input {
-	padding: 0.35em var(--menu-spacing);
-	padding-inline-end: 2.5em;
-	inline-size: calc(100% - var(--bar-size));
+  padding: 0.35em var(--menu-spacing);
+  padding-inline-end: 2.5em;
+  inline-size: calc(100% - var(--bar-size));
 }
 
 .Search-input:focus {
-	outline: none;
-	background: var(--color-Link-active-background);
+  outline: none;
+  background: var(--color-Link-active-background);
 }
 
 .Search-clear:focus-visible {
-	outline-offset: calc(-1 * var(--outline-offset));
+  outline-offset: calc(-1 * var(--outline-offset));
 }

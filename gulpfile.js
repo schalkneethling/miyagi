@@ -11,57 +11,57 @@ import terser from "@rollup/plugin-terser";
 const buildFolder = "dist/";
 const jsFolder = "frontend/assets/js/";
 const jsFiles = [
-	"iframe.js",
-	"iframe.build.js",
-	"main.js",
-	"main.build.js",
-	"jsontree.js",
+  "iframe.js",
+  "iframe.build.js",
+  "main.js",
+  "main.build.js",
+  "jsontree.js",
 ];
 const cssFiles = [
-	"frontend/assets/css/iframe.css",
-	"frontend/assets/css/main.css",
+  "frontend/assets/css/iframe.css",
+  "frontend/assets/css/main.css",
 ];
 const jsDist = path.join(buildFolder, "js");
 const cssDist = path.join(buildFolder, "css");
 
 gulp.task("build:js", (done) => {
-	const promises = [];
+  const promises = [];
 
-	jsFiles.forEach((jsFile) => {
-		promises.push(
-			new Promise((resolve) => {
-				rollup({
-					input: path.join(jsFolder, jsFile),
-					plugins: [nodeResolve(), terser()],
-				})
-					.then((bundle) => {
-						bundle.write({
-							dir: jsDist,
-							format: "esm",
-						});
-						resolve();
-					})
-					.catch((err) => console.error(err));
-			}),
-		);
-	});
+  jsFiles.forEach((jsFile) => {
+    promises.push(
+      new Promise((resolve) => {
+        rollup({
+          input: path.join(jsFolder, jsFile),
+          plugins: [nodeResolve(), terser()],
+        })
+          .then((bundle) => {
+            bundle.write({
+              dir: jsDist,
+              format: "esm",
+            });
+            resolve();
+          })
+          .catch((err) => console.error(err));
+      }),
+    );
+  });
 
-	return Promise.all(promises).then(() => done());
+  return Promise.all(promises).then(() => done());
 });
 
 gulp.task("build:css", () =>
-	gulp
-		.src(cssFiles)
-		.pipe(postcss([postcssImport, cssnano]))
-		.pipe(gulp.dest(cssDist)),
+  gulp
+    .src(cssFiles)
+    .pipe(postcss([postcssImport, cssnano]))
+    .pipe(gulp.dest(cssDist)),
 );
 
 gulp.task("clean", (done) => {
-	rmSync(buildFolder, { recursive: true, force: true });
-	return Promise.resolve();
+  rmSync(buildFolder, { recursive: true, force: true });
+  return Promise.resolve();
 });
 
 gulp.task(
-	"build",
-	gulp.series("clean", gulp.parallel("build:js", "build:css")),
+  "build",
+  gulp.series("clean", gulp.parallel("build:js", "build:css")),
 );

@@ -5,45 +5,45 @@
  * Released under the MIT License
  */
 .json-tree-js {
-	--json-tree-js-text-bold-weight: 400;
-	--json-tree-js-header-bold-weight: 700;
-	--json-tree-js-title-bold-weight: var(--json-tree-js-header-bold-weight);
-	--json-tree-js-text-bold-weight-active: var(
-		--json-tree-js-header-bold-weight
-	);
-	--json-tree-js-color-black: #3b3a3a;
-	--json-tree-js-color-white: currentcolor;
-	--json-tree-js-color-snow-white: currentcolor;
-	--json-tree-js-color-boolean: light-dark(#d9173e, hsl(348deg 100% 68%));
-	--json-tree-js-color-decimal: #e3c868;
-	--json-tree-js-color-number: #666bf9;
-	--json-tree-js-color-string: light-dark(hsl(80deg 100% 24%), #8dd203);
-	--json-tree-js-color-date: #a656f5;
-	--json-tree-js-color-array: light-dark(#7a4613, hsl(30deg 73% 50%));
-	--json-tree-js-color-object: currentcolor;
-	--json-tree-js-color-null: #bbb;
-	--json-tree-js-color-function: var(--json-tree-js-color-null);
-	--json-tree-js-color-unknown: var(--json-tree-js-color-null);
-	--json-tree-js-container-background-color: #22272e;
-	--json-tree-js-container-border-color: #454c56;
-	--json-tree-js-button-background-color: #2d333b;
-	--json-tree-js-button-border-color: var(
-		--json-tree-js-container-border-color
-	);
-	--json-tree-js-button-text-color: var(--json-tree-js-color-white);
-	--json-tree-js-button-background-color-hover: var(
-		--json-tree-js-container-border-color
-	);
-	--json-tree-js-button-text-color-hover: var(--json-tree-js-color-snow-white);
-	--json-tree-js-button-background-color-active: #616b79;
-	--json-tree-js-button-text-color-active: var(--json-tree-js-color-snow-white);
-	--json-tree-js-border-radius: 0.5rem;
-	--json-tree-js-border-style-scrollbar: inset 0 0 6px
-		var(--json-tree-js-color-dark-gray);
-	--json-tree-js-border-size: 0.5px;
-	--json-tree-js-spacing: 10px;
-	--json-tree-js-spacing-font-size: 1em;
-	--json-tree-js-transition: all 0.3s;
+  --json-tree-js-text-bold-weight: 400;
+  --json-tree-js-header-bold-weight: 700;
+  --json-tree-js-title-bold-weight: var(--json-tree-js-header-bold-weight);
+  --json-tree-js-text-bold-weight-active: var(
+    --json-tree-js-header-bold-weight
+  );
+  --json-tree-js-color-black: #3b3a3a;
+  --json-tree-js-color-white: currentcolor;
+  --json-tree-js-color-snow-white: currentcolor;
+  --json-tree-js-color-boolean: light-dark(#d9173e, hsl(348deg 100% 68%));
+  --json-tree-js-color-decimal: #e3c868;
+  --json-tree-js-color-number: #666bf9;
+  --json-tree-js-color-string: light-dark(hsl(80deg 100% 24%), #8dd203);
+  --json-tree-js-color-date: #a656f5;
+  --json-tree-js-color-array: light-dark(#7a4613, hsl(30deg 73% 50%));
+  --json-tree-js-color-object: currentcolor;
+  --json-tree-js-color-null: #bbb;
+  --json-tree-js-color-function: var(--json-tree-js-color-null);
+  --json-tree-js-color-unknown: var(--json-tree-js-color-null);
+  --json-tree-js-container-background-color: #22272e;
+  --json-tree-js-container-border-color: #454c56;
+  --json-tree-js-button-background-color: #2d333b;
+  --json-tree-js-button-border-color: var(
+    --json-tree-js-container-border-color
+  );
+  --json-tree-js-button-text-color: var(--json-tree-js-color-white);
+  --json-tree-js-button-background-color-hover: var(
+    --json-tree-js-container-border-color
+  );
+  --json-tree-js-button-text-color-hover: var(--json-tree-js-color-snow-white);
+  --json-tree-js-button-background-color-active: #616b79;
+  --json-tree-js-button-text-color-active: var(--json-tree-js-color-snow-white);
+  --json-tree-js-border-radius: 0.5rem;
+  --json-tree-js-border-style-scrollbar: inset 0 0 6px
+    var(--json-tree-js-color-dark-gray);
+  --json-tree-js-border-size: 0.5px;
+  --json-tree-js-spacing: 10px;
+  --json-tree-js-spacing-font-size: 1em;
+  --json-tree-js-transition: all 0.3s;
 }
 
 /*
@@ -52,30 +52,30 @@
     -------------------------------------------------------------------------
 */
 div.json-tree-js {
-	box-sizing: border-box;
-	display: inline-block;
-	background-color: var(--color-Code-background);
-	color: var(--json-tree-js-color-white);
-	border: 0.0625rem solid var(--color-Outline);
-	padding: var(--json-tree-js-spacing);
-	font-size: var(--json-tree-js-spacing-font-size);
-	font-weight: var(--json-tree-js-text-bold-weight);
-	line-height: 1.5;
-	width: 100%;
-	margin: 0 !important;
+  box-sizing: border-box;
+  display: inline-block;
+  background-color: var(--color-Code-background);
+  color: var(--json-tree-js-color-white);
+  border: 0.0625rem solid var(--color-Outline);
+  padding: var(--json-tree-js-spacing);
+  font-size: var(--json-tree-js-spacing-font-size);
+  font-weight: var(--json-tree-js-text-bold-weight);
+  line-height: 1.5;
+  width: 100%;
+  margin: 0 !important;
 }
 
 div.json-tree-js div.no-click {
-	pointer-events: none !important;
+  pointer-events: none !important;
 }
 
 div.json-tree-js * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 div.json-tree-js *::before,
 div.json-tree-js *::after {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /*
@@ -85,50 +85,50 @@ div.json-tree-js *::after {
 */
 
 div.json-tree-js :is(.down-arrow, .right-arrow, .no-arrow) {
-	background: none;
-	appearance: none;
-	padding: 0;
-	border: none;
-	font: inherit;
-	width: 1.5em;
-	height: 1.5em;
-	display: inline-flex;
+  background: none;
+  appearance: none;
+  padding: 0;
+  border: none;
+  font: inherit;
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-flex;
 }
 
 div.json-tree-js .no-arrow {
-	visibility: hidden;
-	pointer-events: none;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 div.json-tree-js :is(.down-arrow, .right-arrow) {
-	cursor: pointer;
-	justify-content: center;
-	align-items: center;
-	transform: translateY(-0.125em);
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-0.125em);
 }
 
 div.json-tree-js :is(.down-arrow, .right-arrow)::after {
-	content: "";
-	border: var(--toggle-border);
-	border-color: currentcolor;
-	border-top-width: 0.25em;
-	border-inline-end-width: 0.25em;
-	display: inline-block;
-	font-size: 0.4em;
-	height: var(--toggle-height);
-	flex: 0 0 var(--toggle-width);
+  content: "";
+  border: var(--toggle-border);
+  border-color: currentcolor;
+  border-top-width: 0.25em;
+  border-inline-end-width: 0.25em;
+  display: inline-block;
+  font-size: 0.4em;
+  height: var(--toggle-height);
+  flex: 0 0 var(--toggle-width);
 }
 
 div.json-tree-js :is(.down-arrow, .right-arrow):hover {
-	opacity: 0.7;
+  opacity: 0.7;
 }
 
 div.json-tree-js .down-arrow::after {
-	transform: translateY(-25%) rotate(135deg);
+  transform: translateY(-25%) rotate(135deg);
 }
 
 div.json-tree-js .right-arrow::after {
-	transform: translateX(-25%) rotate(45deg);
+  transform: translateX(-25%) rotate(45deg);
 }
 
 /*
@@ -137,16 +137,16 @@ div.json-tree-js .right-arrow::after {
     -------------------------------------------------------------------------
 */
 div.json-tree-js div.title-bar {
-	display: flex;
-	margin-bottom: var(--json-tree-js-spacing);
+  display: flex;
+  margin-bottom: var(--json-tree-js-spacing);
 }
 
 div.json-tree-js div.title-bar div.title {
-	display: none;
+  display: none;
 }
 
 div.json-tree-js div.title-bar div.controls {
-	display: none;
+  display: none;
 }
 
 /*
@@ -155,21 +155,21 @@ div.json-tree-js div.title-bar div.controls {
     -------------------------------------------------------------------------
 */
 div.json-tree-js div.object-type-title {
-	font-weight: var(--json-tree-js-header-bold-weight);
-	text-align: left !important;
+  font-weight: var(--json-tree-js-header-bold-weight);
+  text-align: left !important;
 }
 
 div.json-tree-js div.object-type-title span.array {
-	color: var(--json-tree-js-color-array);
+  color: var(--json-tree-js-color-array);
 }
 
 div.json-tree-js div.object-type-title span.object {
-	color: var(--json-tree-js-color-object);
+  color: var(--json-tree-js-color-object);
 }
 
 div.json-tree-js div.object-type-title span.count {
-	margin-left: calc(var(--json-tree-js-spacing) / 2);
-	font-weight: var(--json-tree-js-text-bold-weight);
+  margin-left: calc(var(--json-tree-js-spacing) / 2);
+  font-weight: var(--json-tree-js-text-bold-weight);
 }
 
 /*
@@ -178,19 +178,19 @@ div.json-tree-js div.object-type-title span.count {
     -------------------------------------------------------------------------
 */
 div.json-tree-js div.object-type-contents {
-	margin-top: calc(var(--json-tree-js-spacing) / 2);
-	margin-left: calc(var(--json-tree-js-spacing) * 2);
-	text-align: left !important;
+  margin-top: calc(var(--json-tree-js-spacing) / 2);
+  margin-left: calc(var(--json-tree-js-spacing) * 2);
+  text-align: left !important;
 }
 
 div.json-tree-js div.object-type-contents div.object-type-value {
-	margin-top: calc(var(--json-tree-js-spacing) / 2);
-	margin-bottom: calc(var(--json-tree-js-spacing) / 2);
+  margin-top: calc(var(--json-tree-js-spacing) / 2);
+  margin-bottom: calc(var(--json-tree-js-spacing) / 2);
 }
 
 div.json-tree-js div.object-type-contents div.object-type-value span.split {
-	margin-left: calc(var(--json-tree-js-spacing) / 2);
-	margin-right: calc(var(--json-tree-js-spacing) / 2);
+  margin-left: calc(var(--json-tree-js-spacing) / 2);
+  margin-right: calc(var(--json-tree-js-spacing) / 2);
 }
 
 div.json-tree-js div.object-type-contents div.object-type-value span.boolean,
@@ -201,99 +201,99 @@ div.json-tree-js div.object-type-contents div.object-type-value span.date,
 div.json-tree-js div.object-type-contents div.object-type-value span.null,
 div.json-tree-js div.object-type-contents div.object-type-value span.function,
 div.json-tree-js div.object-type-contents div.object-type-value span.unknown {
-	transition: var(--json-tree-js-transition);
-	transition-property: opacity;
+  transition: var(--json-tree-js-transition);
+  transition-property: opacity;
 }
 
 div.json-tree-js
-	div.object-type-contents
-	div.object-type-value
-	span.boolean:not(.no-hover):hover,
+  div.object-type-contents
+  div.object-type-value
+  span.boolean:not(.no-hover):hover,
 div.json-tree-js
-	div.object-type-contents
-	div.object-type-value
-	span.decimal:not(.no-hover):hover,
+  div.object-type-contents
+  div.object-type-value
+  span.decimal:not(.no-hover):hover,
 div.json-tree-js
-	div.object-type-contents
-	div.object-type-value
-	span.number:not(.no-hover):hover,
+  div.object-type-contents
+  div.object-type-value
+  span.number:not(.no-hover):hover,
 div.json-tree-js
-	div.object-type-contents
-	div.object-type-value
-	span.string:not(.no-hover):hover,
+  div.object-type-contents
+  div.object-type-value
+  span.string:not(.no-hover):hover,
 div.json-tree-js
-	div.object-type-contents
-	div.object-type-value
-	span.date:not(.no-hover):hover,
+  div.object-type-contents
+  div.object-type-value
+  span.date:not(.no-hover):hover,
 div.json-tree-js
-	div.object-type-contents
-	div.object-type-value
-	span.null:not(.no-hover):hover,
+  div.object-type-contents
+  div.object-type-value
+  span.null:not(.no-hover):hover,
 div.json-tree-js
-	div.object-type-contents
-	div.object-type-value
-	span.function:not(.no-hover):hover,
+  div.object-type-contents
+  div.object-type-value
+  span.function:not(.no-hover):hover,
 div.json-tree-js
-	div.object-type-contents
-	div.object-type-value
-	span.unknown:not(.no-hover):hover {
-	cursor: pointer;
-	opacity: 0.7;
+  div.object-type-contents
+  div.object-type-value
+  span.unknown:not(.no-hover):hover {
+  cursor: pointer;
+  opacity: 0.7;
 }
 
 div.json-tree-js div.object-type-contents div.object-type-value span.comma {
-	color: var(--json-tree-js-color-white);
-	font-weight: var(--json-tree-js-text-bold-weight);
+  color: var(--json-tree-js-color-white);
+  font-weight: var(--json-tree-js-text-bold-weight);
 }
 
 div.json-tree-js div.object-type-contents div.object-type-value span.boolean {
-	color: var(--json-tree-js-color-boolean);
+  color: var(--json-tree-js-color-boolean);
 }
 
 div.json-tree-js div.object-type-contents div.object-type-value span.decimal {
-	color: var(--json-tree-js-color-decimal);
+  color: var(--json-tree-js-color-decimal);
 }
 
 div.json-tree-js div.object-type-contents div.object-type-value span.number {
-	color: var(--json-tree-js-color-number);
+  color: var(--json-tree-js-color-number);
 }
 
 div.json-tree-js div.object-type-contents div.object-type-value span.string {
-	color: var(--json-tree-js-color-string);
+  color: var(--json-tree-js-color-string);
 }
 
 div.json-tree-js div.object-type-contents div.object-type-value span.date {
-	color: var(--json-tree-js-color-date);
+  color: var(--json-tree-js-color-date);
 }
 
 div.json-tree-js div.object-type-contents div.object-type-value span.array {
-	font-weight: var(--json-tree-js-header-bold-weight);
-	color: var(--json-tree-js-color-array);
+  font-weight: var(--json-tree-js-header-bold-weight);
+  color: var(--json-tree-js-color-array);
 }
 
 div.json-tree-js div.object-type-contents div.object-type-value span.object {
-	font-weight: var(--json-tree-js-header-bold-weight);
-	color: var(--json-tree-js-color-object);
+  font-weight: var(--json-tree-js-header-bold-weight);
+  color: var(--json-tree-js-color-object);
 }
 
 div.json-tree-js div.object-type-contents div.object-type-value span.null {
-	color: var(--json-tree-js-color-null);
-	font-style: italic;
+  color: var(--json-tree-js-color-null);
+  font-style: italic;
 }
 
 div.json-tree-js div.object-type-contents div.object-type-value span.function {
-	color: var(--json-tree-js-color-function);
-	font-style: italic;
+  color: var(--json-tree-js-color-function);
+  font-style: italic;
 }
 
 div.json-tree-js div.object-type-contents div.object-type-value span.unknown {
-	color: var(--json-tree-js-color-unknown);
-	font-style: italic;
+  color: var(--json-tree-js-color-unknown);
+  font-style: italic;
 }
 
 div.json-tree-js div.object-type-contents div.object-type-value span.count {
-	margin-left: calc(var(--json-tree-js-spacing) / 2);
-	font-weight: var(--json-tree-js-text-bold-weight);
+  margin-left: calc(var(--json-tree-js-spacing) / 2);
+  font-weight: var(--json-tree-js-text-bold-weight);
 }
 
 /*
@@ -302,24 +302,24 @@ div.json-tree-js div.object-type-contents div.object-type-value span.count {
     -------------------------------------------------------------------------
 */
 .custom-scroll-bars::-webkit-scrollbar {
-	width: 12px;
+  width: 12px;
 }
 
 .custom-scroll-bars::-webkit-scrollbar-track {
-	box-shadow: var(--json-tree-js-border-style-scrollbar);
+  box-shadow: var(--json-tree-js-border-style-scrollbar);
 }
 
 .custom-scroll-bars::-webkit-scrollbar-thumb {
-	box-shadow: var(--json-tree-js-border-style-scrollbar);
-	background: var(--json-tree-js-color-white);
+  box-shadow: var(--json-tree-js-border-style-scrollbar);
+  background: var(--json-tree-js-color-white);
 }
 
 .custom-scroll-bars::-webkit-scrollbar-thumb:hover {
-	background-color: var(--json-tree-js-color-white);
+  background-color: var(--json-tree-js-color-white);
 }
 
 .custom-scroll-bars::-webkit-scrollbar-thumb:active {
-	background-color: var(--json-tree-js-color-lighter-gray);
+  background-color: var(--json-tree-js-color-lighter-gray);
 }
 
 /*# sourceMappingURL=jsontree.js.css.map */

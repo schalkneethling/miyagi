@@ -35,10 +35,15 @@ pnpm add -D @schalkneethling/miyagi-core twing
 Create `.miyagi.mjs`:
 
 ```js
-import { createSynchronousEnvironment, createSynchronousFilesystemLoader } from "twing";
+import {
+  createSynchronousEnvironment,
+  createSynchronousFilesystemLoader,
+} from "twing";
 import fs from "node:fs";
 
-const twing = createSynchronousEnvironment(createSynchronousFilesystemLoader(fs));
+const twing = createSynchronousEnvironment(
+  createSynchronousFilesystemLoader(fs),
+);
 
 export default {
   components: {

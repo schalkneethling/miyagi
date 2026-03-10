@@ -1,10 +1,10 @@
 {
-	"content": "Card content",
-	"$variants": [
-		{
-			"$name": "invalid mocks",
-			"content": 1,
-			"additionalProperty": true
-		}
-	]
+  "content": "Card content",
+  "$variants": [
+    {
+      "$name": "invalid mocks",
+      "content": 1,
+      "additionalProperty": true
+    }
+  ]
 }

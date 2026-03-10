@@ -7,108 +7,108 @@
 /** @define Menu; */
 
 .Menu {
-	--bar-size: 2rem;
-	--bar-background: var(--color-Menu-background)
-		linear-gradient(
-			to right,
-			var(--color-MenuBar-background) var(--bar-size),
-			transparent var(--bar-size)
-		);
-	--menu-spacing: 0.5rem;
-	--outline: 0.1875rem solid var(--color-Text);
-	--outline-offset: 0.125rem;
+  --bar-size: 2rem;
+  --bar-background: var(--color-Menu-background)
+    linear-gradient(
+      to right,
+      var(--color-MenuBar-background) var(--bar-size),
+      transparent var(--bar-size)
+    );
+  --menu-spacing: 0.5rem;
+  --outline: 0.1875rem solid var(--color-Text);
+  --outline-offset: 0.125rem;
 
-	display: flex;
-	background: var(--bar-background);
-	grid-area: nav;
-	font-size: 0.875em;
-	position: relative;
+  display: flex;
+  background: var(--bar-background);
+  grid-area: nav;
+  font-size: 0.875em;
+  position: relative;
 }
 
 .Menu :where(:focus-visible) {
-	outline: var(--outline);
+  outline: var(--outline);
 }
 
 .Menu-content {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .Menu-nav {
-	flex: 1;
-	overflow-y: auto;
+  flex: 1;
+  overflow-y: auto;
 }
 
 @media (width <= 40rem) {
-	.Menu {
-		--toggle-size: 4rem;
+  .Menu {
+    --toggle-size: 4rem;
 
-		align-items: center;
-		flex-wrap: wrap;
-		justify-content: space-between;
-	}
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 
-	.Menu-content {
-		flex: 0 0 100%;
-		block-size: calc(100dvb - var(--toggle-size));
-		position: fixed;
-		inset-block-start: var(--toggle-size);
-		inset-inline: 0;
-		background: var(--bar-background);
-	}
+  .Menu-content {
+    flex: 0 0 100%;
+    block-size: calc(100dvb - var(--toggle-size));
+    position: fixed;
+    inset-block-start: var(--toggle-size);
+    inset-inline: 0;
+    background: var(--bar-background);
+  }
 
-	.Menu-search {
-		position: relative;
-	}
+  .Menu-search {
+    position: relative;
+  }
 
-	.Menu-toggleMobileMenu {
-		display: block;
-		block-size: var(--toggle-size);
-		padding: 1rem;
-		position: relative;
-		inline-size: var(--toggle-size);
-	}
+  .Menu-toggleMobileMenu {
+    display: block;
+    block-size: var(--toggle-size);
+    padding: 1rem;
+    position: relative;
+    inline-size: var(--toggle-size);
+  }
 
-	.Menu-toggleMobileMenu[aria-expanded="false"] ~ .Menu-content {
-		display: none;
-	}
+  .Menu-toggleMobileMenu[aria-expanded="false"] ~ .Menu-content {
+    display: none;
+  }
 
-	.Menu-toggleMobileMenu::after {
-		border: var(--toggle-border);
-		border-top-width: var(--toggle-borderWidth);
-		border-inline-end-width: var(--toggle-borderWidth);
-		content: "";
-		display: block;
-		font-size: 0.75em;
-		block-size: var(--toggle-height);
-		position: absolute;
-		inset-block-start: 50%;
-		inset-inline-start: 50%;
-		transition: var(--toggle-transition);
-		inline-size: var(--toggle-width);
-	}
+  .Menu-toggleMobileMenu::after {
+    border: var(--toggle-border);
+    border-top-width: var(--toggle-borderWidth);
+    border-inline-end-width: var(--toggle-borderWidth);
+    content: "";
+    display: block;
+    font-size: 0.75em;
+    block-size: var(--toggle-height);
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    transition: var(--toggle-transition);
+    inline-size: var(--toggle-width);
+  }
 
-	.Menu-toggleMobileMenu[aria-expanded="false"]::after {
-		transform: var(--toggle-transition-closed);
-	}
+  .Menu-toggleMobileMenu[aria-expanded="false"]::after {
+    transform: var(--toggle-transition-closed);
+  }
 
-	.Menu-toggleMobileMenu[aria-expanded="true"]::after {
-		transform: var(--toggle-transition-opened);
-	}
+  .Menu-toggleMobileMenu[aria-expanded="true"]::after {
+    transform: var(--toggle-transition-opened);
+  }
 }
 
 @media (width > 40rem) {
-	.Menu {
-		flex-direction: column;
-		block-size: 100vh;
-	}
+  .Menu {
+    flex-direction: column;
+    block-size: 100vh;
+  }
 
-	.Menu-toggleMobileMenu {
-		display: none;
-	}
+  .Menu-toggleMobileMenu {
+    display: none;
+  }
 
-	.Menu-content {
-		flex: 1;
-		overflow: hidden;
-	}
+  .Menu-content {
+    flex: 1;
+    overflow: hidden;
+  }
 }
