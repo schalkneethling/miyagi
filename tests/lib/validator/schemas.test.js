@@ -53,6 +53,34 @@ describe("validateSchemas", () => {
 			}),
 		);
 	});
+
+	test("registers global schema definitions so component $ref to global $id resolves", async () => {
+		global.app = await init("api");
+
+		const result = validateSchemas();
+
+		expect(result.validSchemas.some((entry) => entry.component === "$global")).toBe(
+			true,
+		);
+		expect(
+			result.validSchemas.some(
+				(entry) => entry.component === "ref-global-consumer",
+			),
+		).toBe(true);
+		expect(
+			result.errors.some((entry) => entry.component === "ref-global-consumer"),
+		).toBe(false);
+	});
+
+	test("does not include global schema component in error list for valid global defs", async () => {
+		global.app = await init("api");
+
+		const result = validateSchemas();
+
+		expect(
+			result.errors.some((entry) => entry.component === "$global"),
+		).toBe(false);
+	});
 });
 
 describe("getSchemaValidationMode", () => {

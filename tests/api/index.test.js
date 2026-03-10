@@ -209,7 +209,7 @@ describe("createBuild", () => {
 
 		expect(await createBuild()).toStrictEqual({
 			success: true,
-			message: "Build done! Wrote 112 directories and files.",
+    message: "Build done! Wrote 118 directories and files.",
 		});
 
 		[
@@ -655,6 +655,17 @@ describe("lintComponent", () => {
 					schemaFile: expect.any(String),
 				}),
 			);
+		});
+	});
+
+	describe("with schema $ref to global schema definition", () => {
+		test("resolves global $ref and returns success:true", async () => {
+			expect(
+				await lintComponent({ component: "ref-global-consumer" }),
+			).toStrictEqual({
+				success: true,
+				data: [],
+			});
 		});
 	});
 });
