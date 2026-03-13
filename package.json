@@ -79,7 +79,9 @@
     "test": "vitest run --coverage --coverage.include=api --coverage.include=lib",
     "lint": "stylelint frontend/assets/css/ && eslint lib/ && eslint frontend/assets/js/",
     "fix": "eslint lib/ --fix && eslint frontend/assets/js/ --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "docs:sync-default-config": "node scripts/docs/sync-default-config.mjs --write",
+    "docs:check-default-config": "node scripts/docs/sync-default-config.mjs --check"
   },
   "browserslist": [
     "last 2 versions",

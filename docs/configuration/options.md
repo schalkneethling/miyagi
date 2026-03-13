@@ -17,7 +17,7 @@ This setting can be helpful if assets are located in another folder, e.g. `publi
 
 ### `css`
 
-default: `null`<br>
+default: `[]`<br>
 type: `string[]`
 
 An array of CSS file paths.
@@ -45,7 +45,7 @@ This object is used to generate your automated design token overview.
 
 ### `folder`
 
-default: `null`<br>
+default: `[]`<br>
 type: `array`
 
 If you need _miyagi_ to serve static assets (like images, SVGs, etc.), you can define one or multiple folders here.
@@ -63,7 +63,7 @@ When set to `true`, components that do not declare [`$assets` in their mock data
 
 ### `js`
 
-default: `null`<br>
+default: `[]`<br>
 type: `array`
 
 ```json
@@ -146,7 +146,7 @@ The folder where your components live.
 
 ### `ignores`
 
-default: `["node_modules", ".git", "package.json", "package-lock.json", ".miyagi.js"]`<br>
+default: `["node_modules", ".git", "package.json", "package-lock.json", ".miyagi.js", ".miyagi.mjs"]`<br>
 type: `array`
 
 _miyagi_ ignores these folders and files when looking for your components.
@@ -374,6 +374,13 @@ Defines the text direction (`dir` attribute on the `html` tag) of the _miyagi_ U
 
 _**NOTE:** This does not set the text direction for the components. If you want to change that as well, please have a look at [`components.textDirection`](#textdirection)._
 
+### `watchConfigFile`
+
+default: `true`<br>
+type: `boolean`
+
+When `true`, the miyagi config file (`.miyagi.js` or `.miyagi.mjs`) is watched for changes. When it changes, the server reloads. This setting is also used to populate `watch.configFile.enabled` when merging config.
+
 ### `theme`
 
 default:
@@ -578,6 +585,21 @@ You can set any rule to `none`, `iframe`, or `parent` depending on your project 
 
 ### `socket`
 
+#### `reconnect`
+
+default:
+
+```json
+{
+  "enabled": true,
+  "initialDelayMs": 250,
+  "maxDelayMs": 5000,
+  "jitter": true
+}
+```
+
+Client-side websocket reconnect settings.
+
 #### `heartbeat`
 
 default:
@@ -622,6 +644,18 @@ CLI overrides are available:
 
 Precedence is: `CLI > miyagi config > defaults`.
 
+### `configFile`
+
+default:
+
+```json
+{
+  "enabled": true
+}
+```
+
+When `enabled` is `true`, miyagi watches the config file and triggers a full reload when it changes. If not set, this is derived from `ui.watchConfigFile`.
+
 ### `debug`
 
 default:
@@ -653,3 +687,23 @@ type: `object`
 
 This object gets passed to the instance of the [schema validator AJV](https://github.com/ajv-validator/ajv/). [See all available options](https://github.com/ajv-validator/ajv/#options).
 You can use this to define custom formats e.g..
+
+### `verbose`
+
+default: `false`<br>
+type: `boolean`
+
+When `true`, schema validation errors include more detailed AJV output (e.g. full error paths). Useful for debugging schema issues.
+
+## `schemaValidationMode`
+
+default: `"collect-all"`<br>
+type: `string`<br>
+values: `collect-all|fail-fast`
+
+Controls how schema validation runs during lint:
+
+- `collect-all`: validate all schemas and mocks, then report all errors. Components with schema errors still get mock validation attempted.
+- `fail-fast`: stop after schema validation errors; skip mock validation for components with invalid schemas.
+
+Useful when you want CI to surface schema issues first without running mock validation for components that cannot be validated.
