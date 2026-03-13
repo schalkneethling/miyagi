@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.4.4](https://github.com/schalkneethling/miyagi/compare/v4.4.3...v4.4.4) (2026-03-13)
+
+
+### Bug Fixes
+
+* ensures docs are up to date and adds options cnfig validation script ([6ad4c00](https://github.com/schalkneethling/miyagi/commit/6ad4c006a76ccbdb87e136ed3d4422d2bfa051d4))
+* ensures docs are up to date and adds options cnfig validation script ([bdbf126](https://github.com/schalkneethling/miyagi/commit/bdbf126f962df90b1e5862cf5e4d5124e53cf02a))
+
 ## [4.4.3](https://github.com/schalkneethling/miyagi/compare/v4.4.2...v4.4.3) (2026-03-10)
 
 
