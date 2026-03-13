@@ -7,93 +7,166 @@ import AJV from "ajv";
 
 export default {
   assets: {
-    root: "",
-    css: [],
-    shared: {
+      root: "",
       css: [],
-      js: [],
-    },
-    isolateComponents: false,
-    customProperties: {
-      files: [],
-      prefixes: {
-        typo: "typo",
-        color: "color",
-        spacing: "spacing",
+      shared: {
+        css: [],
+        js: []
       },
+      isolateComponents: false,
+      customProperties: {
+        files: [],
+        prefixes: {
+          typo: "typo",
+          color: "color",
+          spacing: "spacing"
+        }
+      },
+      folder: [],
+      js: [],
+      manifest: null
     },
-    folder: [],
-    js: [],
-    manifest: null,
-  },
   build: {
-    basePath: "/",
-    folder: "build",
-  },
+      basePath: "/",
+      folder: "build"
+    },
   docs: {
-    folder: "docs",
-  },
+      folder: "docs"
+    },
   components: {
-    folder: "src",
-    ignores: [
-      "node_modules",
-      ".git",
-      "package.json",
-      "package-lock.json",
-      ".miyagi.js",
-      ".miyagi.mjs",
-    ],
-    lang: "en",
-    textDirection: "ltr",
-  },
+      folder: "src",
+      ignores: [
+        "node_modules",
+        ".git",
+        "package.json",
+        "package-lock.json",
+        ".miyagi.js",
+        ".miyagi.mjs"
+      ],
+      lang: "en",
+      textDirection: "ltr"
+    },
   engine: {
-    render: null,
-  },
+      render: null,
+      options: {}
+    },
+  lint: {
+      logLevel: "error"
+    },
   extensions: [],
   files: {
-    css: {
-      name: "index",
-      extension: "css",
+      css: {
+        abbr: "css",
+        name: "index",
+        extension: "css"
+      },
+      js: {
+        abbr: "js",
+        name: "index",
+        extension: "js"
+      },
+      mocks: {
+        abbr: "mocks",
+        name: "mocks",
+        extension: [
+          "json",
+          "js"
+        ]
+      },
+      schema: {
+        abbr: "schema",
+        name: "schema",
+        extension: "json"
+      },
+      templates: {
+        abbr: "tpl",
+        name: "index"
+      }
     },
-    js: {
-      name: "index",
-      extension: "js",
-    },
-    mocks: {
-      name: "mocks",
-      extension: ["json", "js"],
-    },
-    schema: {
-      name: "schema",
-      extension: "json",
-    },
-    templates: {
-      name: "index",
-    },
-  },
   namespaces: {},
   projectName: "miyagi",
   ui: {
-    mode: "light",
-    lang: "en",
-    reload: true,
-    reloadAfterChanges: {
-      componentAssets: true,
-    },
-    textDirection: "ltr",
-    theme: {
-      css: null,
-      favicon: null,
-      js: null,
-      logo: {
-        light: null,
-        dark: null,
+      mode: "light",
+      lang: "en",
+      reload: true,
+      reloadAfterChanges: {
+        componentAssets: true
       },
+      textDirection: "ltr",
+      theme: {
+        css: null,
+        favicon: null,
+        js: null,
+        logo: {
+          light: null,
+          dark: null
+        }
+      },
+      watchConfigFile: true
     },
-  },
+  watch: {
+      enabled: true,
+      backend: "chokidar",
+      sources: [],
+      ignore: {
+        defaults: true,
+        patterns: []
+      },
+      behavior: {
+        startupGraceMs: 500,
+        debounceMs: 60,
+        coalesceWindowMs: 120,
+        awaitWriteFinish: {
+          enabled: true,
+          stabilityThresholdMs: 200,
+          pollIntervalMs: 50
+        }
+      },
+      reload: {
+        enabled: true,
+        rules: {
+          template: "iframe",
+          data: "parent",
+          docs: "parent",
+          schema: "iframe",
+          componentAsset: "iframe",
+          globalCss: "iframe",
+          globalJs: "iframe",
+          unknown: "parent"
+        }
+      },
+      socket: {
+        reconnect: {
+          enabled: true,
+          initialDelayMs: 250,
+          maxDelayMs: 5000,
+          jitter: true
+        },
+        heartbeat: {
+          enabled: true,
+          intervalMs: 30000
+        }
+      },
+      report: {
+        enabled: true,
+        onStart: true,
+        format: "summary",
+        destination: "stdout",
+        useColors: true
+      },
+      configFile: {
+        enabled: true
+      },
+      debug: {
+        logEvents: false,
+        logDecisions: false,
+        logResolvedSources: false
+      }
+    },
   schema: {
-    ajv: AJV,
-    options: {},
-  },
+      ajv: AJV,
+      verbose: false
+    },
+  schemaValidationMode: "collect-all"
 };
 ```
