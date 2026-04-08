@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.5.0](https://github.com/schalkneethling/miyagi/compare/v4.4.4...v4.5.0) (2026-04-08)
+
+
+### Features
+
+* **html-validation:** add validate-html CLI command and JS API ([7116902](https://github.com/schalkneethling/miyagi/commit/71169029380ab6ca83fad60a97f478dc71f7ebee))
+* **html-validation:** add validate-html CLI command and JS API ([15b4a0d](https://github.com/schalkneethling/miyagi/commit/15b4a0dc073bff92961705dd8acd0c0121082bc0))
+
 ## [4.4.4](https://github.com/schalkneethling/miyagi/compare/v4.4.3...v4.4.4) (2026-03-13)
 
 
