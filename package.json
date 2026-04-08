@@ -43,6 +43,7 @@
     "deepmerge": "^4.3.1",
     "directory-tree": "^3.5.2",
     "express": "^5.1.0",
+    "html-validate": "^10.11.2",
     "js-yaml": "^4.1.0",
     "marked": "^17.0.2",
     "twing": "7.3.1",

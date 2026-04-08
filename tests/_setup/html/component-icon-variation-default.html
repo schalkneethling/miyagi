@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Icon</title>
+  </head>
+  <body>
+    <!-- duplicate attribute — triggers no-dup-attr -->
+    <span class="icon" class="icon--star">★</span>
+    <!-- missing alt text — triggers wcag/h37 -->
+    <img src="icon-warning.svg" class="icon icon--warning">
+  </body>
+</html>

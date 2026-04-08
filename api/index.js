@@ -12,6 +12,11 @@ import {
   toSchemaValidationResult,
   validateSchemas,
 } from "../lib/validator/schemas.js";
+import {
+  validateAllHtml as validateAllHtmlImpl,
+  validateComponentHtml as validateComponentHtmlImpl,
+} from "../lib/validator/html.js";
+import { generateMarkdownReport } from "../lib/validator/html-report.js";
 
 /**
  * @param {object} obj
@@ -307,6 +312,54 @@ function getComponentsObject(component) {
  * @param {Map<string, Array<object>>} params.errorMap
  * @returns {Array<object>}
  */
+/**
+ * @param {object} [options]
+ * @param {object} [options.htmlValidateConfig]
+ * @returns {Promise<object>}
+ */
+export const validateHtml = async (options = {}) => {
+  global.app = await init("api");
+  const results = await validateAllHtmlImpl(options);
+  const report = generateMarkdownReport(results);
+  return {
+    success: results.summary.failed === 0,
+    data: { results, report },
+  };
+};
+
+/**
+ * @param {object} obj
+ * @param {string|null} obj.component
+ * @param {object} [obj.htmlValidateConfig]
+ * @returns {Promise<object>}
+ */
+export const validateHtmlComponent = async (
+  { component, ...options } = { component: null },
+) => {
+  if (!component)
+    return {
+      success: false,
+      message:
+        'Please pass a component to `validateHtmlComponent` ({ component: "name" }).',
+    };
+
+  global.app = await init("api");
+
+  const componentObject = getComponentsObject(component);
+
+  if (!componentObject)
+    return {
+      success: false,
+      message: `Component "${component}" does not exist.`,
+    };
+
+  const result = await validateComponentHtmlImpl(componentObject, options);
+  return {
+    success: result.variations.every((v) => v.valid),
+    data: result,
+  };
+};
+
 function getLintComponentErrorsInRouteOrder({ components, errorMap }) {
   return components
     .map((route) => {
