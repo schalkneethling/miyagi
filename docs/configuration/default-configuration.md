@@ -60,10 +60,10 @@ export default {
           "html-validate:recommended"
         ],
         rules: {
-          "doctype-style": "off",
-          "input-missing-label": "error",
-          "missing-doctype": "off",
-          "no-missing-references": "off"
+          doctype-style: "off",
+          input-missing-label: "error",
+          missing-doctype: "off",
+          no-missing-references: "off"
         }
       }
     },
