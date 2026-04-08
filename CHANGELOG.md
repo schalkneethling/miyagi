@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.5.1](https://github.com/schalkneethling/miyagi/compare/v4.5.0...v4.5.1) (2026-04-08)
+
+
+### Bug Fixes
+
+* remove duplicate minipass@7.1.3 entry from pnpm-lock.yaml ([b7d2991](https://github.com/schalkneethling/miyagi/commit/b7d2991676a0bf8eec9e324ac349b511a797878b))
+* remove duplicate minipass@7.1.3 entry from pnpm-lock.yaml ([fe63376](https://github.com/schalkneethling/miyagi/commit/fe63376d07108ec5892ed734c494b717a58edd43))
+
 ## [4.5.0](https://github.com/schalkneethling/miyagi/compare/v4.4.4...v4.5.0) (2026-04-08)
 
 
