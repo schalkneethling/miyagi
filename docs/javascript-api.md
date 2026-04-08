@@ -181,6 +181,88 @@ Promise<{
 }>
 ```
 
+### `validateHtml`
+
+Validates the rendered HTML for all components and returns the results along with a Markdown report.
+
+#### Options
+
+```js
+{
+  htmlValidateConfig: Object // Optional — html-validate configuration override
+}
+```
+
+#### Response
+
+```js
+Promise<{
+ success: Boolean, // true if all components pass validation
+ data: {
+  results: {
+   components: [{
+    component: String, // Component path
+    variations: [{
+     name: String, // Variation name
+     valid: Boolean,
+     messages: [{
+      severity: Number, // 1=warning, 2=error
+      message: String,
+      ruleId: String,
+      line: Number,
+      column: Number
+     }]
+    }]
+   }],
+   summary: {
+    total: Number,
+    passed: Number,
+    failed: Number,
+    errors: Number,
+    warnings: Number
+   }
+  },
+  report: String // Markdown-formatted report
+ }
+}>
+```
+
+### `validateHtmlComponent`
+
+Validates the rendered HTML for a single component (all variations).
+
+#### Options
+
+```js
+{
+  component: String, // Required — Path to the component directory, relative from config.components.folder.
+  htmlValidateConfig: Object // Optional — html-validate configuration override
+}
+```
+
+#### Response
+
+```js
+Promise<{
+ success: Boolean, // true if all variations pass validation
+ data: {
+  component: String,
+  variations: [{
+   name: String,
+   valid: Boolean,
+   messages: [{
+    severity: Number,
+    message: String,
+    ruleId: String,
+    line: Number,
+    column: Number
+   }]
+  }]
+ },
+ message: String // Optional — Error message if component not found
+}>
+```
+
 ## Usage
 
 ```js

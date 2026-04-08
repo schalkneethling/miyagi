@@ -53,6 +53,19 @@ export default {
   lint: {
       logLevel: "error"
     },
+  htmlValidation: {
+      output: "html-validation-report.md",
+      htmlValidateConfig: {
+        extends: [
+          "html-validate:recommended"
+        ],
+        rules: {
+          doctype-style: "off",
+          missing-doctype: "off",
+          no-missing-references: "off"
+        }
+      }
+    },
   extensions: [],
   files: {
       css: {
