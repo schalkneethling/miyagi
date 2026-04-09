@@ -2,6 +2,7 @@
 @import url("./shared.css");
 @import url("./main/reset.css");
 @import url("./main/menu.css");
+@import url("./main/controls.css");
 
 html {
   height: 100%;
@@ -18,11 +19,14 @@ body {
 }
 
 .Content {
+  display: flex;
+  flex-direction: column;
   grid-area: iframe;
 }
 
 .FrameWrapper {
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   width: 100%;
 }
 

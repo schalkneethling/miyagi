@@ -1,5 +1,6 @@
 import "./_goto.js";
 import "./_search.js";
+import { loadControls } from "./_controls.js";
 import ThemeConfigSwitcher from "./config-switcher/theme.js";
 import TextDirectionConfigSwitcher from "./config-switcher/text-direction.js";
 import DevelopmentModeConfigSwitcher from "./config-switcher/development-mode.js";
@@ -77,6 +78,7 @@ class Main {
     this.elements.iframe.remove();
     this.elements.iframe.src = src;
     this.elements.frameWrapper.appendChild(this.elements.iframe);
+    loadControls(src);
   }
 
   /**

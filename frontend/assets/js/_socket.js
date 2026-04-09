@@ -49,6 +49,22 @@ function parseScope(messageData) {
   return parseJsonScope(messageData);
 }
 
+function parseReason(messageData) {
+  try {
+    return JSON.parse(messageData).reason ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function parsePaths(messageData) {
+  try {
+    return JSON.parse(messageData).paths ?? [];
+  } catch {
+    return [];
+  }
+}
+
 function scheduleReconnect() {
   const jitter = Math.floor(Math.random() * 100);
   const delay = Math.min(retryDelay + jitter, MAX_RETRY_DELAY_MS);
@@ -67,6 +83,13 @@ function connect() {
   };
 
   websocket.onmessage = (message) => {
+    const reason = parseReason(message.data);
+    if (reason === "schema" || reason === "data") {
+      window.parent.postMessage(
+        { type: "miyagi:invalidate-cache", paths: parsePaths(message.data) },
+        "*",
+      );
+    }
     triggerReload(parseScope(message.data));
   };
 
