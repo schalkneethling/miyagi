@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.6.1](https://github.com/schalkneethling/miyagi/compare/v4.6.0...v4.6.1) (2026-04-09)
+
+
+### Bug Fixes
+
+* repair live controls panel override application and mode-toggle label ([d5ea0c1](https://github.com/schalkneethling/miyagi/commit/d5ea0c18f2cb5aa25f318643dd7b926cd085112c))
+* repair live controls panel override application and mode-toggle label ([d324255](https://github.com/schalkneethling/miyagi/commit/d32425599802ada148a516139e80c99c6dac2d01))
+
 ## [4.6.0](https://github.com/schalkneethling/miyagi/compare/v4.5.1...v4.6.0) (2026-04-09)
 
 
