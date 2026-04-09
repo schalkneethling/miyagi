@@ -45,6 +45,14 @@
   padding: 0.25rem 0.5rem;
 }
 
+.Controls[data-mode="docked"] .Controls-modeToggle::before {
+  content: "Float";
+}
+
+.Controls[data-mode="floating"] .Controls-modeToggle::before {
+  content: "Dock";
+}
+
 .Controls-modeToggle:hover {
   color: var(--color-Text);
 }
