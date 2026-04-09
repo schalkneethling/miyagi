@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.6.0](https://github.com/schalkneethling/miyagi/compare/v4.5.1...v4.6.0) (2026-04-09)
+
+
+### Features
+
+* add live controls panel and mock data injection for web components ([a876559](https://github.com/schalkneethling/miyagi/commit/a876559998faec578365640f7c6040ddad9065a8))
+* add live controls panel and mock data injection for web components ([4cd1fd6](https://github.com/schalkneethling/miyagi/commit/4cd1fd60320e885be277dfe4a80b8ba403aa5793))
+
+
+### Bug Fixes
+
+* remove blank line before custom property in tokens.css ([bc9f00e](https://github.com/schalkneethling/miyagi/commit/bc9f00e90c745df84978a24f48f2a59b93c91c38))
+
 ## [4.5.1](https://github.com/schalkneethling/miyagi/compare/v4.5.0...v4.5.1) (2026-04-08)
 
 
