@@ -1,4 +1,12 @@
 html {
+  /* z-index scale */
+  --send-to-back: -1;
+  --bring-to-front: 9999;
+  --bottom-layer: 100;
+  --middle-layer: 200;
+  --top-layer: 300;
+  --backdrop: 400;
+
   --font-family:
     -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica",
     "Arial", sans-serif;

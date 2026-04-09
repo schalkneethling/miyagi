@@ -19,6 +19,15 @@
       <div class="FrameWrapper">
         <iframe class="Frame" id="iframe" src="{{ iframeSrc }}" name="iframe" title="Components"></iframe>
       </div>
+      <div class="Controls" id="controls-panel" hidden>
+        <div class="Controls-header">
+          <h2 class="Controls-heading">Controls</h2>
+          <button class="Controls-modeToggle" id="controls-mode-toggle">
+            <span class="u-hiddenVisually">Toggle floating panel</span>
+          </button>
+        </div>
+        <div class="Controls-fields" id="controls-fields"></div>
+      </div>
     </main>
   </body>
 </html>

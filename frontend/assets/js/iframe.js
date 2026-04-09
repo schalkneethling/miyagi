@@ -13,6 +13,18 @@ if (
   window.location = new URL(window.location).replace("&embedded=true", "");
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const mockDataEl = document.getElementById("miyagi-mock-data");
+  if (mockDataEl) {
+    try {
+      const detail = JSON.parse(mockDataEl.textContent);
+      document.dispatchEvent(new CustomEvent("miyagi:mockdata", { detail }));
+    } catch (e) {
+      console.debug("[miyagi] Failed to parse mock data island:", e);
+    }
+  }
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   const links = Array.from(document.querySelectorAll(".Component-file"));
   const styleguide = document.querySelector(".Styleguide");
