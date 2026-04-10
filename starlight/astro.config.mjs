@@ -47,6 +47,7 @@ export default defineConfig({
             { label: "Schema", slug: "component-files/schema" },
             { label: "Documentation", slug: "component-files/documentation" },
             { label: "Assets", slug: "component-files/assets" },
+            { label: "Data", slug: "component-files/data" },
           ],
         },
         {
@@ -135,6 +136,10 @@ export default defineConfig({
             {
               label: "Creating a design token overview",
               slug: "how-to/creating-a-design-token-overview",
+            },
+            {
+              label: "Exposing JSON data to components",
+              slug: "how-to/exposing-json-data-to-components",
             },
             {
               label: "Linting mock data",

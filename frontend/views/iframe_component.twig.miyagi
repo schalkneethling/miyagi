@@ -34,6 +34,12 @@
 								<div id="json-tree-resolved-mocks" data-jsontree-js="jsontree.mocks"></div>
 							</details>
 						{% endif %}
+						{% if dataJson %}
+							<details class="Tabs-tab">
+								<summary>Data</summary>
+								<div id="json-tree-resolved-data" data-jsontree-js="jsontree.data"></div>
+							</details>
+						{% endif %}
 						{% if template %}
 							<details class="Tabs-tab">
 								<summary>Template</summary>
@@ -135,6 +141,9 @@
 				},
 				"mocks": {
 					"data": {{ mocks|default({})|replace({'</script>': '<\\/script>'})|raw }}
+				},
+				"data": {
+					"data": {{ dataJson|default({})|replace({'</script>': '<\\/script>'})|raw }}
 				}
 			};
 		</script>

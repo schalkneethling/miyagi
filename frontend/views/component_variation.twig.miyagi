@@ -24,8 +24,8 @@
     {% if assets.js %}
       <script src="{{ assets.js }}"></script>
     {% endif %}
-    {% if mockDataResolved is defined %}
-    <script type="application/json" id="miyagi-mock-data">{{ mockDataResolved|replace({'</script>': '<\\/script>'})|raw }}</script>
+    {% if dataJson is defined and dataJson %}
+    <script type="application/json" id="{{ dataJsonId }}">{{ dataJson|replace({'</script>': '<\\/script>'})|raw }}</script>
     {% endif %}
     <script>
       {{ theme.js }}
