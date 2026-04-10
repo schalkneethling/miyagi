@@ -10,9 +10,11 @@ import { parseArgs } from "node:util";
 import defaultConfig from "../../lib/default-config.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DOC_PATH = path.join(__dirname, "../../docs/configuration/default-configuration.md");
+const DOC_PATH = path.join(__dirname, "../../starlight/src/content/docs/configuration/default-configuration.md");
 
-const INTRO = `# Default configuration
+const INTRO = `---
+title: "Default configuration"
+---
 
 Please refer to the [available options](/configuration/options/) for a full explanation and possible values.
 `;
@@ -123,7 +125,7 @@ function main() {
 
 	if (check) {
 		if (current !== expected) {
-			console.error("docs/configuration/default-configuration.md is out of sync with lib/default-config.js");
+			console.error("starlight/src/content/docs/configuration/default-configuration.md is out of sync with lib/default-config.js");
 			console.error("Run: pnpm docs:sync-default-config");
 			process.exit(1);
 		}
