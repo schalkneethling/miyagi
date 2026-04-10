@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.6.2](https://github.com/schalkneethling/miyagi/compare/v4.6.1...v4.6.2) (2026-04-10)
+
+
+### Bug Fixes
+
+* resolve ESLint 10 lint failures ([542d0d9](https://github.com/schalkneethling/miyagi/commit/542d0d9514be07c855e89c79248f59d540d18724))
+
 ## [4.6.1](https://github.com/schalkneethling/miyagi/compare/v4.6.0...v4.6.1) (2026-04-09)
 
 
