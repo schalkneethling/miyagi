@@ -100,8 +100,7 @@ function renderControls(controls, iframeSrc) {
         const option = document.createElement("option");
         option.value = value;
         option.textContent = value;
-        // eslint-disable-next-line eqeqeq
-        if (value == displayValue) {
+        if (value === displayValue) {
           option.selected = true;
         }
         inputEl.appendChild(option);
