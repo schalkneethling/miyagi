@@ -333,3 +333,7 @@ To force **all** components into isolated mode (even those without `$assets`), s
 You can define global mock data by creating a `mocks.json` (or whatever you defined the mock files to be named like in `files.mocks`) in your [`components.folder`](/configuration/options#components). This mock data will be merged into your components mock data. The components mock data has higher priority, hence overwrites keys with the same name.
 
 You can also add definitions (see above) to the global mock data. When referencing them, you can do this with `mocks/#/$defs/…`. `mocks` needs to be replaced with whatever you defined in `files.mocks.name`.
+
+## Exposing data to JavaScript
+
+If your component's JavaScript needs access to mock data or custom JSON in the DOM, see "[Exposing JSON data to components](/how-to/exposing-json-data-to-components/)".
