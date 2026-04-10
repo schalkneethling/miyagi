@@ -1,6 +1,6 @@
 packages:
   - .
-  - 11ty
+  - starlight
 
 onlyBuiltDependencies:
   - esbuild

@@ -10,7 +10,7 @@ const ROOT = path.join(__dirname, "..");
 describe("docs consistency", () => {
   test("javascript-api.md documents schema-ref error type", () => {
     const content = readFileSync(
-      path.join(ROOT, "docs/javascript-api.md"),
+      path.join(ROOT, "starlight/src/content/docs/javascript-api.md"),
       "utf8",
     );
     expect(content).toContain("schema-ref");
@@ -20,7 +20,7 @@ describe("docs consistency", () => {
 
   test("javascript-api.md uses correct package import path", () => {
     const content = readFileSync(
-      path.join(ROOT, "docs/javascript-api.md"),
+      path.join(ROOT, "starlight/src/content/docs/javascript-api.md"),
       "utf8",
     );
     expect(content).toContain("@schalkneethling/miyagi-core/api");

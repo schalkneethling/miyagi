@@ -82,7 +82,10 @@
     "fix": "eslint lib/ --fix && eslint frontend/assets/js/ --fix",
     "format": "prettier --write .",
     "docs:sync-default-config": "node scripts/docs/sync-default-config.mjs --write",
-    "docs:check-default-config": "node scripts/docs/sync-default-config.mjs --check"
+    "docs:check-default-config": "node scripts/docs/sync-default-config.mjs --check",
+    "docs:dev": "pnpm --filter @schalkneethling/miyagi-docs dev",
+    "docs:build": "pnpm --filter @schalkneethling/miyagi-docs build",
+    "docs:preview": "pnpm --filter @schalkneethling/miyagi-docs preview"
   },
   "browserslist": [
     "last 2 versions",

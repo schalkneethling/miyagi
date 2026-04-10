@@ -1,0 +1,21 @@
+{
+  "name": "@schalkneethling/miyagi-docs",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.34.0",
+    "astro": "^5.0.0",
+    "starlight-theme-catppuccin": "^2.0.0",
+    "sharp": "^0.34.0",
+    "zod": "^3.25.76"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

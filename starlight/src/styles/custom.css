@@ -1,0 +1,40 @@
+/* Shrink the site logo in the header */
+.site-title img {
+  height: 1.5rem;
+}
+
+/* Hide the redundant title text in the splash hero */
+.hero .sl-flex.copy > .title {
+  display: none;
+}
+
+/* Hide Starlight's built-in footer on the splash page */
+body:has(.hero) footer.sl-flex {
+  display: none;
+}
+
+/* Landing page footer */
+.landing-footer {
+  margin-top: 4rem;
+  margin-bottom: 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--sl-color-gray-5);
+  text-align: center;
+  font-size: var(--sl-text-sm);
+  color: var(--sl-color-gray-3);
+  line-height: 1.8;
+}
+
+.landing-footer a {
+  color: var(--sl-color-gray-2);
+  text-decoration: none;
+}
+
+.landing-footer a:hover {
+  color: var(--sl-color-text-accent);
+  text-decoration: underline;
+}
+
+.landing-footer p {
+  margin: 0;
+}
