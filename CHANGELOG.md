@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.7.0](https://github.com/schalkneethling/miyagi/compare/v4.6.2...v4.7.0) (2026-04-10)
+
+
+### Features
+
+* opt-in JSON data exposure via data.json ([39a156d](https://github.com/schalkneethling/miyagi/commit/39a156d7211e412365efc8b577daa7fb5122ea70))
+* opt-in JSON data exposure via data.json ([e7e9331](https://github.com/schalkneethling/miyagi/commit/e7e93315926024b1c804a7c378d3a09ef0aebc44))
+
 ## [4.6.2](https://github.com/schalkneethling/miyagi/compare/v4.6.1...v4.6.2) (2026-04-10)
 
 
