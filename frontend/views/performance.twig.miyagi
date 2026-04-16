@@ -1,0 +1,72 @@
+{% extends "@miyagi/layouts/iframe_default.twig.miyagi" %}
+{% block body %}
+	<div class="Wrapper">
+		<div class="Documentation">
+			<h1>Performance budget</h1>
+			<p>Measured at <strong>{{ compression }}</strong>. OK: {{ summary.ok }} · Warn: {{ summary.warn }} · Exceed: {{ summary.exceed }} · Unbudgeted: {{ summary.unbudgeted }}.</p>
+
+			<h2>Evaluations</h2>
+			<table class="PerformanceTable">
+				<thead>
+					<tr>
+						<th scope="col">Category</th>
+						<th scope="col">Item</th>
+						<th scope="col">Actual</th>
+						<th scope="col">Budget</th>
+						<th scope="col">Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for row in evaluations %}
+						<tr data-status="{{ row.status }}">
+							<td>{{ row.category }}</td>
+							<td>{% if row.key == "total" %}Total{% else %}{{ row.label }}{% endif %}</td>
+							<td>{{ row.actualFormatted }}</td>
+							<td>{{ row.budgetFormatted }}</td>
+							<td>
+								<span class="PerformanceStatus PerformanceStatus--{{ row.status }}">
+									{% if row.status == "ok" %}OK{% elseif row.status == "warn" %}WARN{% elseif row.status == "exceed" %}EXCEED{% else %}—{% endif %}
+								</span>
+								{% if row.ratioPercent is not null %}
+									<small>({{ row.ratioPercent }}%)</small>
+								{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			{% for cat in categories %}
+				{% if cat.files|length > 0 %}
+					<h2>{{ cat.category }}</h2>
+					<table class="PerformanceTable">
+						<thead>
+							<tr>
+								<th scope="col">File</th>
+								<th scope="col">Raw</th>
+								<th scope="col">Gzip</th>
+								<th scope="col">Brotli</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for file in cat.files %}
+								<tr{% if file.missing %} data-missing="true"{% endif %}>
+									<td>{{ file.path }}{% if file.missing %} <em>(missing)</em>{% endif %}</td>
+									<td>{{ file.raw }}</td>
+									<td>{{ file.gzip }}</td>
+									<td>{{ file.brotli }}</td>
+								</tr>
+							{% endfor %}
+							<tr class="PerformanceTable-totals">
+								<th scope="row">Total</th>
+								<td>{{ cat.totals.raw }}</td>
+								<td>{{ cat.totals.gzip }}</td>
+								<td>{{ cat.totals.brotli }}</td>
+							</tr>
+						</tbody>
+					</table>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
