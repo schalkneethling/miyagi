@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.8.1](https://github.com/schalkneethling/miyagi/compare/v4.8.0...v4.8.1) (2026-04-16)
+
+
+### Bug Fixes
+
+* ensure performance tab is enabled and clickable ([25c0919](https://github.com/schalkneethling/miyagi/commit/25c09193546d9d82c5b578355f7b7c9aaf7010a4))
+* ensure performance tab is enabled and clickable ([21ef65e](https://github.com/schalkneethling/miyagi/commit/21ef65e93aadf55d68e7c96cbe66d40d4df6a6cc))
+
 ## [4.8.0](https://github.com/schalkneethling/miyagi/compare/v4.7.0...v4.8.0) (2026-04-16)
 
 
