@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.8.0](https://github.com/schalkneethling/miyagi/compare/v4.7.0...v4.8.0) (2026-04-16)
+
+
+### Features
+
+* add performance budget tracking ([952385e](https://github.com/schalkneethling/miyagi/commit/952385eec636cd1eb1329ab548d520c4e717864c))
+* add performance budget tracking ([2cda1c7](https://github.com/schalkneethling/miyagi/commit/2cda1c7eb1a6cbd22ebad148b6f5121787534bc9))
+
 ## [4.7.0](https://github.com/schalkneethling/miyagi/compare/v4.6.2...v4.7.0) (2026-04-10)
 
 
