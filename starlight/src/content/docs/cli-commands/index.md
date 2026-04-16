@@ -23,6 +23,7 @@ npx miyagi <command>
 | `miyagi lint`          | Validate schema files and mock data                  | [Linting mock data](/cli-commands/linting-mock-data/)             |
 | `miyagi drupal-assets` | Resolve Drupal component assets into `$assets`       | [Resolving Drupal assets](/cli-commands/resolving-drupal-assets/) |
 | `miyagi doctor`        | Check config and environment for common setup issues | [Running doctor](/cli-commands/running-doctor/)                   |
+| `miyagi budget`        | Check asset sizes against a performance budget       | [Performance budget](/cli-commands/performance-budget/)           |
 
 ## Global options
 

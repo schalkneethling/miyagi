@@ -333,6 +333,64 @@ Example:
 }
 ```
 
+## `performance`
+
+_Performance-budget settings. See [Performance budget](/cli-commands/performance-budget/) for full context, including the web.dev sources behind the default numbers._
+
+### `enabled`
+
+default: `true`<br>
+type: `boolean`
+
+Turn the feature on or off. When `false`, the `miyagi budget` command still works but build-time reporting and the dev-UI Performance panel are suppressed.
+
+### `compression`
+
+default: `"gzip"`<br>
+type: `string`<br>
+values: `raw|gzip|brotli`
+
+Which compression to compare against the configured budgets. `raw` and `brotli` are always measured alongside — changing this only changes which number is evaluated.
+
+### `report.failOnExceed`
+
+default: `false`<br>
+type: `boolean`
+
+When `true`, `miyagi build` exits non-zero if any budget is exceeded.
+
+### `report.output`
+
+default: `"performance-report.md"`<br>
+type: `string`
+
+Where the markdown report is written during `miyagi build`. A bare filename lands inside the build folder; a path with a directory component is honoured as-is.
+
+### `budgets.global.{css,js,total}`
+
+default: `"35 kB"` (css), `"200 kB"` (js), `null` (total)<br>
+type: `string|number|null`
+
+Budgets for global CSS (`assets.css` + `assets.shared.css`), global JS, and an optional umbrella total across both. Accepts human strings (`"50 kB"`) or bytes. `null` disables.
+
+### `budgets.html.{perPage,total}`
+
+default: `"30 kB"` (perPage), `null` (total)<br>
+type: `string|number|null`
+
+Applied to rendered HTML pages in `miyagi build` output. `perPage` is checked against every page individually; `total` sums them all.
+
+### `budgets.folders.<name>.total`, `budgets.folders.total`
+
+default: `"30 kB"` (fonts), `"50 kB"` (images), `null` (umbrella)<br>
+type: `string|number|null`
+
+Per-folder budgets, keyed by the folder name configured in `assets.folder[]`. Add/rename freely — the defaults are illustrative.
+
+### `budgets.perComponent.*`
+
+Reserved for a future per-component evaluation pass. No effect yet.
+
 ## `ui`
 
 _Settings for the [web UI](/the-ui)._

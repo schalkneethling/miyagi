@@ -90,6 +90,10 @@ export default defineConfig({
               label: "Validating HTML",
               slug: "cli-commands/validating-html",
             },
+            {
+              label: "Performance budget",
+              slug: "cli-commands/performance-budget",
+            },
           ],
         },
         {

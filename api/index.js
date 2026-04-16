@@ -17,6 +17,8 @@ import {
   validateComponentHtml as validateComponentHtmlImpl,
 } from "../lib/validator/html.js";
 import { generateMarkdownReport } from "../lib/validator/html-report.js";
+import { runPerformance } from "../lib/performance/index.js";
+import { generatePerformanceReport } from "../lib/performance/report.js";
 
 /**
  * @param {object} obj
@@ -324,6 +326,39 @@ export const validateHtml = async (options = {}) => {
   return {
     success: results.summary.failed === 0,
     data: { results, report },
+  };
+};
+
+/**
+ * Run the performance-budget check programmatically.
+ * @param {object} [options]
+ * @param {boolean} [options.html] - include post-build HTML pages
+ * @param {string} [options.buildFolder] - required when html is true
+ * @param {"raw"|"gzip"|"brotli"} [options.compression] - override config compression
+ * @returns {Promise<object>}
+ */
+export const getPerformance = async (options = {}) => {
+  global.app = await init("api");
+
+  if (options.compression) {
+    global.config.performance = {
+      ...(global.config.performance || {}),
+      compression: options.compression,
+    };
+  }
+
+  const result = runPerformance({
+    config: global.config,
+    html: Boolean(options.html),
+    buildFolder: options.buildFolder,
+  });
+
+  return {
+    success: result.summary.exceed === 0,
+    data: {
+      result,
+      report: generatePerformanceReport(result),
+    },
   };
 };
 
