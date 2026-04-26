@@ -260,36 +260,9 @@ Promise<{
 }>
 ```
 
-### `getPerformance`
+### Performance
 
-Run the performance-budget check programmatically. See [Performance budget](/cli-commands/performance-budget/) for configuration details.
-
-#### Options
-
-```js
-{
- html: Boolean, // Optional — include post-build HTML pages
- buildFolder: String, // Required when `html` is true — reads output.json from this folder
- compression: "raw"|"gzip"|"brotli" // Optional — override the configured compression
-}
-```
-
-#### Response
-
-```js
-Promise<{
- success: Boolean, // true when no budget has been exceeded
- data: {
-  result: {
-   measurement: Object, // raw byte sizes per category
-   evaluations: Array,  // per-row budget status
-   compression: String,
-   summary: { ok: Number, warn: Number, exceed: Number, unbudgeted: Number }
-  },
-  report: String // Markdown-formatted report
- }
-}>
-```
+The opt-in performance feature is consumed via the `miyagi perf` CLI or the dev-server's `/api/performance/*` endpoints. There is no programmatic JavaScript API export — see [Performance](/cli-commands/performance-budget/) for full details.
 
 ## Usage
 

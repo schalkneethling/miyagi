@@ -1,124 +1,130 @@
 ---
-title: "Performance budget"
+title: "Performance"
 ---
 
-_miyagi_ can track the byte size of the assets it ships — global CSS, global JS, static asset folders, and (post-build) rendered HTML pages — against a configured performance budget. Because _miyagi_ already owns the authoritative list of assets for your component library, it's a natural place to run this check.
+_miyagi_ ships an **opt-in** performance feature that reports CSS, JS, and (for pages) HTML bundle sizes. It is enabled by dropping a single JSON file at the root of your component library.
 
-Budgets are enforced in three places:
+When the file is absent, nothing happens: no menu entry, no overlay, no API endpoints, no CLI side effects. When present, you explicitly enumerate which components to measure and which pages to track. Page configs declare their component dependencies explicitly — there is no auto-discovery in v1.
 
-1. **On-demand**: `miyagi budget` prints a table of current vs. budgeted sizes.
-2. **Build-time**: `miyagi build` writes a `performance-report.md` alongside `output.json` and logs a one-line summary. Non-failing by default.
-3. **Dev server**: a **Performance** entry in the menu (dev-mode only) shows the live table, updated on each render.
+## Enabling the feature
 
-## On-demand check
+Create `miyagi.performance.json` next to your `.miyagi.js`:
 
-```bash
-miyagi budget
-```
-
-Prints an evaluation table to stdout with columns `Category | Item | Actual | Budget | Status`. Exits `0` unless `--fail` is set.
-
-### Options
-
-| Option            | Purpose                                                                     |
-| ----------------- | --------------------------------------------------------------------------- |
-| `--compression`   | `raw`, `gzip`, or `brotli` — overrides the configured compression metric    |
-| `--fail`          | Exit non-zero (`4`) if any budget is exceeded                               |
-| `--json`          | Emit the raw evaluation as JSON on stdout (for CI / automation)             |
-| `--output`, `-o`  | Also write a markdown report to this path                                   |
-| `--build-folder`  | Include post-build HTML pages from this folder (reads `output.json`)        |
-| `--list-all-pages` | List every HTML page, not just those that exceed or warn                   |
-
-## Configuration
-
-Configure in `.miyagi.js` / `.miyagi.mjs`:
-
-```js
-export default {
-  performance: {
-    enabled: true,
-    compression: "gzip", // "raw" | "gzip" | "brotli"
-    report: {
-      failOnExceed: false,
-      output: "performance-report.md", // bare filename lands inside build/
+```json
+{
+  "compression": "gzip",
+  "warnRatio": 0.8,
+  "components": {
+    "components/atoms/button": {
+      "css": { "budget": "5 kB" },
+      "js": { "budget": "10 kB" }
     },
-    budgets: {
-      global: {
-        css: "35 kB",
-        js: "200 kB",
-        total: null, // optional umbrella across CSS + JS
-      },
-      html: {
-        perPage: "30 kB",
-        total: null,
-      },
-      folders: {
-        fonts: { total: "30 kB" },
-        images: { total: "50 kB" },
-        total: null,
-      },
-    },
+    "components/molecules/card": {
+      "css": {},
+      "js": {}
+    }
   },
-};
+  "pages": {
+    "templates/default": {
+      "variations": {
+        "living room window": {
+          "components": [
+            "components/atoms/button",
+            "components/molecules/card"
+          ],
+          "budget": {
+            "css": "30 kB",
+            "js": "100 kB",
+            "html": "30 kB",
+            "total": "150 kB"
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
-Sizes accept human strings (`"50 kB"`, `"1.5 MB"`) or plain numbers (bytes). `null` disables budgeting for that slot — the file is still measured and shown, just not evaluated.
+Top-level `components` and `pages` are both optional — keep only the section you need.
 
-### Status semantics
+### Top-level keys
 
-- **OK** — under 80% of budget
-- **WARN** — at or above 80% of budget
-- **EXCEED** — over budget
-- **—** (unbudgeted) — no budget set for this category
+- `compression` (`raw` | `gzip` | `brotli`, default `gzip`) — which compressed size to compare against budgets.
+- `warnRatio` (number in `(0, 1)`, default `0.8`) — when an asset crosses this fraction of its budget, the status flips from `ok` to `warn`.
 
-## Default budgets & sources
+### Components
 
-The defaults (Global CSS: 35 kB, Global JS: 200 kB, HTML per page: 30 kB, Fonts folder: 30 kB, Images folder: 50 kB) track the **Slow 4G / Moto G4** tier from web.dev's "Your First Performance Budget" guide. All values are gzip-compressed transfer bytes — matches the `compression: "gzip"` default, which is in turn the convention established by ["Performance Budgets 101"](https://web.dev/articles/performance-budgets-101).
+Each entry is keyed by the library-relative folder path (the same path you'd pass to `/show?file=...`). Inside the entry:
 
-These are a **starting point**, not a verdict. Real budgets should be derived from your own performance goals and real-user data.
+- `css`, `js` — both optional. Each is an object that may set `budget` (a size string like `"5 kB"`).
+- An empty `{}` means "measure and report this asset, but don't enforce a budget" — the result shows up as `unbudgeted`.
 
-Sources:
+Component asset files are read by name: `<component-name>.css` and `<component-name>.js` at the component folder root, where `<component-name>` matches the terminal folder segment.
 
-- **[Your First Performance Budget](https://web.dev/articles/your-first-performance-budget)** (Addy Osmani & Kayce Basques, web.dev) — the tiered per-category kB table our defaults track. Projects targeting emerging markets may prefer the Slow 3G tier (100 kB JS, 10 kB CSS, 30 kB HTML). Projects targeting desktop-primarily may lift to the WiFi tier (300 kB JS, 50 kB CSS, 100 kB fonts).
-- **[Performance Budgets 101](https://web.dev/articles/performance-budgets-101)** (web.dev) — establishes the ~170 kB critical-path budget for mobile 3G and the framing that budgets should be expressed in gzipped/minified transfer size.
-- **[SpeedCurve — Web Performance Budgets](https://www.speedcurve.com/web-performance-guide/performance-budgets/)** — framing and terminology. Numerical baselines live in the SpeedCurve product rather than the public guide.
-- **[HTTP Archive — Page Weight report](https://httparchive.org/reports/page-weight)** — useful as a "current reality" baseline (what median sites actually ship), not as a prescriptive target.
+### Pages
 
-## Build-time reporting
+Each entry is keyed by the template's library-relative path. Under `variations`, each named variation declares:
 
-`miyagi build` runs the budget check automatically after writing `output.json`:
+- `components` — required array of declared component dependencies. The page totals are summed across these components.
+- `budget` — optional object with any subset of `css`, `js`, `html`, `total`. Each key is evaluated independently.
+
+## Status semantics
+
+- **ok** — bytes < `warnRatio` × budget
+- **warn** — bytes ≥ `warnRatio` × budget, ≤ budget
+- **exceed** — bytes > budget
+- **unbudgeted** — no budget set for this slot
+- **missing** — asset file not present at the expected path (component-only)
+
+## CLI: `miyagi perf`
 
 ```bash
-miyagi build
-# → Performance budget (gzip): 3 ok, 1 warn, 0 exceed, 2 unbudgeted.
-# → Wrote build/performance-report.md.
+miyagi perf
 ```
 
-The report is always written; the build only fails when `performance.report.failOnExceed: true` and something is over budget.
+Prints a per-asset table for every configured component and page. Exits 0 when the feature is disabled.
+
+| Option            | Purpose                                                            |
+| ----------------- | ------------------------------------------------------------------ |
+| `--compression`   | `raw`, `gzip`, or `brotli` — overrides the configured compression  |
+| `--warn-ratio`    | Override `warnRatio` for this run (must be in `(0, 1)`)            |
+| `--fail`          | Exit non-zero if any component or page has status `exceed`         |
+| `--json`          | Emit the full result as JSON on stdout (CI-friendly)               |
+| `--output`, `-o`  | Also write a markdown report to this path                          |
+
+## Build-time report
+
+```bash
+miyagi build --perf-report performance-report.md
+```
+
+Runs the perf check against the just-built tree and writes the markdown report. The build does not fail on `exceed` — use `miyagi perf --fail` in CI for gating.
 
 ## Dev server
 
-With `miyagi start`, a **Performance** entry appears in the sidebar (dev-mode only — it is never generated into a static build). The panel renders the same table as the CLI, refreshed on each request. A JSON endpoint is also available at `/api/performance` for tooling integrations.
+When `miyagi.performance.json` exists, the dev server surfaces results in two places:
 
-## CI usage
+- **Component overview**: visiting `/show?file=<configured-component>` adds a **Performance** section between Information and Files showing CSS and JS rows with bytes, budget, and status.
+- **Page banner**: visiting `/show?file=<configured-page>&variation=<configured-variation>` prepends a banner above the iframe with CSS / JS / HTML / Total chips.
 
-```bash
-miyagi budget --fail --json > budget.json
-```
+Edits to `miyagi.performance.json` and to component asset files are picked up on the next request — no server restart needed. The underlying byte-size cache is keyed by mtime so unchanged files are reused.
 
-Combined with `--output` you can commit / post the markdown report as a PR artefact.
+## API endpoints
+
+The dev server exposes JSON endpoints when the config file is present (404 otherwise):
+
+- `GET /api/performance/components` — array of component measurements
+- `GET /api/performance/pages` — array of page measurements with totals
+- `GET /api/performance/pages/:templatePath/:variation` — single page (URL-encode the path)
 
 ## Exit codes
 
-- `0` — within budget (or exceed observed but `--fail` not set)
+- `0` — no `exceed` rows, or `--fail` not set
 - `2` — CLI usage error
-- `4` — budget exceeded with `--fail` or `performance.report.failOnExceed: true`
+- `1` — `exceed` detected with `--fail`
 
-## What's measured today
+## What changed from previous versions
 
-- Global CSS (`config.assets.css` + `config.assets.shared.css`)
-- Global JS (`config.assets.js` + `config.assets.shared.js`)
-- Each configured asset folder (`config.assets.folder[]`), aggregated
-- Each rendered HTML page (build-time only, iterated from `output.json`)
+Earlier _miyagi_ versions tallied global CSS and JS asset folders against a single configured budget. That model isn't useful for Drupal-backed projects whose real bundles are produced downstream — Miyagi's own dev-server bundle isn't tree-shaken or split per page. The opt-in per-component / per-page model replaces it entirely.
 
-Per-component budgets are reserved in the config shape (`budgets.perComponent`) but not yet evaluated — that is planned for a follow-up.
+A follow-up issue tracks adding **drift validation** — flagging when a page mock references a component not in `pages[…].components`, or vice versa.
