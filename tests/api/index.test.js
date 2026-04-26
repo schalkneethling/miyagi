@@ -209,7 +209,7 @@ describe("createBuild", () => {
 
     expect(await createBuild()).toStrictEqual({
       success: true,
-      message: "Build done! Wrote 119 directories and files.",
+      message: "Build done! Wrote 118 directories and files.",
     });
 
     [

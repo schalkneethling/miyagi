@@ -100,39 +100,6 @@ export default {
       }
     },
   namespaces: {},
-  performance: {
-      enabled: true,
-      compression: "gzip",
-      report: {
-        failOnExceed: false,
-        output: "performance-report.md"
-      },
-      budgets: {
-        global: {
-          css: "35 kB",
-          js: "200 kB",
-          total: null
-        },
-        html: {
-          perPage: "30 kB",
-          total: null
-        },
-        folders: {
-          fonts: {
-            total: "30 kB"
-          },
-          images: {
-            total: "50 kB"
-          },
-          total: null
-        },
-        perComponent: {
-          css: null,
-          js: null,
-          total: null
-        }
-      }
-    },
   projectName: "miyagi",
   ui: {
       mode: "light",
