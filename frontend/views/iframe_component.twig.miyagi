@@ -19,6 +19,23 @@
 						</div>
 					</dl>
 				{% endif %}
+				{% if perfSection %}
+					<h2 class="SectionTitle">Performance</h2>
+					<dl class="Information PerfSection">
+						<div class="Information-wrapper">
+							<dt class="Information-attr">CSS</dt>
+							<dd class="Information-val">
+								<span class="PerfChip PerfChip--{{ perfSection.css.status }}">{{ perfSection.css.bytesLabel }}{% if perfSection.css.budgetLabel %} / {{ perfSection.css.budgetLabel }}{% else %} (no budget){% endif %}</span>
+							</dd>
+						</div>
+						<div class="Information-wrapper">
+							<dt class="Information-attr">JS</dt>
+							<dd class="Information-val">
+								<span class="PerfChip PerfChip--{{ perfSection.js.status }}">{{ perfSection.js.bytesLabel }}{% if perfSection.js.budgetLabel %} / {{ perfSection.js.budgetLabel }}{% else %} (no budget){% endif %}</span>
+							</dd>
+						</div>
+					</dl>
+				{% endif %}
 				{% if renderFileTabs %}
 					<h2 class="SectionTitle">Files</h2>
 					<div class="Tabs">

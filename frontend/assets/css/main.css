@@ -3,6 +3,7 @@
 @import url("./main/reset.css");
 @import url("./main/menu.css");
 @import url("./main/controls.css");
+@import url("./main/perf.css");
 
 html {
   height: 100%;
