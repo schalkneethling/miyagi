@@ -6,17 +6,20 @@
   "properties": {
     "compression": {
       "type": "string",
-      "enum": ["raw", "gzip", "brotli"]
+      "enum": ["raw", "gzip", "brotli"],
+      "default": "gzip"
     },
     "warnRatio": {
       "type": "number",
       "exclusiveMinimum": 0,
-      "exclusiveMaximum": 1
+      "exclusiveMaximum": 1,
+      "default": 0.8
     },
     "components": {
       "type": "object",
       "minProperties": 0,
       "propertyNames": { "minLength": 1 },
+      "default": {},
       "additionalProperties": {
         "type": "object",
         "additionalProperties": false,
@@ -27,6 +30,7 @@
       }
     },
     "pages": {
+      "default": {},
       "type": "object",
       "propertyNames": { "minLength": 1 },
       "additionalProperties": {
