@@ -12,8 +12,6 @@ Create `miyagi.performance.json` next to your `.miyagi.js`:
 
 ```json
 {
-  "compression": "gzip",
-  "warnRatio": 0.8,
   "components": {
     "components/atoms/button": {
       "css": { "budget": "5 kB" },
