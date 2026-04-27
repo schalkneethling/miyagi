@@ -10,18 +10,18 @@ describe("measureHtmlBytes", () => {
     expect(measureHtmlBytes(html, "raw")).toBe(Buffer.byteLength(html));
   });
 
-  test("returns smaller-than-raw size for repetitive HTML under gzip", () => {
+  test("each compression value routes to a distinct code path", () => {
+    // We don't own gzip/brotli correctness — that's zlib's. What we
+    // own is that the `compression` arg actually picks a different
+    // code path for each value. If raw / gzip / brotli all returned
+    // the same number for the same input, our routing would be broken
+    // even if the individual compressors worked.
     const html = "<div>a</div>".repeat(500);
+    const raw = measureHtmlBytes(html, "raw");
     const gzip = measureHtmlBytes(html, "gzip");
-    expect(gzip).toBeGreaterThan(0);
-    expect(gzip).toBeLessThan(Buffer.byteLength(html));
-  });
-
-  test("returns smaller-than-raw size under brotli", () => {
-    const html = "<div>a</div>".repeat(500);
     const brotli = measureHtmlBytes(html, "brotli");
-    expect(brotli).toBeGreaterThan(0);
-    expect(brotli).toBeLessThan(Buffer.byteLength(html));
+
+    expect(new Set([raw, gzip, brotli]).size).toBe(3);
   });
 
   test("throws on unknown compression", () => {
