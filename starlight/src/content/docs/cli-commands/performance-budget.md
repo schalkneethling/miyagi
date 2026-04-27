@@ -84,21 +84,12 @@ miyagi perf
 
 Prints a per-asset table for every configured component and page. Exits 0 when the feature is disabled.
 
-| Option            | Purpose                                                            |
-| ----------------- | ------------------------------------------------------------------ |
-| `--compression`   | `raw`, `gzip`, or `brotli` — overrides the configured compression  |
-| `--warn-ratio`    | Override `warnRatio` for this run (must be in `(0, 1)`)            |
-| `--fail`          | Exit non-zero if any component or page has status `exceed`         |
-| `--json`          | Emit the full result as JSON on stdout (CI-friendly)               |
-| `--output`, `-o`  | Also write a markdown report to this path                          |
-
-## Build-time report
-
-```bash
-miyagi build --perf-report performance-report.md
-```
-
-Runs the perf check against the just-built tree and writes the markdown report. The build does not fail on `exceed` — use `miyagi perf --fail` in CI for gating.
+| Option          | Purpose                                                            |
+| --------------- | ------------------------------------------------------------------ |
+| `--compression` | `raw`, `gzip`, or `brotli` — overrides the configured compression  |
+| `--warn-ratio`  | Override `warnRatio` for this run (must be in `(0, 1)`)            |
+| `--fail`        | Exit non-zero if any component or page has status `exceed`         |
+| `--json`        | Emit the full result as JSON on stdout (CI-friendly)               |
 
 ## Dev server
 

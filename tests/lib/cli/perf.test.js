@@ -11,8 +11,6 @@ import {
   mkdirSync,
   rmSync,
   writeFileSync,
-  existsSync,
-  readFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -114,28 +112,6 @@ describe("miyagi perf CLI", () => {
     const result = await perfCli({ fail: true });
     expect(result.success).toBe(false);
     expect(result.code).not.toBe(0);
-  });
-
-  test("--output writes a markdown report to the given path", async () => {
-    writeFile("components/atoms/button/button.css", "x".repeat(100));
-    writeFile("components/atoms/button/button.js", "");
-    writeFile(
-      "miyagi.performance.json",
-      JSON.stringify({
-        compression: "raw",
-        components: { "components/atoms/button": { css: {}, js: {} } },
-      }),
-    );
-
-    vi.doMock("../../../lib/index.js", () => ({ default: async () => ({}) }));
-    vi.doMock("../../../lib/config.js", () => ({ default: async () => ({}) }));
-
-    const reportPath = path.join(tempCwd, "perf.md");
-    const perfCli = await importCliPerf();
-    await perfCli({ output: reportPath });
-
-    expect(existsSync(reportPath)).toBe(true);
-    expect(readFileSync(reportPath, "utf-8")).toContain("# Performance report");
   });
 
   test("--compression overrides config", async () => {
