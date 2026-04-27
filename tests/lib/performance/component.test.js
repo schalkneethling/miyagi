@@ -38,38 +38,16 @@ function* walkFiles(dir, ext) {
   }
 }
 
-function sumJsFilesIn(dir) {
+function sumFilesIn(dir, ext) {
   let total = 0;
-  for (const file of walkFiles(dir, ".js")) {
+  for (const file of walkFiles(dir, ext)) {
     total += readFileSync(file).byteLength;
   }
   return total;
 }
 
-function countJsFilesIn(dir) {
-  let count = 0;
-  // eslint-disable-next-line no-unused-vars
-  for (const _ of walkFiles(dir, ".js")) {
-    count += 1;
-  }
-  return count;
-}
-
-function sumCssFilesIn(dir) {
-  let total = 0;
-  for (const file of walkFiles(dir, ".css")) {
-    total += readFileSync(file).byteLength;
-  }
-  return total;
-}
-
-function countCssFilesIn(dir) {
-  let count = 0;
-  // eslint-disable-next-line no-unused-vars
-  for (const _ of walkFiles(dir, ".css")) {
-    count += 1;
-  }
-  return count;
+function countFilesIn(dir, ext) {
+  return [...walkFiles(dir, ext)].length;
 }
 
 function writeComponent(cwd, relPath, files) {
@@ -345,10 +323,10 @@ describe("measureComponent", () => {
     // Sum the on-disk size of every .js file in the fixture (minus the
     // renamed-away entry.js, plus the renamed-in js-imports.js). If the
     // walker missed any pattern, the measured bytes would be smaller.
-    const expected = sumJsFilesIn(folder);
+    const expected = sumFilesIn(folder, ".js");
     expect(result.js.bytes).toBe(expected);
     // Sanity: the fixture has a non-trivial number of files.
-    expect(countJsFilesIn(folder)).toBeGreaterThanOrEqual(8);
+    expect(countFilesIn(folder, ".js")).toBeGreaterThanOrEqual(8);
   });
 
   test("walks every CSS @import variant (quoted, single-quoted, url(), bare url())", () => {
@@ -374,9 +352,9 @@ describe("measureComponent", () => {
       warnRatio: 0.8,
     });
 
-    const expected = sumCssFilesIn(folder);
+    const expected = sumFilesIn(folder, ".css");
     expect(result.css.bytes).toBe(expected);
-    expect(countCssFilesIn(folder)).toBe(5);
+    expect(countFilesIn(folder, ".css")).toBe(5);
   });
 
   test("falls back to the entry file when the import walker fails", () => {
