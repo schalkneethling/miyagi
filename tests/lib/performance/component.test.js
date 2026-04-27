@@ -220,6 +220,71 @@ describe("measureComponent", () => {
     expect(result.js.path).toBe(path.join(folder, "button.js"));
   });
 
+  test("walks JS imports and counts every reachable file", () => {
+    const cwd = makeTempCwd();
+    writeComponent(cwd, "components/atoms/button", {
+      "button.js": `import "./helpers/dom.js";\nimport "./helpers/format.js";\nexport const x = 1;\n`,
+    });
+    writeComponent(cwd, "components/atoms/button/helpers", {
+      "dom.js": "x".repeat(500),
+      "format.js": "y".repeat(800),
+    });
+
+    const result = measureComponent({
+      cwd,
+      componentPath: "components/atoms/button",
+      entry: { css: {}, js: {} },
+      compression: "raw",
+      warnRatio: 0.8,
+    });
+
+    // Entry file plus both helpers should be summed; raw size should
+    // dominantly reflect the helper sizes (500 + 800 = 1300 plus the
+    // small entry).
+    expect(result.js.bytes).toBeGreaterThan(1300);
+  });
+
+  test("walks CSS @import statements and counts every reachable file", () => {
+    const cwd = makeTempCwd();
+    writeComponent(cwd, "components/atoms/button", {
+      "button.css": `@import url("./helpers/typography.css");\n.btn { color: red; }\n`,
+    });
+    writeComponent(cwd, "components/atoms/button/helpers", {
+      "typography.css": "a".repeat(2000),
+    });
+
+    const result = measureComponent({
+      cwd,
+      componentPath: "components/atoms/button",
+      entry: { css: {}, js: {} },
+      compression: "raw",
+      warnRatio: 0.8,
+    });
+
+    expect(result.css.bytes).toBeGreaterThan(2000);
+  });
+
+  test("falls back to the entry file when the import walker fails", () => {
+    const cwd = makeTempCwd();
+    writeComponent(cwd, "components/atoms/button", {
+      // Deliberately broken JS — dependency-tree should bail; we still
+      // want a measurement of the entry file rather than a thrown error.
+      "button.js": "import from",
+      "button.css": ".btn {}",
+    });
+
+    const result = measureComponent({
+      cwd,
+      componentPath: "components/atoms/button",
+      entry: { css: {}, js: {} },
+      compression: "raw",
+      warnRatio: 0.8,
+    });
+
+    expect(result.js.status).toBe("unbudgeted");
+    expect(result.js.bytes).toBe("import from".length);
+  });
+
   test("returns the parsed budget bytes when budget is set", () => {
     const cwd = makeTempCwd();
     writeComponent(cwd, "components/atoms/button", {

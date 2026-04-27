@@ -61,6 +61,8 @@ Each entry is keyed by the library-relative folder path (the same path you'd pas
 
 Component asset files are read by name: `<component-name>.css` and `<component-name>.js` at the component folder root, where `<component-name>` matches the terminal folder segment.
 
+The measurement walks static imports — `import "./util.js"` in JS, `@import "./typography.css"` in CSS — and sums every reachable file. A 2 kB entry that imports a 50 kB util reports the full reachable size. `node_modules` is skipped (Drupal/your downstream pipeline owns those dependencies). Dynamic imports and runtime branching aren't followed, and there's no tree-shaking, so the number is an **upper-bound proxy** for what your bundler will actually emit. If the import graph can't be resolved (parse error, exotic loader), the entry file alone is measured rather than throwing.
+
 ### Pages
 
 Each entry is keyed by the template's library-relative path. Under `variations`, each named variation declares:
