@@ -1,3 +1,4 @@
+/* Target of: @import url("./url-double-quoted.css") — url(), double quotes. */
 .fixture-url-double-quoted {
   color: blue;
   padding: 1rem;

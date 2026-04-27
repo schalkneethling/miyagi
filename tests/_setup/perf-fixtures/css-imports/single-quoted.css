@@ -1,3 +1,4 @@
+/* Target of: @import './single-quoted.css' — bare path, single quotes. */
 .fixture-single-quoted {
   color: green;
   padding: 1rem;

@@ -1,3 +1,4 @@
+/* Target of: @import url('./url-single-quoted.css') — url(), single quotes. */
 .fixture-url-single-quoted {
   color: orange;
   padding: 1rem;

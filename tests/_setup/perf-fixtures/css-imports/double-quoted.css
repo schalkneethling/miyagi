@@ -1,3 +1,4 @@
+/* Target of: @import "./double-quoted.css" — bare path, double quotes. */
 .fixture-double-quoted {
   color: red;
   padding: 1rem;
