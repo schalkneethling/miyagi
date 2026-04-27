@@ -7,3 +7,4 @@ vendor/
 .pnpm-store/
 .pnpm-debug.log
 memory/
+.plan-review/

@@ -4,7 +4,7 @@
 @import url("./iframe/accordion-tabs.css") layer(miyagi);
 @import url("./iframe/jsontree.js.css") layer(miyagi);
 @import url("./iframe/styleguide/index.css") layer(miyagi);
-@import url("./iframe/performance.css") layer(miyagi);
+@import url("./iframe/perf.css") layer(miyagi);
 
 html {
   --iframe-spacing: clamp(0.75rem, 4vi, 2.5rem);

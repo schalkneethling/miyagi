@@ -1,0 +1,21 @@
+.card {
+  background: white;
+  border: 1px solid hsl(220deg 15% 90%);
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.card-body {
+  color: hsl(220deg 15% 30%);
+  line-height: 1.5;
+  margin: 0;
+}

@@ -1,0 +1,63 @@
+.PerfBanner {
+  align-items: center;
+  background: var(--color-Menu-background);
+  border-block-end: 1px solid var(--color-Outline);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.875em;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.PerfBanner-label {
+  color: var(--color-Text);
+  font-weight: 600;
+  margin-inline-end: 0.5rem;
+}
+
+.PerfBanner-errors {
+  color: var(--color-Negative);
+  font-weight: 600;
+  margin-inline-start: auto;
+}
+
+.PerfChip {
+  background: var(--color-Code-background);
+  border: 1px solid var(--color-Outline);
+  border-radius: 999px;
+  display: inline-flex;
+  font-family: var(--font-family);
+  gap: 0.25rem;
+  padding: 0.125rem 0.625rem;
+}
+
+.PerfChip b {
+  font-weight: 600;
+}
+
+.PerfChip--ok {
+  background: light-dark(hsl(135deg 60% 92%), hsl(135deg 30% 18%));
+  border-color: var(--color-Positive);
+}
+
+.PerfChip--warn {
+  background: light-dark(hsl(45deg 90% 88%), hsl(45deg 50% 18%));
+  border-color: light-dark(hsl(35deg 90% 45%), hsl(35deg 80% 60%));
+}
+
+.PerfChip--exceed {
+  background: light-dark(hsl(0deg 70% 92%), hsl(0deg 40% 22%));
+  border-color: var(--color-Negative);
+  color: var(--color-Negative);
+}
+
+.PerfChip--missing {
+  background: var(--color-Code-background);
+  border-style: dashed;
+  color: var(--color-Iframe-text-secondary, currentcolor);
+}
+
+.PerfChip--unbudgeted {
+  background: transparent;
+  color: var(--color-Iframe-text-secondary, currentcolor);
+}

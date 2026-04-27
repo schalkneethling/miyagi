@@ -1,0 +1,35 @@
+.PerfSection .PerfChip {
+  background: var(--color-Code-background);
+  border: 1px solid var(--color-Outline);
+  border-radius: 999px;
+  display: inline-block;
+  font-family: var(--font-family);
+  font-size: 0.875em;
+  padding: 0.125rem 0.625rem;
+}
+
+.PerfSection .PerfChip--ok {
+  background: light-dark(hsl(135deg 60% 92%), hsl(135deg 30% 18%));
+  border-color: var(--color-Positive);
+}
+
+.PerfSection .PerfChip--warn {
+  background: light-dark(hsl(45deg 90% 88%), hsl(45deg 50% 18%));
+  border-color: light-dark(hsl(35deg 90% 45%), hsl(35deg 80% 60%));
+}
+
+.PerfSection .PerfChip--exceed {
+  background: light-dark(hsl(0deg 70% 92%), hsl(0deg 40% 22%));
+  border-color: var(--color-Negative);
+  color: var(--color-Negative);
+}
+
+.PerfSection .PerfChip--missing {
+  border-style: dashed;
+  color: var(--color-Iframe-text-secondary);
+}
+
+.PerfSection .PerfChip--unbudgeted {
+  background: transparent;
+  color: var(--color-Iframe-text-secondary);
+}
