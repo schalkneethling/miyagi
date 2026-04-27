@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.9.0](https://github.com/schalkneethling/miyagi/compare/v4.8.1...v4.9.0) (2026-04-27)
+
+
+### Features
+
+* **performance:** add /api/performance/* routes ([c5d92f5](https://github.com/schalkneethling/miyagi/commit/c5d92f5f6703b9b36be4bbec0b4bd87c611a65d4))
+* **performance:** add component measurement module ([2ce8877](https://github.com/schalkneethling/miyagi/commit/2ce8877d9cd6edc45a192aa7b80322012546f6dc))
+* **performance:** add html-size measurement and page-totals modules ([0097719](https://github.com/schalkneethling/miyagi/commit/0097719184536f792f33104c4cccf885f6477703))
+* **performance:** add miyagi perf CLI and build --perf-report flag ([d8b11be](https://github.com/schalkneethling/miyagi/commit/d8b11be8e2555cfa8c7e596d0cb82e3eec1ce778))
+* **performance:** add miyagi.performance.json config loader ([8ac171d](https://github.com/schalkneethling/miyagi/commit/8ac171d45b96f29d0caca8ac451cfd5a16d5afdc))
+* **performance:** add page chrome banner and component-overview section ([72bcab9](https://github.com/schalkneethling/miyagi/commit/72bcab985512b0bace692dfd58ad7077da3ae22d))
+* **performance:** add runPerformance orchestrator and markdown report ([411bf84](https://github.com/schalkneethling/miyagi/commit/411bf8460b8b6974d6d48670e792385c30704292))
+* **performance:** walk static imports when measuring components ([f130c01](https://github.com/schalkneethling/miyagi/commit/f130c01dfe6d28b1ad9da60ed2efb1ec3fd9d325))
+* Redesign performance feature: opt-in per-component and per-page reporting ([e88005c](https://github.com/schalkneethling/miyagi/commit/e88005c3d41151cb7ba7dbac84d9dd8bc1467edd))
+
+
+### Bug Fixes
+
+* **performance:** address PR review findings ([0c72f58](https://github.com/schalkneethling/miyagi/commit/0c72f581aa8e66c5958ebe3306cdf490c8783bbc))
+* **performance:** replace title attributes with u-hiddenVisually spans ([e42ab64](https://github.com/schalkneethling/miyagi/commit/e42ab645364d3ad4c95e528e7812f59ad7b91117))
+
+
+### Reverts
+
+* **performance:** drop markdown report generator ([ca195c9](https://github.com/schalkneethling/miyagi/commit/ca195c9b35e1d0d86c0ae35eb6ac8fe153b565aa))
+
 ## [4.8.1](https://github.com/schalkneethling/miyagi/compare/v4.8.0...v4.8.1) (2026-04-16)
 
 
