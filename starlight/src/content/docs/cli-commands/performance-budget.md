@@ -61,6 +61,38 @@ Component asset files are read by name: `<component-name>.css` and `<component-n
 
 The measurement walks static imports — `import "./util.js"` in JS, `@import "./typography.css"` in CSS — and sums every reachable file. A 2 kB entry that imports a 50 kB util reports the full reachable size. `node_modules` is skipped (Drupal/your downstream pipeline owns those dependencies). Dynamic imports and runtime branching aren't followed, and there's no tree-shaking, so the number is an **upper-bound proxy** for what your bundler will actually emit. If the import graph can't be resolved (parse error, exotic loader), the entry file alone is measured rather than throwing.
 
+#### Import patterns the walker supports
+
+JS — every static `import` and `export … from` form is followed:
+
+```js
+import x from "./default.js";
+import { a, b } from "./named.js";
+import x, { a } from "./mixed.js";
+import * as ns from "./star.js";
+import "./side-effect.js";
+export * from "./reexport.js";
+export { a } from "./reexport.js";
+```
+
+CSS — `@import` is followed when the path is **quoted** and **prefixed with `./`** for siblings:
+
+```css
+@import "./typography.css";
+@import './typography.css';
+@import url("./typography.css");
+@import url('./typography.css');
+```
+
+**Not followed:**
+
+- `@import url(./x.css)` — unquoted url() arguments. Always quote.
+- `@import "x.css"` — bare paths (no `./`). The walker treats them like package specifiers and skips. Use `./x.css` for siblings, `../x.css` for parent traversal.
+- Dynamic imports (`import("./x.js")`).
+- CSS `composes:` from CSS Modules.
+
+If your component uses an unsupported pattern, the affected import is silently excluded from the total — which makes the reported number lower than reality, not higher. Stick to the supported forms above and you'll get a faithful upper-bound.
+
 ### Pages
 
 Each entry is keyed by the template's library-relative path. Under `variations`, each named variation declares:
