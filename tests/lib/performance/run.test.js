@@ -154,6 +154,33 @@ describe("runPerformance", () => {
     });
   });
 
+  test("pages with errors are tallied as failing in the summary", async () => {
+    const cwd = makeTempCwd();
+    writeFile(cwd, "components/atoms/button/button.css", "x");
+    writeFile(cwd, "components/atoms/button/button.js", "");
+    writeFile(cwd, "miyagi.performance.json", JSON.stringify({
+      compression: "raw",
+      components: { "components/atoms/button": { css: {}, js: {} } },
+      pages: {
+        "templates/default": {
+          variations: {
+            home: {
+              components: ["components/atoms/button", "components/missing"],
+            },
+          },
+        },
+      },
+    }));
+
+    const render = async () => "<html></html>";
+    const result = await runPerformance({ cwd, render });
+
+    // The page's totals object has errors → page status must reflect
+    // that, not "ok" / "unbudgeted".
+    expect(result.summary.pages.missing).toBe(1);
+    expect(result.summary.pages.ok).toBe(0);
+  });
+
   test("pages whose components are missing from measurements record errors", async () => {
     const cwd = makeTempCwd();
     writeFile(cwd, "components/atoms/button/button.css", "x");

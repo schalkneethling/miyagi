@@ -378,6 +378,25 @@ describe("measureComponent", () => {
     expect(result.js.bytes).toBe("import from".length);
   });
 
+  test("zero-byte asset against zero budget classifies as ok, not warn", () => {
+    const cwd = makeTempCwd();
+    writeComponent(cwd, "components/atoms/button", {
+      "button.css": "",
+      "button.js": "",
+    });
+
+    const result = measureComponent({
+      cwd,
+      componentPath: "components/atoms/button",
+      entry: { css: { budget: "0 B" }, js: { budget: "0 B" } },
+      compression: "raw",
+      warnRatio: 0.8,
+    });
+
+    expect(result.css.status).toBe("ok");
+    expect(result.js.status).toBe("ok");
+  });
+
   test("returns the parsed budget bytes when budget is set", () => {
     const cwd = makeTempCwd();
     writeComponent(cwd, "components/atoms/button", {

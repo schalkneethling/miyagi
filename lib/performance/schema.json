@@ -36,6 +36,7 @@
       "additionalProperties": {
         "type": "object",
         "additionalProperties": false,
+        "required": ["variations"],
         "properties": {
           "variations": {
             "type": "object",

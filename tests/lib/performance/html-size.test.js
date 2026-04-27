@@ -57,13 +57,18 @@ describe("measureHtml", () => {
       throw new Error("boom");
     };
 
-    await expect(
-      measureHtml({
-        templatePath: "templates/default",
-        variation: "home",
-        render,
-        compression: "raw",
-      }),
-    ).rejects.toThrow(/templates\/default.*home/);
+    const promise = measureHtml({
+      templatePath: "templates/default",
+      variation: "home",
+      render,
+      compression: "raw",
+    });
+
+    await expect(promise).rejects.toThrow(/templates\/default.*home/);
+    // The original error is preserved as `cause` so callers can inspect
+    // the underlying failure (stack trace, custom error subclass, etc.).
+    await expect(promise).rejects.toMatchObject({
+      cause: expect.objectContaining({ message: "boom" }),
+    });
   });
 });

@@ -90,6 +90,28 @@ describe("computePageTotals", () => {
     expect(result.css.status).toBe("unbudgeted");
   });
 
+  test("dedupes repeated component paths so bytes are not double-counted", () => {
+    const result = computePageTotals({
+      variationConfig: {
+        components: [
+          "components/atoms/button",
+          "components/atoms/button", // duplicate
+        ],
+      },
+      componentMeasurements: new Map([
+        [
+          "components/atoms/button",
+          makeComponentMeasurement("components/atoms/button", 100, 200),
+        ],
+      ]),
+      htmlBytes: 0,
+      warnRatio: 0.8,
+    });
+
+    expect(result.css.bytes).toBe(100);
+    expect(result.js.bytes).toBe(200);
+  });
+
   test("returns errors[] for components missing from the measurements map", () => {
     const result = computePageTotals({
       variationConfig: {
