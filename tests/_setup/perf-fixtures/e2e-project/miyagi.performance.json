@@ -1,0 +1,23 @@
+{
+  "compression": "raw",
+  "components": {
+    "components/button": {
+      "css": { "budget": "5 kB" },
+      "js": { "budget": "10 kB" }
+    },
+    "components/card": {
+      "css": { "budget": "5 kB" },
+      "js": {}
+    }
+  },
+  "pages": {
+    "templates/landing": {
+      "variations": {
+        "default": {
+          "components": ["components/button", "components/card"],
+          "budget": { "total": "50 kB" }
+        }
+      }
+    }
+  }
+}

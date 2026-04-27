@@ -1,0 +1,14 @@
+/*
+ * Exercises every CSS @import variant the dependency-tree walker
+ * supports. Note: bare `@import url(./x.css)` (no quotes) is NOT
+ * followed — quote your url() arguments.
+ */
+@import "./double-quoted.css";
+@import './single-quoted.css';
+@import url("./url-double-quoted.css");
+@import url('./url-single-quoted.css');
+
+.entry-rule {
+  background: white;
+  font-family: system-ui, sans-serif;
+}

@@ -4,11 +4,20 @@ import {
   mkdirSync,
   rmSync,
   writeFileSync,
+  cpSync,
+  readdirSync,
+  statSync,
+  readFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { measureComponent } from "../../../lib/performance/component.js";
 import { clearMeasureCache } from "../../../lib/performance/measure.js";
+
+const FIXTURES_ROOT = path.join(
+  import.meta.dirname,
+  "../../_setup/perf-fixtures",
+);
 
 const tempRoots = [];
 
@@ -16,6 +25,51 @@ function makeTempCwd() {
   const dir = mkdtempSync(path.join(tmpdir(), "miyagi-perf-component-"));
   tempRoots.push(dir);
   return dir;
+}
+
+function* walkFiles(dir, ext) {
+  for (const entry of readdirSync(dir)) {
+    const full = path.join(dir, entry);
+    if (statSync(full).isDirectory()) {
+      yield* walkFiles(full, ext);
+    } else if (full.endsWith(ext)) {
+      yield full;
+    }
+  }
+}
+
+function sumJsFilesIn(dir) {
+  let total = 0;
+  for (const file of walkFiles(dir, ".js")) {
+    total += readFileSync(file).byteLength;
+  }
+  return total;
+}
+
+function countJsFilesIn(dir) {
+  let count = 0;
+  // eslint-disable-next-line no-unused-vars
+  for (const _ of walkFiles(dir, ".js")) {
+    count += 1;
+  }
+  return count;
+}
+
+function sumCssFilesIn(dir) {
+  let total = 0;
+  for (const file of walkFiles(dir, ".css")) {
+    total += readFileSync(file).byteLength;
+  }
+  return total;
+}
+
+function countCssFilesIn(dir) {
+  let count = 0;
+  // eslint-disable-next-line no-unused-vars
+  for (const _ of walkFiles(dir, ".css")) {
+    count += 1;
+  }
+  return count;
 }
 
 function writeComponent(cwd, relPath, files) {
@@ -262,6 +316,67 @@ describe("measureComponent", () => {
     });
 
     expect(result.css.bytes).toBeGreaterThan(2000);
+  });
+
+  test("walks every JS import pattern (named, default, star, reexport, side-effect)", () => {
+    // Stage the js-imports fixture as a "component" by giving it the
+    // entry-file naming convention measureComponent expects.
+    const cwd = makeTempCwd();
+    cpSync(
+      path.join(FIXTURES_ROOT, "js-imports"),
+      path.join(cwd, "components/js-imports"),
+      { recursive: true },
+    );
+    // Rename entry.js → js-imports.js to match the <component-name>.js rule.
+    const folder = path.join(cwd, "components/js-imports");
+    cpSync(path.join(folder, "entry.js"), path.join(folder, "js-imports.js"));
+    rmSync(path.join(folder, "entry.js"));
+    // Stub CSS so component.js is happy.
+    writeFileSync(path.join(folder, "js-imports.css"), "");
+
+    const result = measureComponent({
+      cwd,
+      componentPath: "components/js-imports",
+      entry: { css: {}, js: {} },
+      compression: "raw",
+      warnRatio: 0.8,
+    });
+
+    // Sum the on-disk size of every .js file in the fixture (minus the
+    // renamed-away entry.js, plus the renamed-in js-imports.js). If the
+    // walker missed any pattern, the measured bytes would be smaller.
+    const expected = sumJsFilesIn(folder);
+    expect(result.js.bytes).toBe(expected);
+    // Sanity: the fixture has a non-trivial number of files.
+    expect(countJsFilesIn(folder)).toBeGreaterThanOrEqual(8);
+  });
+
+  test("walks every CSS @import variant (quoted, single-quoted, url(), bare url())", () => {
+    const cwd = makeTempCwd();
+    cpSync(
+      path.join(FIXTURES_ROOT, "css-imports"),
+      path.join(cwd, "components/css-imports"),
+      { recursive: true },
+    );
+    const folder = path.join(cwd, "components/css-imports");
+    cpSync(
+      path.join(folder, "entry.css"),
+      path.join(folder, "css-imports.css"),
+    );
+    rmSync(path.join(folder, "entry.css"));
+    writeFileSync(path.join(folder, "css-imports.js"), "");
+
+    const result = measureComponent({
+      cwd,
+      componentPath: "components/css-imports",
+      entry: { css: {}, js: {} },
+      compression: "raw",
+      warnRatio: 0.8,
+    });
+
+    const expected = sumCssFilesIn(folder);
+    expect(result.css.bytes).toBe(expected);
+    expect(countCssFilesIn(folder)).toBe(5);
   });
 
   test("falls back to the entry file when the import walker fails", () => {
