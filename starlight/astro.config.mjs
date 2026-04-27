@@ -1,6 +1,6 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
-import catppuccin from "starlight-theme-catppuccin";
+import catppuccin from "@catppuccin/starlight";
 
 export default defineConfig({
   site: "https://miyagi.schalkneethling.com/",
