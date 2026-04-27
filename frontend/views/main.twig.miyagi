@@ -19,12 +19,12 @@
       {% if perfBanner %}
         <div class="PerfBanner" data-template="{{ perfBanner.templatePath }}" data-variation="{{ perfBanner.variation }}">
           <span class="PerfBanner-label">Page perf</span>
-          <span class="PerfChip PerfChip--{{ perfBanner.css.status }}" title="Sum of declared component CSS files"><b>CSS</b> {{ perfBanner.css.bytesLabel }}{% if perfBanner.css.budgetLabel %} / {{ perfBanner.css.budgetLabel }}{% endif %}</span>
-          <span class="PerfChip PerfChip--{{ perfBanner.js.status }}" title="Sum of declared component JS files"><b>JS</b> {{ perfBanner.js.bytesLabel }}{% if perfBanner.js.budgetLabel %} / {{ perfBanner.js.budgetLabel }}{% endif %}</span>
-          <span class="PerfChip PerfChip--{{ perfBanner.html.status }}" title="Rendered HTML size"><b>HTML</b> {{ perfBanner.html.bytesLabel }}{% if perfBanner.html.budgetLabel %} / {{ perfBanner.html.budgetLabel }}{% endif %}</span>
-          <span class="PerfChip PerfChip--{{ perfBanner.total.status }}" title="CSS + JS + HTML"><b>Total</b> {{ perfBanner.total.bytesLabel }}{% if perfBanner.total.budgetLabel %} / {{ perfBanner.total.budgetLabel }}{% endif %}</span>
+          <span class="PerfChip PerfChip--{{ perfBanner.css.status }}"><span class="u-hiddenVisually">Sum of declared component </span><b>CSS</b> {{ perfBanner.css.bytesLabel }}{% if perfBanner.css.budgetLabel %} / {{ perfBanner.css.budgetLabel }}{% endif %}</span>
+          <span class="PerfChip PerfChip--{{ perfBanner.js.status }}"><span class="u-hiddenVisually">Sum of declared component </span><b>JS</b> {{ perfBanner.js.bytesLabel }}{% if perfBanner.js.budgetLabel %} / {{ perfBanner.js.budgetLabel }}{% endif %}</span>
+          <span class="PerfChip PerfChip--{{ perfBanner.html.status }}"><span class="u-hiddenVisually">Rendered </span><b>HTML</b><span class="u-hiddenVisually"> size</span> {{ perfBanner.html.bytesLabel }}{% if perfBanner.html.budgetLabel %} / {{ perfBanner.html.budgetLabel }}{% endif %}</span>
+          <span class="PerfChip PerfChip--{{ perfBanner.total.status }}"><b>Total</b><span class="u-hiddenVisually"> CSS + JS + HTML</span> {{ perfBanner.total.bytesLabel }}{% if perfBanner.total.budgetLabel %} / {{ perfBanner.total.budgetLabel }}{% endif %}</span>
           {% if perfBanner.errors and perfBanner.errors|length > 0 %}
-            <span class="PerfBanner-errors" title="Components missing from miyagi.performance.json">⚠ {{ perfBanner.errors|length }} undeclared</span>
+            <span class="PerfBanner-errors">⚠ {{ perfBanner.errors|length }} undeclared<span class="u-hiddenVisually"> components missing from miyagi.performance.json</span></span>
           {% endif %}
         </div>
       {% endif %}
