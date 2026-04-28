@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.9.1](https://github.com/schalkneethling/miyagi/compare/v4.9.0...v4.9.1) (2026-04-28)
+
+
+### Bug Fixes
+
+* **performance:** resolve component files relative to componentsFolder ([c4115d2](https://github.com/schalkneethling/miyagi/commit/c4115d23b88d35ad1ba8f287e6b2992987bf8ef2))
+* **performance:** resolve component files relative to componentsFolder ([56c425d](https://github.com/schalkneethling/miyagi/commit/56c425d7efad66d8c7b349aa29e693dd5e85bf14))
+
 ## [4.9.0](https://github.com/schalkneethling/miyagi/compare/v4.8.1...v4.9.0) (2026-04-27)
 
 
