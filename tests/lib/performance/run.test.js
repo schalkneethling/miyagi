@@ -181,6 +181,36 @@ describe("runPerformance", () => {
     expect(result.summary.pages.ok).toBe(0);
   });
 
+  test("resolves component files when componentsFolder splits the path from the config key", async () => {
+    // Regression test: config keys (and dir.short) are relative to componentsFolder,
+    // but files live at <cwd>/<componentsFolder>/<componentPath>. Without forwarding
+    // componentsFolder the measurement resolves the wrong path and returns 0 B.
+    const cwd = makeTempCwd();
+    writeFile(cwd, "src/components/elements/button/button.css", "x".repeat(800));
+    writeFile(cwd, "src/components/elements/button/button.js", "y".repeat(200));
+    writeFile(cwd, "miyagi.performance.json", JSON.stringify({
+      compression: "raw",
+      components: {
+        "elements/button": {
+          css: { budget: "5 kB" },
+          js: { budget: "10 kB" },
+        },
+      },
+    }));
+
+    const result = await runPerformance({
+      cwd,
+      componentsFolder: "src/components",
+    });
+
+    expect(result.enabled).toBe(true);
+    expect(result.components).toHaveLength(1);
+    expect(result.components[0].css.bytes).toBe(800);
+    expect(result.components[0].js.bytes).toBe(200);
+    expect(result.components[0].css.status).toBe("ok");
+    expect(result.components[0].js.status).toBe("ok");
+  });
+
   test("pages whose components are missing from measurements record errors", async () => {
     const cwd = makeTempCwd();
     writeFile(cwd, "components/atoms/button/button.css", "x");
