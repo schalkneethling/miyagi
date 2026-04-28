@@ -415,4 +415,28 @@ describe("measureComponent", () => {
     expect(result.css.budget).toBe(5000);
     expect(result.js.budget).toBe(10000);
   });
+
+  test("resolves files under componentsFolder when short componentPath is used", () => {
+    const cwd = makeTempCwd();
+    // Mirror the real layout: files live at <cwd>/<componentsFolder>/<componentPath>/
+    // but the config key and dir.short are relative to componentsFolder only.
+    writeComponent(cwd, "src/components/elements/button", {
+      "button.css": ".btn { color: red; }",
+      "button.js": "export const x = 1;",
+    });
+
+    const result = measureComponent({
+      cwd,
+      componentsFolder: "src/components",
+      componentPath: "elements/button",
+      entry: { css: { budget: "5 kB" }, js: { budget: "10 kB" } },
+      compression: "raw",
+      warnRatio: 0.8,
+    });
+
+    expect(result.css.bytes).toBe(".btn { color: red; }".length);
+    expect(result.js.bytes).toBe("export const x = 1;".length);
+    expect(result.css.status).toBe("ok");
+    expect(result.js.status).toBe("ok");
+  });
 });
