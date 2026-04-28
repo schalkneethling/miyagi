@@ -76,7 +76,7 @@ describe("miyagi perf CLI", () => {
       default: async () => ({}),
     }));
     vi.doMock("../../../lib/config.js", () => ({
-      default: async () => ({}),
+      default: async () => ({ components: { folder: "" } }),
     }));
 
     const perfCli = await importCliPerf();
@@ -106,7 +106,7 @@ describe("miyagi perf CLI", () => {
     );
 
     vi.doMock("../../../lib/index.js", () => ({ default: async () => ({}) }));
-    vi.doMock("../../../lib/config.js", () => ({ default: async () => ({}) }));
+    vi.doMock("../../../lib/config.js", () => ({ default: async () => ({ components: { folder: "" } }) }));
 
     const perfCli = await importCliPerf();
     const result = await perfCli({ fail: true });
@@ -126,7 +126,7 @@ describe("miyagi perf CLI", () => {
     );
 
     vi.doMock("../../../lib/index.js", () => ({ default: async () => ({}) }));
-    vi.doMock("../../../lib/config.js", () => ({ default: async () => ({}) }));
+    vi.doMock("../../../lib/config.js", () => ({ default: async () => ({ components: { folder: "" } }) }));
 
     const perfCli = await importCliPerf();
     await perfCli({ json: true, compression: "brotli" });
