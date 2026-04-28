@@ -13,7 +13,7 @@
     "@catppuccin/starlight": "^2.0.0",
     "astro": "^6.1.9",
     "sharp": "^0.34.0",
-    "zod": "^3.25.76"
+    "zod": "^4.3.6"
   },
   "engines": {
     "node": ">=24"
