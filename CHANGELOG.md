@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.10.0](https://github.com/schalkneethling/miyagi/compare/v4.9.1...v4.10.0) (2026-05-03)
+
+
+### Features
+
+* **components:** add components.hidden config option ([9409c34](https://github.com/schalkneethling/miyagi/commit/9409c34d442b516812ed5eec54a4ae4d2124b117))
+* **components:** add components.hidden config option ([35ebce1](https://github.com/schalkneethling/miyagi/commit/35ebce19231737389c50347653cd2e5050113546))
+
+
+### Bug Fixes
+
+* **components:** normalize paths to forward slashes before anymatch ([725f84a](https://github.com/schalkneethling/miyagi/commit/725f84a03b8a7be6ef9caa6af92773df5b594c23))
+
 ## [4.9.1](https://github.com/schalkneethling/miyagi/compare/v4.9.0...v4.9.1) (2026-04-28)
 
 
