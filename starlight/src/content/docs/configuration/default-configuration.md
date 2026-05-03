@@ -45,6 +45,7 @@ export default {
         ".miyagi.js",
         ".miyagi.mjs"
       ],
+      hidden: [],
       lang: "en",
       textDirection: "ltr"
     },
