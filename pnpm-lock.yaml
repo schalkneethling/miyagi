@@ -48,7 +48,7 @@ importers:
         version: 11.1.0(vitest@4.1.0(@types/node@25.6.0)(jsdom@29.0.2)(vite@7.3.3(@types/node@25.6.0)(terser@5.46.0)(yaml@2.9.0)))
       js-yaml:
         specifier: ^4.1.0
-        version: 4.1.1
+        version: 4.2.0
       marked:
         specifier: ^18.0.2
         version: 18.0.2
@@ -2827,6 +2827,10 @@ packages:
 
   js-yaml@4.1.1:
     resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
+    hasBin: true
+
+  js-yaml@4.2.0:
+    resolution: {integrity: sha512-ePWsvanv0DWuDRsW8dnt+R4jQ31SCRCQ7hhNcPXZPsoBZiemuZNYGf7adZdqX2D86j6rvKp3RpCxVTSb8WQlOw==}
     hasBin: true
 
   jsdoc-type-pratt-parser@7.2.0:
@@ -6387,7 +6391,7 @@ snapshots:
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
-      js-yaml: 4.1.1
+      js-yaml: 4.2.0
       parse-json: 5.2.0
     optionalDependencies:
       typescript: 5.9.3
@@ -7652,6 +7656,10 @@ snapshots:
   js-tokens@9.0.1: {}
 
   js-yaml@4.1.1:
+    dependencies:
+      argparse: 2.0.1
+
+  js-yaml@4.2.0:
     dependencies:
       argparse: 2.0.1
 
