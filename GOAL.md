@@ -43,8 +43,8 @@ Miyagi is for frontend developers and design-system maintainers who work with co
 
 - Miyagi is not a full application framework, router, CMS, or backend runtime.
 - Miyagi should not require projects to use one prescribed template engine, directory structure, design system, bundler, or frontend framework.
-- Miyagi should not replace project-owned rendering logic; projects are expected to provide the render function for their engine.
-- Miyagi should not become a general-purpose asset bundler. It may resolve, copy, isolate, and report on assets needed for component workflows, but application bundling remains outside its core scope.
+- Project-owned rendering logic stays in the project; teams are expected to provide the render function for their engine.
+- Application bundling remains outside Miyagi's core scope. It may resolve, copy, isolate, and report on assets needed for component workflows, but it should not become a general-purpose asset bundler.
 - Miyagi should deliberately not compete with Storybook by matching every addon, test runner, visual review, hosting, or framework integration feature. Its advantage should be a smaller, clearer component workbench built around ordinary web output.
 - Miyagi should avoid broad, engine-specific integrations in core. When integrations are valuable, they should be optional utilities or plugins with clear boundaries.
 
