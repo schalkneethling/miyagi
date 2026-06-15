@@ -2,7 +2,10 @@ packages:
   - .
   - starlight
 
-onlyBuiltDependencies:
-  - esbuild
-  - pre-commit
-  - spawn-sync
+ignoreScripts: true
+
+allowBuilds:
+  esbuild: false
+  pre-commit: false
+  sharp: false
+  spawn-sync: false
