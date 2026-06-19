@@ -71,7 +71,7 @@
     "pre-commit": "^2.0.0",
     "prettier": "^3.6.2",
     "rollup": "^4.52.5",
-    "stylelint": "^16.25.0",
+    "stylelint": "^17.13.0",
     "stylelint-config-standard": "^39.0.1",
     "typescript-eslint": "^8.46.2",
     "vitest": "^4.0.6"
