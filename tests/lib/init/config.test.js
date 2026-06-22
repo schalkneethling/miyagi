@@ -149,4 +149,64 @@ describe("config processing", () => {
       expect(config.assets.isolateComponents).toBe(false);
     });
   });
+
+  describe("extensions", () => {
+    test("normalizes legacy extension tuples and options", () => {
+      const extension = { name: "legacy-extension" };
+      const config = getConfig({
+        extensions: [[extension, { locale: "en" }]],
+      });
+
+      expect(config.extensions).toStrictEqual([
+        {
+          extension,
+          options: { locale: "en" },
+        },
+      ]);
+    });
+
+    test("applies extension config before normal config processing", () => {
+      const extension = {
+        configure() {
+          return {
+            assets: {
+              shared: {
+                css: ["./tokens.css"],
+              },
+            },
+            watch: {
+              sources: [
+                {
+                  id: "extension-docs",
+                  type: "dir",
+                  path: "./extension-docs/",
+                },
+              ],
+            },
+          };
+        },
+      };
+
+      const config = getConfig({
+        extensions: [extension],
+      });
+
+      expect(config.assets.shared.css).toStrictEqual(["tokens.css"]);
+      expect(config.extensions).toStrictEqual([
+        {
+          extension,
+          options: { locales: {} },
+        },
+      ]);
+      expect(config.watch.sources).toStrictEqual([
+        {
+          id: "extension-docs",
+          type: "dir",
+          path: "extension-docs",
+          recursive: true,
+          optional: false,
+        },
+      ]);
+    });
+  });
 });

@@ -107,6 +107,10 @@ export default defineConfig({
             },
           ],
         },
+        {
+          label: "Architecture",
+          items: [{ label: "Plugin API", slug: "architecture/plugin-api" }],
+        },
         { label: "JavaScript API", slug: "javascript-api" },
         {
           label: "How-To Guides",
