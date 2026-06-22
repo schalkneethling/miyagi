@@ -211,6 +211,40 @@ The render function for your templates. The function will be called with an obje
 default: `[]`<br>
 type: `array`
 
+Experimental plugin entry points for ecosystem-specific behavior. Plugins can be local modules or npm packages imported by your `.miyagi.js` or `.miyagi.mjs` file.
+
+```js
+import myPlugin from "miyagi-example-plugin";
+
+export default {
+  extensions: [
+    {
+      plugin: myPlugin,
+      options: {
+        folder: "fixtures",
+      },
+    },
+  ],
+};
+```
+
+Miyagi also supports the older tuple form for existing v4 projects, but it is deprecated. New code should use `{ plugin, options }`.
+
+```js
+export default {
+  extensions: [[myPlugin, { folder: "fixtures" }]],
+};
+```
+
+Supported hooks are:
+
+- `configure({ config, options })`: return a partial Miyagi config object to merge before normal config processing.
+- `extendTemplateData(templatePath, templateOptions, data)`: return template data before rendering.
+- `extendWatcher(options)`: deprecated legacy helper for adding optional watcher folders.
+- `callbacks.fileChanged(options)`: run cache invalidation or other small work after a watched file changes.
+
+See [Plugin API](/architecture/plugin-api/) for the current experimental contract and migration guidance.
+
 ## `files`
 
 _This is the configuration for your actual component files._
