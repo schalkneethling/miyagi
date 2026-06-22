@@ -88,4 +88,37 @@ describe("extension helpers", () => {
       },
     });
   });
+
+  test("normalizes extensions returned by configuration hooks", () => {
+    const configuredExtension = {
+      name: "configured-extension",
+    };
+    const extension = {
+      configure() {
+        return {
+          extensions: [
+            {
+              plugin: configuredExtension,
+              options: { enabled: true },
+            },
+          ],
+        };
+      },
+    };
+
+    expect(
+      applyExtensionConfig({
+        extensions: [extension],
+      }).extensions,
+    ).toStrictEqual([
+      {
+        extension,
+        options: { locales: {} },
+      },
+      {
+        extension: configuredExtension,
+        options: { enabled: true },
+      },
+    ]);
+  });
 });

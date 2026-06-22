@@ -160,6 +160,21 @@ describe("Watcher", () => {
     expect(consoleInfoSpy).toHaveBeenCalled();
   });
 
+  test("continues when extension watcher hooks throw", () => {
+    const error = new Error("watcher extension failed");
+    global.config.extensions = [
+      {
+        extendWatcher() {
+          throw error;
+        },
+      },
+    ];
+
+    expect(() => Watcher(mockServer)).not.toThrow();
+    expect(mockLogger).toHaveBeenCalledWith("error", error);
+    expect(watchMock).toHaveBeenCalledTimes(1);
+  });
+
   test("coalesces repeated events for same path", async () => {
     Watcher(mockServer);
 
@@ -181,6 +196,27 @@ describe("Watcher", () => {
       menu: true,
       partials: true,
     });
+  });
+
+  test("continues when extension file-change callbacks throw", async () => {
+    const error = new Error("file changed extension failed");
+    global.config.extensions = [
+      {
+        callbacks: {
+          async fileChanged() {
+            throw error;
+          },
+        },
+      },
+    ];
+
+    Watcher(mockServer);
+
+    chokidarOnHandlers.all("change", "lib/example.txt");
+    await vi.advanceTimersByTimeAsync(150);
+
+    expect(mockLogger).toHaveBeenCalledWith("error", error);
+    expect(mockSetState).toHaveBeenCalledTimes(1);
   });
 
   test("prints resolved source list only when debug.logResolvedSources is enabled", () => {
