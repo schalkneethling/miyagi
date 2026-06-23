@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GitHub Issue Triage Report - schalkneethling/miyagi</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f8fa;
+        --panel: #ffffff;
+        --text: #1f2328;
+        --muted: #59636e;
+        --border: #d0d7de;
+        --p0: #b60205;
+        --p1: #d93f0b;
+        --p2: #9a6700;
+        --p3: #1a7f37;
+        --code: #f6f8fa;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 32px 20px 48px;
+      }
+
+      h1,
+      h2,
+      h3 {
+        line-height: 1.2;
+      }
+
+      a {
+        color: #0969da;
+      }
+
+      .meta,
+      .note {
+        color: var(--muted);
+      }
+
+      .summary-grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        margin: 20px 0 28px;
+      }
+
+      .stat,
+      details {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+      }
+
+      .stat {
+        padding: 14px 16px;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.6rem;
+      }
+
+      details {
+        margin-top: 18px;
+        overflow: hidden;
+      }
+
+      summary {
+        cursor: pointer;
+        font-weight: 700;
+        padding: 16px 18px;
+      }
+
+      .content {
+        border-top: 1px solid var(--border);
+        padding: 18px;
+      }
+
+      .priority {
+        border-radius: 999px;
+        color: #fff;
+        display: inline-block;
+        font-weight: 700;
+        min-width: 2.4em;
+        padding: 2px 8px;
+        text-align: center;
+      }
+
+      .p0 {
+        background: var(--p0);
+      }
+
+      .p1 {
+        background: var(--p1);
+      }
+
+      .p2 {
+        background: var(--p2);
+      }
+
+      .p3 {
+        background: var(--p3);
+      }
+
+      table {
+        border-collapse: collapse;
+        display: block;
+        margin-top: 16px;
+        overflow-x: auto;
+        width: 100%;
+      }
+
+      th,
+      td {
+        border: 1px solid var(--border);
+        padding: 10px 12px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: var(--code);
+        font-size: 0.92rem;
+      }
+
+      td {
+        background: #fff;
+      }
+
+      code {
+        background: var(--code);
+        border-radius: 4px;
+        padding: 2px 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>GitHub Issue Triage Report</h1>
+      <p class="meta">
+        Generated: <time datetime="2026-06-15T21:34:00Z">2026-06-15T21:34:00Z</time>
+      </p>
+      <p>
+        Input repository:
+        <a href="https://github.com/schalkneethling/miyagi">schalkneethling/miyagi</a>
+      </p>
+
+      <h2>Summary</h2>
+      <div class="summary-grid" aria-label="Repository summary">
+        <div class="stat"><span>Status</span><strong>Triaged</strong></div>
+        <div class="stat"><span>Open issues</span><strong>15</strong></div>
+        <div class="stat"><span>p0</span><strong>1</strong></div>
+        <div class="stat"><span>p1</span><strong>4</strong></div>
+        <div class="stat"><span>p2</span><strong>6</strong></div>
+        <div class="stat"><span>p3</span><strong>4</strong></div>
+      </div>
+      <p>
+        Nominated next issue:
+        <a href="https://github.com/schalkneethling/miyagi/issues/133">#133 Define a plugin API for ecosystem-specific Miyagi behavior</a>.
+      </p>
+
+      <details open>
+        <summary>
+          schalkneethling/miyagi - triaged - 15 open issues - p0: 1, p1: 4, p2: 6, p3: 4 - next:
+          #133 Define a plugin API for ecosystem-specific Miyagi behavior
+        </summary>
+        <div class="content">
+          <h2>Project Goal Summary</h2>
+          <p>
+            Miyagi aims to be a lightweight, web-platform-first component workbench for frontend teams and design-system maintainers. The goal emphasizes ordinary component folders, iframe isolation, project-owned render functions, reliable mocks and schema validation, static builds, HTML validation, performance reporting, design-token documentation, and automation-friendly CLI/API surfaces. Current focus areas are plugin boundaries for ecosystem-specific behavior and a flagship Web Components example.
+          </p>
+
+          <h2>Label Update Status</h2>
+          <p>
+            Created missing labels <code>p0</code>, <code>p1</code>, <code>p2</code>, and <code>p3</code>. Applied exactly one priority label to every open issue and preserved existing non-priority labels.
+          </p>
+
+          <h2>Next Issue Nomination</h2>
+          <p>
+            Work next on <a href="https://github.com/schalkneethling/miyagi/issues/133">#133</a>. It is the architectural prerequisite for moving Drupal and Twig behavior behind explicit extension points, documenting plugin migration paths, and preserving the small default setup named in <code>GOAL.md</code>.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Priority</th>
+                <th>Issue</th>
+                <th>Rationale tied to GOAL.md</th>
+                <th>Impact</th>
+                <th>Current labels</th>
+                <th>Notes or uncertainty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="priority p0">p0</span></td>
+                <td><a href="https://github.com/schalkneethling/miyagi/issues/133">#133 Define a plugin API for ecosystem-specific Miyagi behavior</a></td>
+                <td>Directly addresses the current focus on moving Twig, Drupal, and ecosystem-specific behavior behind pluggable boundaries without weakening the simple default setup.</td>
+                <td>Unblocks several related issues and protects the core web-platform-first direction.</td>
+                <td>p0</td>
+                <td>Best next issue because it provides the contract needed by #134, #135, and #138.</td>
+              </tr>
+              <tr>
+                <td><span class="priority p1">p1</span></td>
+                <td><a href="https://github.com/schalkneethling/miyagi/issues/137">#137 Add a flagship Web Components example that exercises Miyagi end to end</a></td>
+                <td>Explicit success signal in <code>GOAL.md</code>; proves Miyagi works beyond Twig/Drupal and validates mocks, assets, builds, docs, and automation workflows.</td>
+                <td>High adoption and regression value for the project direction.</td>
+                <td>p1</td>
+                <td>Large enough to benefit from #133 decisions, but still independently valuable.</td>
+              </tr>
+              <tr>
+                <td><span class="priority p1">p1</span></td>
+                <td><a href="https://github.com/schalkneethling/miyagi/issues/135">#135 Separate Miyagi internal UI rendering from user-facing Twig support</a></td>
+                <td>Supports the template-engine-agnostic goal by clarifying that Twig/Twing is not the preferred or required user-component path.</td>
+                <td>Reduces ecosystem coupling and documentation confusion.</td>
+                <td>p1</td>
+                <td>Likely should follow or run alongside plugin API design.</td>
+              </tr>
+              <tr>
+                <td><span class="priority p1">p1</span></td>
+                <td><a href="https://github.com/schalkneethling/miyagi/issues/134">#134 Move Drupal asset resolution behind an optional plugin boundary</a></td>
+                <td>Matches the non-goal of avoiding broad engine-specific integrations in core and keeps specialized integrations pluggable.</td>
+                <td>Concrete migration case for the plugin architecture.</td>
+                <td>p1</td>
+                <td>Depends on the extension points from #133.</td>
+              </tr>
+              <tr>
+                <td><span class="priority p1">p1</span></td>
+                <td><a href="https://github.com/schalkneethling/miyagi/issues/90">#90 Drift validation for performance feature: page mocks vs declared component dependencies</a></td>
+                <td>Strengthens trustworthy validation and performance budget reporting, both called out as success criteria and current-focus items.</td>
+                <td>Prevents under- or over-reporting page weight in automation and UI reporting.</td>
+                <td>p1</td>
+                <td>Shares dependency-walking logic with #91.</td>
+              </tr>
+              <tr>
+                <td><span class="priority p2">p2</span></td>
+                <td><a href="https://github.com/schalkneethling/miyagi/issues/139">#139 Evaluate modernizing Miyagi&#39;s build and tooling stack</a></td>
+                <td>Aligns with lightweight, modern, ESM-first workflows and contributor feedback loops.</td>
+                <td>Potentially meaningful maintainability and speed gains.</td>
+                <td>p2</td>
+                <td>Research/ADR first; not urgent until concrete bottlenecks are confirmed.</td>
+              </tr>
+              <tr>
+                <td><span class="priority p2">p2</span></td>
+                <td><a href="https://github.com/schalkneethling/miyagi/issues/138">#138 Document the plugin architecture and migration path for ecosystem-specific features</a></td>
+                <td>Turns the core/plugin boundary principle into contributor guidance.</td>
+                <td>Important docs work once #133 settles the API shape.</td>
+                <td>p2</td>
+                <td>Blocked by design decisions from #133.</td>
+              </tr>
+              <tr>
+                <td><span class="priority p2">p2</span></td>
+                <td><a href="https://github.com/schalkneethling/miyagi/issues/136">#136 Position Miyagi as a lightweight web-platform-first Storybook alternative</a></td>
+                <td>Improves docs and product clarity around Miyagi&#39;s niche and non-goals.</td>
+                <td>Helps adoption and expectation-setting.</td>
+                <td>p2</td>
+                <td>Valuable, but less blocking than the plugin and example work.</td>
+              </tr>
+              <tr>
+                <td><span class="priority p2">p2</span></td>
+                <td><a href="https://github.com/schalkneethling/miyagi/issues/91">#91 Performance: on-demand CLI page-weight summary</a></td>
+                <td>Enhances performance reporting through the CLI, supporting automation and validation goals.</td>
+                <td>Useful workflow improvement for inspecting rendered page weight.</td>
+                <td>p2</td>
+                <td>Best paired with #90 because both need mock dependency traversal.</td>
+              </tr>
+              <tr>
+                <td><span class="priority p2">p2</span></td>
+                <td><a href="https://github.com/schalkneethling/miyagi/issues/78">#78 Use Valibot schemas for performance module typedefs</a></td>
+                <td>Supports stronger runtime validation and maintainable data contracts in the performance module.</td>
+                <td>Improves correctness and future extensibility.</td>
+                <td>p2</td>
+                <td>Internal quality work; impact is narrower than user-facing validation fixes.</td>
+              </tr>
+              <tr>
+                <td><span class="priority p2">p2</span></td>
+                <td><a href="https://github.com/schalkneethling/miyagi/issues/76">#76 Consolidate raw CSS values into a design token system</a></td>
+                <td>Connects to design-token overviews and a consistent Miyagi UI, both part of the component workbench experience.</td>
+                <td>Improves maintainability and theming consistency.</td>
+                <td>p2</td>
+                <td>Broad audit scope; not a blocker for the near-term architecture path.</td>
+              </tr>
+              <tr>
+                <td><span class="priority p3">p3</span></td>
+                <td><a href="https://github.com/schalkneethling/miyagi/issues/111">#111 chore: anymatch</a></td>
+                <td>Dependency cleanup can help keep the package lean, but the issue has limited detail and no direct user-facing outcome yet.</td>
+                <td>Low immediate impact unless it uncovers watcher correctness work.</td>
+                <td>p3</td>
+                <td>Could rise if tied to concrete watcher bugs or dependency risk.</td>
+              </tr>
+              <tr>
+                <td><span class="priority p3">p3</span></td>
+                <td><a href="https://github.com/schalkneethling/miyagi/issues/110">#110 chore: arrayfy</a></td>
+                <td>Supports dependency hygiene and lightweight packaging, but does not directly advance current focus areas.</td>
+                <td>Small maintenance win.</td>
+                <td>p3</td>
+                <td>Likely quick, but low urgency.</td>
+              </tr>
+              <tr>
+                <td><span class="priority p3">p3</span></td>
+                <td><a href="https://github.com/schalkneethling/miyagi/issues/79">#79 Extract shared markdown report utilities from report writers</a></td>
+                <td>Reduces duplication in report generation, adjacent to validation/performance reporting.</td>
+                <td>Maintainability improvement with limited user-visible impact.</td>
+                <td>p3</td>
+                <td>Good opportunistic cleanup when touching reports.</td>
+              </tr>
+              <tr>
+                <td><span class="priority p3">p3</span></td>
+                <td><a href="https://github.com/schalkneethling/miyagi/issues/77">#77 Consider a shared CLI output helper for table formatting</a></td>
+                <td>Would improve consistency across CLI commands, but the goal values explicit reports over hidden magic more than specific formatting internals.</td>
+                <td>Polish and maintainability improvement.</td>
+                <td>p3</td>
+                <td>Evaluate when adding or touching CLI table output.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </main>
+  </body>
+</html>
